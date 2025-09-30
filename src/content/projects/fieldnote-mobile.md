@@ -1,38 +1,49 @@
 ---
-title: "FieldNote — Mobile field service app"
-summary: "Equipped field technicians with an offline-first mobile app that eliminated paperwork and sped up service loops."
-category: "Mobile"
-role: "Product & UX"
-timeline: "5 months"
-heroImage: "/images/projects/fieldnote-mobile.svg"
-heroAlt: "Mobile field service dashboards"
-impact: "-35% service cycle time"
+title: "GroopT — Smart group coordination"
+summary: "AI-powered coordination app that makes organizing groups effortless with intelligent scheduling and seamless communication."
+category: "Mobile App"
+role: "React Native Developer"
+timeline: "6 months"
+heroImage: "/images/projects/GroopT-logo.png"
+heroAlt: "GroopT app icon for smart group coordination"
+impact: "Live on TestFlight, App Store ready"
 tags:
-  - Mobile Product
-  - Offline UX
-  - Field Operations
+  - React Native
+  - TypeScript
+  - Supabase
+  - OpenAI
+  - Expo
+  - AI Integration
 metrics:
-  - label: "Service cycle"
-    value: "-35%"
-    hint: "Dispatch to completion"
-  - label: "Rework"
-    value: "-48%"
-    hint: "Follow-up visits"
-  - label: "Technician adoption"
-    value: "96%"
-    hint: "Within first month"
-problem: "Technicians captured job data on paper, leading to rework, billing delays, and frustrated customers."
-roleDetail: "Ran discovery ride-alongs, defined offline-first tech requirements, and led UX for the native app experience."
+  - label: "Platform"
+    value: "iOS 15.1+"
+    hint: "Cross-platform ready"
+  - label: "AI Features"
+    value: "OpenAI + Claude"
+    hint: "Smart scheduling & suggestions"
+  - label: "Backend"
+    value: "Supabase"
+    hint: "Real-time sync & auth"
+problem: "Created an intelligent group coordination app that transforms how people organize activities, manage schedules, and communicate, using AI-powered suggestions and seamless calendar integration."
+roleDetail: "Full-stack mobile development including React Native architecture, AI integration with OpenAI and Anthropic Claude, Supabase backend implementation, and comprehensive App Store Connect submission process."
 process:
-  - title: "Ride-alongs"
-    description: "Shadowed technicians across urban and rural routes to map pain points."
-  - title: "Offline-first architecture"
-    description: "Partnered with engineering on sync rules and conflict resolution patterns."
-  - title: "Enablement"
-    description: "Piloted training, established feedback loops, and launched a dispatch dashboard."
+  - title: "AI-Powered Coordination"
+    description: "Integrated OpenAI and Anthropic Claude APIs for intelligent scheduling suggestions, conflict resolution, and automated group coordination assistance."
+  - title: "Cross-Platform Architecture"
+    description: "Built with React Native and Expo for seamless iOS deployment, featuring TypeScript for type safety and React Query for efficient data management."
+    media:
+      - src: "/images/projects/GroopT-logo.png"
+        alt: "GroopT coordination interface"
+  - title: "Real-time Backend Integration"
+    description: "Implemented Supabase for authentication, real-time data sync, and PostgreSQL database with row-level security for privacy-focused group management."
 outcomes:
-  - "Service cycle time dropped 35%."
-  - "Follow-up visits decreased 48%."
-  - "Technician adoption hit 96% in the first month."
-reflection: "Delivering for field teams means respecting low-connectivity realities. Next release adds AR-assisted schematics."
+  - "Successfully integrated AI-powered scheduling with OpenAI and Claude APIs."
+  - "Built comprehensive group management system with real-time communication."
+  - "Implemented smart calendar integration with conflict resolution suggestions."
+  - "Achieved App Store Connect compliance with privacy-focused data collection."
+  - "Available for beta testing via TestFlight with production-ready architecture."
+reflection: "Modern mobile development excels when combining AI intelligence with intuitive UX. GroopT demonstrates how smart automation can make complex coordination feel effortless and natural."
+gallery:
+  - src: "/images/projects/GroopT-logo.png"
+    alt: "GroopT app showcase"
 ---
