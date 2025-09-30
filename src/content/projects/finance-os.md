@@ -1,38 +1,41 @@
 ---
-title: "FinanceOS — Embedded capital workflows"
-summary: "Built an underwriting cockpit that let partner banks launch embedded capital products in weeks instead of quarters."
-category: "Fintech"
-role: "Product Lead"
-timeline: "8 months"
+title: "Windy — AI Development Agents"
+summary: "An intelligent development assistant platform that streamlines coding workflows with AI-powered automation and collaborative tools."
+category: "Developer Tools"
+role: "Full-Stack Developer"
+timeline: "Ongoing"
 heroImage: "/images/logos/financeos.svg"
-heroAlt: "FinanceOS logomark"
-impact: "$74M activated credit"
+heroAlt: "Windy AI development platform"
+impact: "In Development"
 tags:
-  - Underwriting
-  - Workflow Automation
-  - Fintech
+  - AI
+  - Developer Tools
+  - Automation
+  - React
+  - Node.js
+  - TypeScript
 metrics:
-  - label: "Partner onboarding"
-    value: "3 weeks"
-    hint: "From signed LOI to live capital"
-  - label: "Credit activation"
-    value: "$74M"
-    hint: "First six months"
-  - label: "Loan decision time"
-    value: "-55%"
-    hint: "Automated underwriting checks"
-problem: "Bank partners struggled to launch capital workflows because underwriting rules and manual review steps lived across spreadsheets, inboxes, and legacy CRM integrations."
-roleDetail: "Owned product discovery, set the architecture with engineering, and embedded with compliance to codify risk rules for automation."
+  - label: "Status"
+    value: "Active"
+    hint: "Currently in development"
+  - label: "Focus"
+    value: "AI Agents"
+    hint: "Development automation"
+  - label: "Platform"
+    value: "Web"
+    hint: "Full-stack application"
+problem: "Development workflows often involve repetitive tasks and context switching that slow down productivity. Windy aims to create intelligent agents that can assist developers with coding, testing, and deployment tasks."
+roleDetail: "Leading full-stack development of an AI-powered platform that integrates with existing development workflows to provide intelligent assistance and automation capabilities."
 process:
-  - title: "Discovery & modeling"
-    description: "Interviewed partner teams and mapped decision trees to identify automatable checkpoints."
-  - title: "Workflow orchestration"
-    description: "Prototyped a rules engine and task queue with clear ownership and SLAs."
-  - title: "Pilot & scale"
-    description: "Launched with two design partners, instrumented feedback loops, and scaled to seven programs."
+  - title: "AI Integration"
+    description: "Building intelligent agents that can understand development contexts and provide meaningful assistance with coding tasks."
+  - title: "Workflow Automation"
+    description: "Creating seamless integrations with popular development tools and platforms to automate repetitive tasks."
+  - title: "Collaborative Features"
+    description: "Developing features that enable teams to share AI agents and development insights effectively."
 outcomes:
-  - "Underwriting approval time dropped 55%."
-  - "Partners moved from manual reviews to automated decisioning with audit trails."
-  - "Activated $74M in new credit lines during the first half-year."
-reflection: "Fintech velocity comes from aligning compliance, ops, and engineering around a single source of truth. Next up: adding predictive risk scoring."
+  - "Developing advanced AI agent capabilities for development assistance."
+  - "Creating intuitive interfaces for developer-AI collaboration."
+  - "Building robust integrations with popular development tools."
+reflection: "AI-powered development tools represent the future of software engineering. Windy explores how intelligent agents can augment human creativity while maintaining developer control and understanding."
 ---

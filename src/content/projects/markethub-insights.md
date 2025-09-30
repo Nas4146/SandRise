@@ -1,38 +1,41 @@
 ---
-title: "MarketHub — Marketplace analytics"
-summary: "Delivered a unified insights layer for a B2B marketplace, letting vendors act on demand signals in near real time."
-category: "Marketplace"
-role: "Product & Growth"
-timeline: "5 months"
+title: "Ring — Connection Platform"
+summary: "A modern connection and networking platform that helps people build meaningful professional and personal relationships through intelligent matching."
+category: "Social Network"
+role: "Full-Stack Developer"
+timeline: "8 months"
 heroImage: "/images/logos/markethub.svg"
-heroAlt: "MarketHub logomark"
-impact: "+18% GMV"
+heroAlt: "Ring connection platform"
+impact: "In Development"
 tags:
-  - Marketplaces
-  - Growth Loops
-  - Data Visualization
+  - Social Networking
+  - React Native
+  - Node.js
+  - GraphQL
+  - Real-time
+  - Matching Algorithm
 metrics:
-  - label: "GMV lift"
-    value: "+18%"
-    hint: "Quarter over quarter"
-  - label: "Vendor retention"
-    value: "+24%"
-    hint: "Vendors seeing weekly insights"
-  - label: "Activation time"
-    value: "-46%"
-    hint: "Time to first repeat sale"
-problem: "Vendors lacked visibility into demand trends, leading to stockouts, mispriced inventory, and churn."
-roleDetail: "Ran discovery, defined the insights schema, and partnered with data engineering to ship dashboards and automated nudges."
+  - label: "Platform"
+    value: "Mobile"
+    hint: "iOS & Android"
+  - label: "Focus"
+    value: "Connections"
+    hint: "Meaningful relationships"
+  - label: "Technology"
+    value: "React Native"
+    hint: "Cross-platform app"
+problem: "Existing networking platforms focus on quantity over quality, making it difficult to form genuine connections and maintain meaningful professional relationships."
+roleDetail: "Leading full-stack development of a mobile-first platform that uses intelligent algorithms to suggest relevant connections and facilitate meaningful conversations."
 process:
-  - title: "Signal identification"
-    description: "Analyzed transaction logs to uncover leading indicators of vendor churn."
-  - title: "Insight design"
-    description: "Prototyped dashboards with focus vendors, blending alerts with recommended actions."
-  - title: "Growth loops"
-    description: "Automated weekly nudges that tied insights to next-best actions and promotions."
+  - title: "Matching Algorithm"
+    description: "Developing sophisticated matching algorithms that consider interests, professional goals, and compatibility factors for better connections."
+  - title: "Real-time Features"
+    description: "Building real-time messaging and interaction features that encourage genuine conversations and relationship building."
+  - title: "Mobile Experience"
+    description: "Creating an intuitive React Native application optimized for mobile interactions and cross-platform compatibility."
 outcomes:
-  - "GMV grew 18% quarter over quarter."
-  - "Vendors using insights retained 24% better."
-  - "Time to first repeat sale dropped 46%."
-reflection: "Insights are only as strong as the actions they trigger. Next step adds inventory planning suggestions."
+  - "Developing intelligent matching algorithms for quality connections."
+  - "Building real-time communication features for meaningful interactions."
+  - "Creating a seamless mobile experience across iOS and Android platforms."
+reflection: "True networking success comes from quality relationships, not quantity of connections. Ring focuses on facilitating genuine interactions that lead to lasting professional and personal relationships."
 ---

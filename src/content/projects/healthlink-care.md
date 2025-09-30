@@ -1,38 +1,41 @@
 ---
-title: "HealthLink — Care coordination platform"
-summary: "Connected fragmented care teams with a shared patient timeline, driving faster interventions and higher satisfaction."
-category: "Healthcare"
-role: "Product Strategy"
-timeline: "10 months"
+title: "Dev Talk — Developer Communication Platform"
+summary: "A streamlined communication platform designed specifically for development teams to collaborate effectively and share technical knowledge."
+category: "Communication"
+role: "Product Developer"
+timeline: "6 months"
 heroImage: "/images/logos/healthlink.svg"
-heroAlt: "HealthLink logomark"
-impact: "+22 pt NPS"
+heroAlt: "Dev Talk communication platform"
+impact: "Beta Testing"
 tags:
-  - Care Coordination
-  - HealthTech
-  - Product Discovery
+  - Communication
+  - Developer Tools
+  - Collaboration
+  - React
+  - WebRTC
+  - Real-time
 metrics:
-  - label: "Intervention speed"
-    value: "-38%"
-    hint: "Time from alert to action"
-  - label: "Task completion"
-    value: "+44%"
-    hint: "Within treatment plans"
-  - label: "Patient NPS"
-    value: "+22 pts"
-    hint: "Six-month rolling average"
-problem: "Care teams used disjointed EHR exports, email, and chat to coordinate interventions, causing delays and missed handoffs."
-roleDetail: "Partnered with clinical leaders to map workflows, defined new data models, and paired with engineering on a HIPAA-compliant experience."
+  - label: "Platform"
+    value: "Web"
+    hint: "Browser-based application"
+  - label: "Focus"
+    value: "Dev Teams"
+    hint: "Developer-centric features"
+  - label: "Status"
+    value: "Beta"
+    hint: "Currently in testing"
+problem: "Development teams struggle with communication tools that aren't designed for technical discussions, code sharing, and collaborative problem-solving."
+roleDetail: "Leading product development of a communication platform that understands developer workflows and integrates seamlessly with coding environments."
 process:
-  - title: "Shadowing & mapping"
-    description: "Shadowed coordinators across five clinics and mapped the handoff lattice."
-  - title: "Timeline architecture"
-    description: "Defined a longitudinal patient timeline with structured interventions and audit logs."
-  - title: "Rollout & training"
-    description: "Piloted with two high-volume clinics, refined SOPs, and scaled training playbooks."
+  - title: "Developer Research"
+    description: "Conducted extensive research with development teams to understand communication pain points and workflow requirements."
+  - title: "Technical Architecture"
+    description: "Built a real-time communication platform with code syntax highlighting, screen sharing, and integrated development tools."
+  - title: "User Testing"
+    description: "Iterative testing with beta users to refine features and ensure the platform meets real developer needs."
 outcomes:
-  - "Intervention speed improved by 38%."
-  - "Task completion within care plans increased 44%."
-  - "Patient satisfaction rose 22 NPS points post-launch."
-reflection: "Meeting clinicians where they are—and respecting regulated contexts—unlocked adoption. Next iteration focuses on predictive alerts."
+  - "Developed real-time communication features tailored for developers."
+  - "Integrated code sharing and syntax highlighting capabilities."
+  - "Created seamless workflow integrations with popular development tools."
+reflection: "Effective developer communication requires understanding the unique context and challenges of technical work. Dev Talk focuses on making these conversations more productive and meaningful."
 ---

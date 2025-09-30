@@ -1,38 +1,41 @@
 ---
-title: "SummitGo — Outdoor trip planning"
-summary: "Launched a trip planning companion that stitched weather, gear, and route data into one streamlined experience."
-category: "Consumer"
-role: "Product Builder"
+title: "Morning Google News Feed Podcast"
+summary: "An AI-powered podcast that automatically generates daily news summaries from Google News feeds with natural voice narration."
+category: "AI Content"
+role: "Full-Stack Developer"
 timeline: "3 months"
 heroImage: "/images/projects/summit-go.svg"
-heroAlt: "SummitGo product visualization"
-impact: "+3× itinerary creation"
+heroAlt: "Morning podcast automation platform"
+impact: "Daily Episodes"
 tags:
-  - Consumer Product
-  - GTM Launch
-  - Experimentation
+  - AI
+  - Podcast
+  - News Automation
+  - Text-to-Speech
+  - Python
+  - Content Generation
 metrics:
-  - label: "Itinerary creation"
-    value: "3×"
-    hint: "Per active user"
-  - label: "Time to plan"
-    value: "-52%"
-    hint: "From idea to packed"
-  - label: "Paid conversion"
-    value: "+17%"
-    hint: "Freemium to Pro"
-problem: "Outdoor enthusiasts juggled spreadsheets, weather apps, and gear checklists without a cohesive planning workflow."
-roleDetail: "Built the zero-to-one MVP, shipped in public with community testers, and tuned onboarding to drive conversion."
+  - label: "Frequency"
+    value: "Daily"
+    hint: "Automated episodes"
+  - label: "Sources"
+    value: "Google News"
+    hint: "Multiple news feeds"
+  - label: "Format"
+    value: "Podcast"
+    hint: "Audio content"
+problem: "Staying informed with daily news requires significant time investment in reading multiple sources. An automated podcast format makes news consumption passive and efficient."
+roleDetail: "Developing an automated system that fetches, processes, and converts news content into professionally narrated podcast episodes using AI technologies."
 process:
-  - title: "Community discovery"
-    description: "Ran interviews and async diaries with hikers, climbers, and overlanders to understand planning friction."
-  - title: "MVP build"
-    description: "Shipped a responsive, offline-aware planner with smart defaults for gear and routes."
-  - title: "Launch loops"
-    description: "Instrumented activation funnels, built referral loops, and iterated on retention messaging."
+  - title: "News Aggregation"
+    description: "Built automated systems to fetch and curate relevant news stories from Google News feeds across multiple categories."
+  - title: "Content Processing"
+    description: "Implemented AI-powered summarization and script generation to create coherent, engaging podcast narratives."
+  - title: "Voice Generation"
+    description: "Integrated advanced text-to-speech technology to create natural-sounding podcast episodes with consistent hosting voice."
 outcomes:
-  - "Itinerary creation per active user tripled."
-  - "Time to plan a trip dropped by half."
-  - "Paid conversion rose 17% through tightened onboarding."
-reflection: "Community co-creation unlocked retention. Next steps explore guided trips with local experts."
+  - "Automated daily podcast generation with minimal manual intervention."
+  - "Created professional-quality audio content from text sources."
+  - "Built scalable content pipeline for consistent episode delivery."
+reflection: "Automation in content creation opens possibilities for personalized information consumption. The challenge lies in maintaining quality and relevance while scaling production."
 ---
