@@ -171,13 +171,6 @@ declare module 'astro:content' {
   collection: "projects";
   data: InferEntrySchema<"projects">
 } & { render(): Render[".md"] };
-"flagship-platform.md": {
-	id: "flagship-platform.md";
-  slug: "flagship-platform";
-  body: string;
-  collection: "projects";
-  data: InferEntrySchema<"projects">
-} & { render(): Render[".md"] };
 "flexex.md": {
 	id: "flexex.md";
   slug: "flexex";
@@ -195,20 +188,6 @@ declare module 'astro:content' {
 "markethub-insights.md": {
 	id: "markethub-insights.md";
   slug: "markethub-insights";
-  body: string;
-  collection: "projects";
-  data: InferEntrySchema<"projects">
-} & { render(): Render[".md"] };
-"northwind-market.md": {
-	id: "northwind-market.md";
-  slug: "northwind-market";
-  body: string;
-  collection: "projects";
-  data: InferEntrySchema<"projects">
-} & { render(): Render[".md"] };
-"rise-credit.md": {
-	id: "rise-credit.md";
-  slug: "rise-credit";
   body: string;
   collection: "projects";
   data: InferEntrySchema<"projects">
