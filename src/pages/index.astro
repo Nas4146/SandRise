@@ -1,0 +1,670 @@
+---
+import BaseLayout from '@layouts/BaseLayout.astro';
+import SectionHeading from '@components/SectionHeading.astro';
+import profilePortrait from '@content/profile.jpeg';
+import type { CollectionEntry } from 'astro:content';
+import { getCollection } from 'astro:content';
+
+const allProjects = (await getCollection('projects')).filter((project) => !project.data.draft);
+const projects: CollectionEntry<'projects'>[] = allProjects.sort((a, b) =>
+  a.data.title.localeCompare(b.data.title)
+);
+
+const interests = [
+  'AI & applied automation',
+  'Product systems & ops',
+  'Strength training',
+  'Coffee brewing & roasting',
+  'Horror films & storytelling',
+  'Trail running & outdoors'
+];
+
+const heroStructuredData = {
+  '@context': 'https://schema.org',
+  '@type': 'Person',
+  name: 'Nick Sanders',
+  jobTitle: 'Product Builder',
+  url: 'https://sandrise.studio',
+  worksFor: {
+    '@type': 'Organization',
+    name: 'SandRise'
+  }
+};
+---
+<BaseLayout
+  title="Nick Sanders — Product Builder @ SandRise"
+  description="Product builder and founder of SandRise, crafting digital products that validate quickly and scale responsibly."
+  structuredData={heroStructuredData}
+>
+  <section id="intro" class="intro-section pattern-grid">
+    <div class="container intro-grid">
+      <div class="intro-copy">
+        <h1 class="intro-name">Nick Sanders</h1>
+        <p class="intro-title">Product Builder</p>
+        <p class="intro-location">San Francisco Bay Area</p>
+        <p class="intro-skills">Product Management | Cloud Platform & Services | Developer Tools | AI Agents | Ops Design</p>
+        <a class="intro-email" href="mailto:Nick.sanders.a@gmail.com">Nick.sanders.a@gmail.com</a>
+        <p class="intro-bio">
+          DC roots, Austin for business school, now building from the SF Bay Area. Number of years in product management and developer tools. Currently obsessed with AI and agent-powered experiences, and shaping a slate of AI enabled products.
+        </p>
+        <div class="intro-actions">
+          <a class="intro-button primary" href="/resume.pdf" download target="_blank" rel="noopener">Download resume</a>
+          <a class="intro-button" href="https://github.com/Nas4146" target="_blank" rel="noopener">GitHub</a>
+          <a class="intro-button" href="https://www.linkedin.com/in/sandersnick/" target="_blank" rel="noopener">LinkedIn</a>
+        </div>
+      </div>
+      <aside class="intro-portrait">
+        <div class="portrait-frame">
+          <img
+            src={profilePortrait.src}
+            alt="Portrait of Nick Sanders"
+            width={profilePortrait.width}
+            height={profilePortrait.height}
+            loading="lazy"
+            decoding="async"
+          />
+        </div>
+      </aside>
+    </div>
+  </section>
+
+  <section id="projects" class="projects-section">
+    <div class="container">
+      <h2 class="projects-heading">Current Projects</h2>
+      <ul class="project-list">
+        {projects.map((project, index) => {
+          const href = project.data.href ?? `/work/${project.slug}`;
+          return (
+            <li>
+              <a
+                class="project-tile"
+                href={href}
+                aria-label={`Explore ${project.data.title}`}
+                style={`--project-image: url(${project.data.heroImage})`}
+              >
+                <div class="project-overlay">
+                  <span class="project-index">{String(index + 1).padStart(2, '0')}</span>
+                  <div class="project-content">
+                    <div class="project-heading">
+                      <h3>{project.data.title}</h3>
+                      {project.data.impact && <span class="project-impact">{project.data.impact}</span>}
+                    </div>
+                    <p>{project.data.summary}</p>
+                    {project.data.tags && project.data.tags.length > 0 && (
+                      <div class="project-tags">
+                        {project.data.tags.slice(0, 4).map((tag) => (
+                          <span>{tag}</span>
+                        ))}
+                      </div>
+                    )}
+                  </div>
+                </div>
+              </a>
+            </li>
+          );
+        })}
+      </ul>
+      <div class="projects-cta">
+        <a class="button secondary" href="/work">Explore the full project archive</a>
+      </div>
+    </div>
+  </section>
+
+  <section id="interests" class="section-compact interests-section">
+    <div class="container">
+      <SectionHeading
+        eyebrow="Interests"
+        title="What keeps me curious right now"
+        description="The themes I’m reading, building, and experimenting with outside of client work."
+      />
+      <ul class="interests-grid">
+        {interests.map((interest) => (
+          <li class="interest-card">
+            <span>{interest}</span>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </section>
+
+  <section id="sandrise" class="section-alt sandrise-section pattern-grid">
+    <div class="container sandrise-grid">
+      <div class="sandrise-copy">
+        <SectionHeading
+          eyebrow="SandRise"
+          title="The studio I founded to shape momentum"
+          description="SandRise is a lean product practice focused on finding signal fast, designing what matters, and guiding teams through the messy middle of shipping."
+        />
+        <p>
+          I partner with founders and product leaders to translate ambition into systems, rituals, and experiences that customers trust. Whether it’s validating a new market, building the first design system, or accelerating growth, SandRise brings an operator’s mindset with an IC’s hands-on craft.
+        </p>
+      </div>
+      <div class="sandrise-card card">
+        <h3>How we engage</h3>
+        <ul>
+          <li><strong>Fractional product leadership</strong> for teams that need strategy and execution in the same seat.</li>
+          <li><strong>Discovery sprints</strong> that surface customer signal and prioritize the next build.</li>
+          <li><strong>Design systems & delivery</strong> to scale craft without slowing velocity.</li>
+          <li><strong>Founder advisory</strong> supporting GTM, hiring, and operating cadence.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+</BaseLayout>
+
+<style>
+  .intro-section {
+    padding-top: calc(var(--space-sm) + var(--nav-height));
+    padding-bottom: var(--space-md);
+    min-height: 60vh;
+    display: flex;
+    align-items: center;
+  }
+
+  .intro-grid {
+    display: grid;
+    grid-template-columns: repeat(12, minmax(0, 1fr));
+    gap: var(--space-md);
+    align-items: center;
+    width: 100%;
+    min-height: 100%;
+  }
+
+  .intro-copy {
+    grid-column: span 8;
+    display: grid;
+    gap: var(--space-2xs);
+    background: linear-gradient(135deg, rgba(12, 143, 98, 0.02), rgba(47, 190, 132, 0.005));
+    padding: var(--space-lg);
+    border-radius: var(--radius-lg);
+    border: 1px solid rgba(12, 143, 98, 0.06);
+    position: relative;
+    box-shadow: 0 4px 12px rgba(12, 143, 98, 0.03);
+    align-items: start;
+    justify-items: start;
+    align-self: stretch;
+    animation: slideInLeft 0.8s ease-out;
+  }
+
+  .intro-copy::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(12, 143, 98, 0.2), transparent);
+    border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+  }
+
+  .intro-name {
+    margin: 0;
+    font-size: clamp(1.8rem, 3vw, 2.5rem);
+    letter-spacing: -0.01em;
+    color: var(--color-text-primary);
+    font-weight: var(--font-weight-bold);
+  }
+
+  .intro-title {
+    margin: 0;
+    font-size: var(--font-size-lg);
+    font-weight: var(--font-weight-semibold);
+    color: var(--color-text-primary);
+    margin-bottom: var(--space-3xs);
+  }
+
+  .intro-location {
+    margin: 0;
+    font-size: var(--font-size-xs);
+    font-weight: var(--font-weight-medium);
+    color: var(--color-accent);
+    margin-bottom: var(--space-2xs);
+    opacity: 0.8;
+  }
+
+  .intro-skills {
+    margin: 0;
+    font-size: var(--font-size-xs);
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--color-text-secondary);
+    font-weight: var(--font-weight-medium);
+    margin-bottom: var(--space-2xs);
+    padding-left: var(--space-xs);
+    border-left: 2px solid rgba(12, 143, 98, 0.2);
+  }
+
+  .intro-email {
+    font-size: var(--font-size-xs);
+    font-weight: var(--font-weight-medium);
+    color: var(--color-text-secondary);
+    text-decoration: none;
+    position: relative;
+    transition: all 0.3s ease;
+    margin-bottom: var(--space-xs);
+    padding: var(--space-2xs) var(--space-xs);
+    background: rgba(12, 143, 98, 0.04);
+    border-radius: var(--radius-sm);
+    width: fit-content;
+    transform: translateY(0);
+  }
+
+  .intro-email:hover,
+  .intro-email:focus-visible {
+    color: var(--color-accent);
+    background: rgba(12, 143, 98, 0.08);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(12, 143, 98, 0.15);
+  }
+
+  .intro-bio {
+    margin: 0;
+    font-size: var(--font-size-sm);
+    line-height: 1.6;
+    color: var(--color-text-primary);
+    padding-left: var(--space-xs);
+    border-left: 2px solid rgba(12, 143, 98, 0.15);
+  }
+
+  .intro-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-2xs);
+    margin-top: var(--space-xs);
+    justify-content: flex-start;
+  }
+
+  .intro-button {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-2xs);
+    padding: var(--space-xs) var(--space-md);
+    border-radius: var(--radius-round);
+    font-size: var(--font-size-xs);
+    font-weight: var(--font-weight-semibold);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    text-decoration: none;
+    color: var(--color-text-primary);
+    background: color-mix(in srgb, var(--color-surface) 92%, rgba(12, 143, 98, 0.08) 8%);
+    border: 1px solid rgba(17, 34, 21, 0.12);
+    transition: transform var(--duration-sm) var(--ease-standard),
+      box-shadow var(--duration-sm) var(--ease-standard),
+      border-color var(--duration-sm) var(--ease-standard);
+  }
+
+  .intro-button.primary {
+    background: linear-gradient(140deg, rgba(12, 143, 98, 0.16), rgba(12, 143, 98, 0));
+    border-color: rgba(12, 143, 98, 0.42);
+    color: var(--color-text-primary);
+  }
+
+  .intro-button:hover,
+  .intro-button:focus-visible {
+    transform: translateY(-2px);
+    border-color: rgba(17, 34, 21, 0.22);
+    box-shadow: 0 10px 18px rgba(17, 34, 21, 0.12);
+  }
+
+  .intro-portrait {
+    grid-column: span 4;
+    position: relative;
+    min-height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    animation: slideInRight 0.8s ease-out;
+  }
+
+  .portrait-frame {
+    position: relative;
+    padding: var(--space-2xs);
+    border-radius: var(--radius-sm);
+    background: color-mix(in srgb, var(--color-surface) 95%, transparent 5%);
+    border: 1px solid rgba(17, 34, 21, 0.08);
+    box-shadow: 0 8px 16px rgba(17, 34, 21, 0.06);
+  }
+
+  .portrait-frame::after {
+    content: '';
+    position: absolute;
+    inset: var(--space-2xs);
+    border-radius: calc(var(--radius-sm) - var(--space-3xs));
+    border: 1px dashed rgba(17, 34, 21, 0.12);
+    pointer-events: none;
+  }
+
+  .portrait-frame img {
+    display: block;
+    width: clamp(190px, 24vw, 260px);
+    height: auto;
+  }
+
+  .projects-section {
+    padding: var(--space-2xl) 0 var(--space-2xl);
+  }
+
+  .projects-heading {
+    margin: 0 0 var(--space-2xl) 0;
+    font-size: var(--font-size-xl);
+    font-weight: var(--font-weight-semibold);
+    color: var(--color-text-primary);
+    opacity: 0;
+    animation: fadeInUp 0.6s ease-out 0.2s forwards;
+  }
+
+  .project-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    gap: var(--space-xl);
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    align-items: stretch;
+  }
+
+  .project-tile {
+    position: relative;
+    display: block;
+    border-radius: var(--radius-md);
+    overflow: hidden;
+    background-color: var(--color-surface);
+    height: 280px;
+    border: 1px solid rgba(17, 34, 21, 0.08);
+    box-shadow: 0 12px 28px rgba(17, 34, 21, 0.1);
+    background-image: var(--project-image);
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    transition: all var(--duration-md) var(--ease-standard);
+    transform: translateY(0) scale(1);
+    opacity: 0;
+    animation: fadeInUp 0.6s ease-out forwards;
+  }
+
+  .project-tile:nth-child(1) { animation-delay: 0.1s; }
+  .project-tile:nth-child(2) { animation-delay: 0.2s; }
+  .project-tile:nth-child(3) { animation-delay: 0.3s; }
+  .project-tile:nth-child(4) { animation-delay: 0.4s; }
+  .project-tile:nth-child(5) { animation-delay: 0.5s; }
+  .project-tile:nth-child(6) { animation-delay: 0.6s; }
+
+  .project-tile::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, rgba(17, 34, 21, 0.05) 0%, rgba(17, 34, 21, 0.85) 100%);
+    opacity: 0.9;
+    transition: opacity var(--duration-sm) var(--ease-standard);
+  }
+
+  .project-tile:hover,
+  .project-tile:focus-visible {
+    transform: translateY(-8px) scale(1.02);
+    box-shadow: 0 24px 48px rgba(17, 34, 21, 0.18);
+  }
+
+  .project-tile:hover::before,
+  .project-tile:focus-visible::before {
+    opacity: 1;
+  }
+
+  .project-overlay {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100%;
+    padding: var(--space-2xl) var(--space-xl);
+    color: var(--color-surface);
+  }
+
+  .project-content {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-sm);
+    flex-grow: 1;
+    justify-content: flex-end;
+  }
+
+  .project-index {
+    font-size: var(--font-size-xs);
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.68);
+  }
+
+  .project-heading {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-xs);
+  }
+
+  .project-heading h3 {
+    margin: 0;
+    color: white;
+    font-size: clamp(1rem, 1.8vw, 1.3rem);
+    line-height: 1.2;
+  }
+
+  .project-impact {
+    font-size: var(--font-size-xs);
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+    padding: var(--space-3xs) var(--space-sm);
+    border-radius: var(--radius-round);
+    background: linear-gradient(135deg, var(--color-accent), rgba(47, 190, 132, 0.8));
+    color: white;
+    font-weight: var(--font-weight-semibold);
+    box-shadow: 0 4px 8px rgba(12, 143, 98, 0.3);
+    width: fit-content;
+    align-self: flex-start;
+    transition: all 0.3s ease;
+    transform: translateY(0);
+  }
+
+  .project-tile:hover .project-impact {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 12px rgba(12, 143, 98, 0.4);
+  }
+
+  .project-content p {
+    margin: 0;
+    color: rgba(255, 255, 255, 0.82);
+    max-width: 52ch;
+    font-size: var(--font-size-xs);
+  }
+
+  .project-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-xs);
+  }
+
+  .project-tags span {
+    padding: var(--space-3xs) var(--space-xs);
+    border-radius: var(--radius-round);
+    background: rgba(12, 143, 98, 0.15);
+    border: 1px solid rgba(12, 143, 98, 0.3);
+    color: rgba(255, 255, 255, 0.9);
+    font-size: 0.6rem;
+    letter-spacing: 0.06em;
+    font-weight: var(--font-weight-medium);
+  }
+
+  .projects-cta {
+    margin-top: var(--space-md);
+    display: flex;
+    justify-content: flex-end;
+  }
+
+  .interests-grid {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    gap: var(--space-sm);
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  }
+
+  .interest-card {
+    padding: var(--space-md);
+    border-radius: var(--radius-sm);
+    border: 1px solid rgba(17, 34, 21, 0.08);
+    background: color-mix(in srgb, var(--color-surface) 94%, transparent 6%);
+    box-shadow: 0 10px 22px rgba(17, 34, 21, 0.08);
+    font-size: var(--font-size-sm);
+    color: var(--color-text-primary);
+  }
+
+  .sandrise-grid {
+    display: grid;
+    grid-template-columns: repeat(12, minmax(0, 1fr));
+    gap: var(--space-2xl);
+    align-items: start;
+  }
+
+  .sandrise-section {
+    padding: var(--space-md) 0 var(--space-lg);
+  }
+
+  .sandrise-copy {
+    grid-column: span 7;
+    display: grid;
+    gap: var(--space-md);
+  }
+
+  .sandrise-card {
+    grid-column: span 5;
+    display: grid;
+    gap: var(--space-md);
+  }
+
+  .sandrise-card ul {
+    list-style: none;
+    margin: 0;
+    display: grid;
+    gap: var(--space-sm);
+  }
+
+  .sandrise-card li {
+    display: grid;
+    gap: var(--space-4xs);
+    color: var(--color-text-secondary);
+  }
+
+  .sandrise-card strong {
+    color: var(--color-text-primary);
+  }
+
+  @media (max-width: 1080px) {
+    .intro-grid {
+      grid-template-columns: repeat(1, minmax(0, 1fr));
+    }
+
+    .intro-copy,
+    .intro-portrait {
+      grid-column: span 1;
+    }
+
+    .intro-portrait {
+      justify-content: flex-start;
+    }
+
+    .sandrise-grid {
+      grid-template-columns: repeat(1, minmax(0, 1fr));
+    }
+
+    .sandrise-copy,
+    .sandrise-card {
+      grid-column: span 1;
+    }
+  }
+
+  @media (max-width: 768px) {
+    .intro-section {
+      padding-top: calc(var(--space-3xl) + var(--nav-height));
+      padding-bottom: var(--space-3xl);
+    }
+
+    .portrait-frame {
+      padding: var(--space-lg);
+    }
+
+    .project-overlay {
+      padding: var(--space-md);
+      gap: var(--space-sm);
+    }
+
+    .projects-cta {
+      justify-content: center;
+    }
+
+    .interest-card {
+      padding: var(--space-lg);
+    }
+
+  }
+
+  @media (max-width: 520px) {
+    .intro-links {
+      flex-direction: column;
+      align-items: stretch;
+    }
+
+    .project-overlay {
+      padding: var(--space-lg);
+    }
+
+    .project-index {
+      font-size: var(--font-size-xs);
+    }
+  }
+  }
+
+  /* Keyframe Animations */
+  @keyframes slideInLeft {
+    from {
+      opacity: 0;
+      transform: translateX(-30px);
+    }
+    to {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+
+  @keyframes slideInRight {
+    from {
+      opacity: 0;
+      transform: translateX(30px);
+    }
+    to {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+
+  @keyframes fadeInUp {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes shimmer {
+    0% {
+      background-position: -200% center;
+    }
+    100% {
+      background-position: 200% center;
+    }
+  }
+
+</style>

@@ -1,0 +1,140 @@
+{
+  "file": "SandRise Portfolio Mockups",
+  "description": "Reference structure for Figma. Import via JSON-to-Figma plugins or use as blueprint.",
+  "tokens": {
+    "colors": {
+      "base": "#F8F8F8",
+      "surface": "#FFFFFF",
+      "surfaceAlt": "#ECECEC",
+      "textPrimary": "#111111",
+      "textSecondary": "#222222",
+      "accent": "#0C7AE3",
+      "accentMuted": "#D6ECFF",
+      "highlight": "#5A7BFF"
+    },
+    "typography": {
+      "fontFamilies": {
+        "sans": "Inter",
+        "heading": "Manrope"
+      },
+      "scale": {
+        "body": 16,
+        "h3": 28,
+        "h2": 36,
+        "h1": 52
+      }
+    },
+    "radii": {
+      "sm": 6,
+      "md": 12,
+      "lg": 18,
+      "round": 999
+    },
+    "spacing": [4, 8, 12, 16, 24, 32, 48, 64]
+  },
+  "pages": [
+    {
+      "name": "Desktop",
+      "frames": [
+        {
+          "name": "Home Desktop",
+          "size": { "width": 1440, "height": 4280 },
+          "sections": [
+            {
+              "name": "Hero",
+              "layout": "two-column",
+              "components": ["Badge", "Heading", "Lead", "Button Primary", "Button Secondary", "Metric Trio", "Identity Card"]
+            },
+            {
+              "name": "Featured Work",
+              "layout": "three-card grid",
+              "components": ["Section Heading", "Project Card"]
+            },
+            {
+              "name": "About Preview",
+              "layout": "split",
+              "components": ["Section Heading", "Bulleted List", "Service Card"]
+            },
+            {
+              "name": "Approach",
+              "layout": "quad grid",
+              "components": ["Process Card"]
+            },
+            {
+              "name": "Contact CTA",
+              "layout": "callout",
+              "components": ["Badge", "Heading", "Body", "Button Group"]
+            }
+          ]
+        },
+        {
+          "name": "Work Desktop",
+          "size": { "width": 1440, "height": 3200 },
+          "sections": [
+            { "name": "Header", "layout": "full", "components": ["Heading", "Lead"] },
+            { "name": "Filters", "layout": "pill row", "components": ["Filter Chip"] },
+            { "name": "Grid", "layout": "three-card grid", "components": ["Project Card"] }
+          ]
+        },
+        {
+          "name": "Project Detail Desktop",
+          "size": { "width": 1440, "height": 5200 },
+          "sections": [
+            { "name": "Hero", "layout": "media-right", "components": ["Badge", "Heading", "Lead", "Fact Row", "Hero Image"] },
+            { "name": "Context", "layout": "split", "components": ["Rich Text", "Metric Stack"] },
+            { "name": "Process", "layout": "vertical timeline", "components": ["Stage Card", "Media Grid"] },
+            { "name": "Outcomes", "layout": "list", "components": ["Outcome Bullet"] },
+            { "name": "Reflection", "layout": "card", "components": ["Paragraph", "Button Secondary"] }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Mobile",
+      "frames": [
+        {
+          "name": "Home Mobile",
+          "size": { "width": 390, "height": 5200 },
+          "notes": "Stacked layout with hero card above fold, metrics in horizontal scroll.",
+          "components": ["Mobile Nav", "Hero Stack", "Metric Pills", "Project Carousel", "Approach List", "CTA Card"]
+        },
+        {
+          "name": "Project Detail Mobile",
+          "size": { "width": 390, "height": 5600 },
+          "notes": "Hero image leads, facts in chips, timeline cards stacked with 24px spacing.",
+          "components": ["Hero Image", "Fact Chips", "Timeline Card", "Outcome List", "CTA Button"]
+        }
+      ]
+    }
+  ],
+  "components": [
+    {
+      "name": "Project Card",
+      "description": "Image thumbnail, category badge, impact label, title, summary, and tag list.",
+      "style": {
+        "padding": 32,
+        "radius": 18,
+        "shadow": "0 16px 44px rgba(12,22,44,0.12)",
+        "imageRatio": "16:10"
+      }
+    },
+    {
+      "name": "Section Heading",
+      "description": "Eyebrow badge, H2, optional leading paragraph",
+      "style": {
+        "alignment": "left/center",
+        "spacing": 12
+      }
+    },
+    {
+      "name": "Button Primary",
+      "description": "Rounded pill button in accent color",
+      "style": {
+        "padding": "12px 24px",
+        "radius": 999,
+        "fill": "#0C7AE3",
+        "text": "#FFFFFF"
+      }
+    }
+  ]
+}

@@ -1,0 +1,176 @@
+---
+import BaseLayout from '@layouts/BaseLayout.astro';
+import SectionHeading from '@components/SectionHeading.astro';
+
+const description = 'Discover the SandRise methodology: a discover-validate-build-iterate rhythm that helps teams ship products with confidence.';
+
+const stages = [
+  {
+    title: 'Discover',
+    summary: 'Align on the hill worth climbing by clarifying problems, users, and success signals.',
+    bullets: [
+      'Foundational qualitative + quantitative research',
+      'Opportunity mapping workshops',
+      'Product hypothesis canvas'
+    ]
+  },
+  {
+    title: 'Validate',
+    summary: 'De-risk the roadmap with targeted experiments and prototype-led testing.',
+    bullets: ['Storyboards & testable prototypes', 'Experiment design + metric framework', 'Insight synth + prioritization']
+  },
+  {
+    title: 'Build',
+    summary: 'Design and deliver experiences with the right fidelity to launch fast and learn.',
+    bullets: ['Design system foundations', 'Launch-ready UX/UI design', 'Partner engineering support']
+  },
+  {
+    title: 'Iterate',
+    summary: 'Instrument, learn, and evolve the product so momentum compounds.',
+    bullets: ['Growth diagnostics', 'Roadmap refinement', 'Enablement + measurement rituals']
+  }
+];
+
+const differentiators = [
+  {
+    title: 'Fractional leadership',
+    description: 'Hands-on partnership that feels like an internal leader, not a vendor.'
+  },
+  {
+    title: 'Evidence-led decisions',
+    description: 'Experiments, research, and metrics inform every key move.'
+  },
+  {
+    title: 'System + craft balance',
+    description: 'Strong systems thinking with design details that delight.'
+  }
+];
+
+const testimonials = [
+  {
+    quote:
+      'Nick helped us zero in on the features that mattered, launch on time, and establish a product cadence that stuck.',
+    name: 'Amelia Chen',
+    role: 'CEO, Lumenpay'
+  }
+];
+---
+<BaseLayout title="Approach — SandRise" description={description}>
+  <section class="page-hero pattern-grid">
+    <div class="container">
+      <span class="badge">Methodology</span>
+      <h1>The SandRise approach</h1>
+      <p class="lead">
+        A simple, repeatable rhythm that balances discovery depth with shipping momentum.
+      </p>
+    </div>
+  </section>
+
+  <section class="section-alt pattern-grid">
+    <div class="container">
+      <SectionHeading
+        eyebrow="Rhythm"
+        title="Discover → Validate → Build → Iterate"
+        description="Each stage is modular—you can tap SandRise for the full arc or the step you need most."
+      />
+      <div class="stages">
+        {stages.map((stage, index) => (
+          <article class="card">
+            <span class="stage-index">0{index + 1}</span>
+            <h3>{stage.title}</h3>
+            <p>{stage.summary}</p>
+            <ul>
+              {stage.bullets.map((item) => (
+                <li>{item}</li>
+              ))}
+            </ul>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="container">
+      <SectionHeading
+        eyebrow="Why it works"
+        title="Embedded, strategic, measurable"
+      />
+      <div class="grid diffs">
+        {differentiators.map((item) => (
+          <article class="card">
+            <h3>{item.title}</h3>
+            <p>{item.description}</p>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section-muted">
+    <div class="container testimonial">
+      {testimonials.map((item) => (
+        <figure class="card">
+          <blockquote>“{item.quote}”</blockquote>
+          <figcaption>
+            <strong>{item.name}</strong>
+            <span>{item.role}</span>
+          </figcaption>
+        </figure>
+      ))}
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .page-hero {
+    padding-top: calc(var(--space-4xl) + var(--nav-height));
+    padding-bottom: var(--space-2xl);
+  }
+
+  .stages {
+    display: grid;
+    gap: var(--space-2xl);
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  }
+
+  .stage-index {
+    font-size: var(--font-size-xs);
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+    color: var(--color-text-tertiary);
+  }
+
+  .stages ul {
+    margin: var(--space-md) 0 0;
+    padding-left: var(--space-lg);
+    color: var(--color-text-secondary);
+  }
+
+  .stages .card {
+    border: 1px solid rgba(11, 143, 98, 0.18);
+  }
+
+  .diffs {
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: var(--space-2xl);
+  }
+
+  .testimonial {
+    display: grid;
+    gap: var(--space-2xl);
+  }
+
+  blockquote {
+    font-size: var(--font-size-lg);
+    line-height: var(--line-height-snug);
+    margin: 0;
+  }
+
+  figcaption {
+    margin-top: var(--space-md);
+    display: grid;
+    gap: var(--space-3xs);
+    color: var(--color-text-tertiary);
+  }
+</style>

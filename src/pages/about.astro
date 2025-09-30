@@ -1,0 +1,219 @@
+---
+import BaseLayout from '@layouts/BaseLayout.astro';
+import SectionHeading from '@components/SectionHeading.astro';
+
+const description = 'Learn about Nick Sanders, the product builder behind SandRise—values, story, milestones, and how collaboration works.';
+
+const timeline = [
+  {
+    year: '2024',
+    title: 'Founded SandRise',
+    summary: 'Created SandRise to partner with venture-backed and mission-led teams as a fractional product leader.'
+  },
+  {
+    year: '2021',
+    title: 'Head of Product, Atlas Labs',
+    summary: 'Scaled product org and launched analytics suite that increased retention 18%.'
+  },
+  {
+    year: '2018',
+    title: 'Product Lead, Northwind',
+    summary: 'Shipped B2B marketplace from prototype to Series B, introducing a unified design system.'
+  }
+];
+
+const values = [
+  {
+    title: 'Build signal before scale',
+    description:
+      'Every roadmap starts with clarity. I map assumptions, run crisp experiments, and translate findings into confident bets.'
+  },
+  {
+    title: 'Design for trust',
+    description:
+      'Inclusive, accessible experiences are non-negotiable. I craft journeys that feel effortless, credible, and human.'
+  },
+  {
+    title: 'Ship momentum, not tickets',
+    description:
+      'Momentum compounds. I partner closely with teams to keep decisions transparent, outcomes measured, and releases meaningful.'
+  }
+];
+---
+<BaseLayout title="About — SandRise" description={description}>
+  <section class="page-hero pattern-grid">
+    <div class="container hero-grid">
+      <div>
+        <span class="badge">About Nick</span>
+        <h1>Product builder, forever curious partner</h1>
+        <p class="lead">
+          I bridge strategy, design, and execution to help teams validate faster and deliver products that earn trust. SandRise is how I embed with founders and product teams to go from idea to impact.
+        </p>
+        <div class="bio-actions">
+          <a class="button" href="/contact">Work with SandRise</a>
+          <a class="button secondary" href="/resume.pdf" target="_blank" rel="noopener">Open resume</a>
+        </div>
+      </div>
+      <figure class="portrait">
+        <img src="/images/nick-sanders-portrait.svg" alt="Portrait of Nick Sanders smiling" width="520" height="640" loading="lazy" />
+      </figure>
+    </div>
+  </section>
+
+  <section class="section-alt pattern-grid">
+    <div class="container">
+      <SectionHeading
+        eyebrow="Story"
+        title="A product practice shaped by building and scaling"
+        description="From early-stage scrappy teams to scaled product orgs, I’ve seen what helps teams find clarity—and what holds them back. SandRise is a studio built to bring the best of those lessons to every engagement."
+      />
+      <div class="timeline">
+        {timeline.map((item) => (
+          <article>
+            <span class="timeline-year">{item.year}</span>
+            <h3>{item.title}</h3>
+            <p>{item.summary}</p>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="container values-grid">
+      <SectionHeading
+        eyebrow="Values"
+        title="What guides every partnership"
+        description="A few principles that shape how SandRise shows up in the work."
+      />
+      <div class="grid value-cards">
+        {values.map((value) => (
+          <article class="card">
+            <h3>{value.title}</h3>
+            <p>{value.description}</p>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section-alt pattern-grid">
+    <div class="container">
+      <div class="card collaboration">
+        <h2>How we’ll collaborate</h2>
+        <ul>
+          <li>
+            <strong>Embedded partnerships</strong>
+            <span>I plug into your team, co-own outcomes, and leave behind clear playbooks so momentum sticks.</span>
+          </li>
+          <li>
+            <strong>Transparent rhythms</strong>
+            <span>We set cadence, define decision loops, and ensure every sprint ladder ups to your goals.</span>
+          </li>
+          <li>
+            <strong>Measurable impact</strong>
+            <span>Inputs and outcomes are visible from day one—no black boxes, just honest progress.</span>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .page-hero {
+    padding-top: calc(var(--space-4xl) + var(--nav-height));
+    padding-bottom: var(--space-3xl);
+  }
+
+  .hero-grid {
+    display: grid;
+    grid-template-columns: repeat(12, minmax(0, 1fr));
+    gap: var(--space-3xl);
+    align-items: center;
+  }
+
+  .hero-grid > div {
+    grid-column: span 7;
+    display: grid;
+    gap: var(--space-lg);
+  }
+
+  .portrait {
+    grid-column: span 5;
+    margin: 0;
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    box-shadow: 0 26px 48px rgba(12, 39, 21, 0.2);
+    border: 1px solid rgba(11, 143, 98, 0.2);
+  }
+
+  .bio-actions {
+    display: flex;
+    gap: var(--space-md);
+    flex-wrap: wrap;
+  }
+
+  .timeline {
+    display: grid;
+    gap: var(--space-2xl);
+  }
+
+  .timeline article {
+    background: var(--color-surface);
+    border-radius: var(--radius-md);
+    padding: var(--space-xl) var(--space-2xl);
+    border: 1px solid var(--color-border-subtle);
+    box-shadow: 0 18px 34px rgba(17, 34, 21, 0.08);
+  }
+
+  .timeline-year {
+    font-size: var(--font-size-xs);
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+    color: var(--color-text-tertiary);
+  }
+
+  .values-grid {
+    display: grid;
+    gap: var(--space-3xl);
+  }
+
+  .value-cards {
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  }
+
+  .collaboration {
+    display: grid;
+    gap: var(--space-lg);
+    border: 1px solid rgba(11, 143, 98, 0.18);
+  }
+
+  .collaboration ul {
+    list-style: none;
+    margin: 0;
+    display: grid;
+    gap: var(--space-md);
+  }
+
+  .collaboration li {
+    display: grid;
+    gap: var(--space-3xs);
+  }
+
+  .collaboration strong {
+    font-family: var(--font-heading);
+    color: var(--color-text-primary);
+  }
+
+  @media (max-width: 960px) {
+    .hero-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .hero-grid > div,
+    .portrait {
+      grid-column: span 1;
+    }
+  }
+</style>

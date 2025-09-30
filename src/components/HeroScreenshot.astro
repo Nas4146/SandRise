@@ -1,0 +1,134 @@
+---
+export interface Props {
+  src: string;
+  alt: string;
+  title?: string;
+  subtitle?: string;
+  className?: string;
+}
+
+const { src, alt, title, subtitle, className = '' } = Astro.props;
+---
+
+<div class={`hero-screenshot ${className}`}>
+  {title && (
+    <div class="screenshot-header">
+      <h3 class="screenshot-title">{title}</h3>
+      {subtitle && <p class="screenshot-subtitle">{subtitle}</p>}
+    </div>
+  )}
+  
+  <div class="screenshot-container">
+    <div class="screenshot-frame">
+      <img 
+        src={src} 
+        alt={alt}
+        loading="lazy"
+        decoding="async"
+      />
+    </div>
+    <div class="screenshot-overlay"></div>
+  </div>
+</div>
+
+<style>
+  .hero-screenshot {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-lg);
+    max-width: 800px;
+    margin: 0 auto;
+  }
+
+  .screenshot-header {
+    text-align: center;
+  }
+
+  .screenshot-title {
+    font-size: var(--font-size-lg);
+    font-weight: var(--font-weight-semibold);
+    color: var(--color-text-primary);
+    margin: 0 0 var(--space-xs);
+  }
+
+  .screenshot-subtitle {
+    font-size: var(--font-size-md);
+    color: var(--color-text-secondary);
+    margin: 0;
+  }
+
+  .screenshot-container {
+    position: relative;
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    box-shadow: var(--shadow-medium);
+    background: var(--color-surface);
+  }
+
+  .screenshot-frame {
+    position: relative;
+    background: var(--color-surface);
+    border: 1px solid var(--color-border-subtle);
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+  }
+
+  .screenshot-frame::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 32px;
+    background: linear-gradient(
+      to bottom,
+      var(--color-surface-alt),
+      var(--color-surface)
+    );
+    border-bottom: 1px solid var(--color-border-subtle);
+    z-index: 1;
+  }
+
+  .screenshot-frame img {
+    width: 100%;
+    height: auto;
+    display: block;
+    border-radius: var(--radius-md);
+    margin-top: 32px;
+  }
+
+  .screenshot-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      45deg,
+      transparent 0%,
+      rgba(11, 143, 98, 0.03) 50%,
+      transparent 100%
+    );
+    pointer-events: none;
+  }
+
+  @media (max-width: 768px) {
+    .hero-screenshot {
+      max-width: 100%;
+      gap: var(--space-md);
+    }
+
+    .screenshot-frame::before {
+      height: 24px;
+    }
+
+    .screenshot-frame img {
+      margin-top: 24px;
+    }
+
+    .screenshot-title {
+      font-size: var(--font-size-md);
+    }
+
+    .screenshot-subtitle {
+      font-size: var(--font-size-sm);
+    }
+  }
+</style>

@@ -1,0 +1,124 @@
+---
+import type { CollectionEntry } from 'astro:content';
+
+interface Props {
+  project: CollectionEntry<'projects'>;
+}
+
+const { project } = Astro.props as Props;
+const { title, summary, tags, heroAlt, heroImage, impact, href } = project.data;
+const slug = project.slug;
+const iconToken = project.data.category?.slice(0, 1).toUpperCase() ?? '•';
+---
+<article class="project-card">
+  <a href={href ?? `/work/${slug}`} class="card-link">
+    <figure>
+      <img src={heroImage} alt={heroAlt} loading="lazy" width="640" height="420" />
+    </figure>
+    <div class="card-body">
+      <div class="card-meta">
+        <span class="icon-chip" aria-hidden="true">{iconToken}</span>
+        <div class="meta-text">
+          <span class="badge">{project.data.category}</span>
+          {impact && <span class="impact">{impact}</span>}
+        </div>
+      </div>
+      <h3>{title}</h3>
+      <p>{summary}</p>
+      <div class="tag-list">
+        {tags?.map((tag) => (
+          <span class="tag">{tag}</span>
+        ))}
+      </div>
+    </div>
+  </a>
+</article>
+
+<style>
+  .project-card {
+    border-radius: var(--radius-lg);
+    background: var(--color-surface);
+    box-shadow: var(--shadow-soft);
+    overflow: hidden;
+    border: 1px solid rgba(17, 17, 17, 0.05);
+    transition: transform var(--duration-md) var(--ease-standard),
+      box-shadow var(--duration-md) var(--ease-standard);
+  }
+
+  .project-card:hover,
+  .project-card:focus-within {
+    transform: translateY(-6px);
+    box-shadow: var(--shadow-medium);
+  }
+
+  .card-link {
+    display: grid;
+    text-decoration: none;
+    color: inherit;
+  }
+
+  figure {
+    margin: 0;
+    position: relative;
+  }
+
+  figure::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(0deg, rgba(11, 143, 98, 0.2), transparent 50%);
+    opacity: 0;
+    transition: opacity var(--duration-sm) var(--ease-standard);
+  }
+
+  .card-link:hover figure::after,
+  .card-link:focus-visible figure::after {
+    opacity: 1;
+  }
+
+  img {
+    width: 100%;
+    display: block;
+  }
+
+  .card-body {
+    padding: var(--space-xl);
+    display: grid;
+    gap: var(--space-md);
+  }
+
+  .card-meta {
+    display: flex;
+    align-items: center;
+    gap: var(--space-md);
+    flex-wrap: wrap;
+  }
+
+  .impact {
+    font-size: var(--font-size-xs);
+    color: var(--color-text-tertiary);
+    background: rgba(17, 34, 21, 0.06);
+    padding: var(--space-3xs) var(--space-sm);
+    border-radius: var(--radius-round);
+  }
+
+  .meta-text {
+    display: grid;
+    gap: var(--space-3xs);
+  }
+
+  h3 {
+    margin-bottom: var(--space-xs);
+    font-size: var(--font-size-xl);
+  }
+
+  p {
+    margin: 0;
+  }
+
+  @media (max-width: 768px) {
+    .card-body {
+      padding: var(--space-lg);
+    }
+  }
+</style>

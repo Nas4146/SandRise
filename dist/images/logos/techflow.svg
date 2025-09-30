@@ -1,0 +1,6 @@
+<!-- Placeholder logo for a tech startup -->
+<svg width="120" height="40" viewBox="0 0 120 40" xmlns="http://www.w3.org/2000/svg">
+  <rect width="120" height="40" fill="none"/>
+  <rect x="8" y="12" width="16" height="16" rx="4" fill="#4a5568"/>
+  <text x="32" y="24" font-family="Inter, sans-serif" font-size="14" font-weight="600" fill="#4a5568">TechFlow</text>
+</svg>

@@ -1,0 +1,111 @@
+---
+import BaseLayout from '@layouts/BaseLayout.astro';
+import ProjectCard from '@components/ProjectCard.astro';
+import { getCollection } from 'astro:content';
+
+const projects = (await getCollection('projects')).filter((project) => !project.data.draft);
+const categories = Array.from(new Set(projects.map((p) => p.data.category))).sort();
+const urlCategory = Astro.url.searchParams.get('category');
+const filtered = urlCategory
+  ? projects.filter((project) => project.data.category === urlCategory)
+  : projects;
+
+const description = 'Explore SandRise projects led by Nick Sanders: discovery sprints, product launches, platform redesigns, and growth accelerators grounded in measurable outcomes.';
+---
+<BaseLayout title="SandRise Work" description={description}>
+  <section class="page-hero pattern-grid">
+    <div class="container">
+      <h1>Projects & Product Stories</h1>
+      <p class="lead">
+        A collection of engagements creating momentum for founders and teams. Each case study highlights the challenge, the path we took, and the outcomes that followed.
+      </p>
+    </div>
+  </section>
+
+  <section class="section-compact">
+    <div class="container filters">
+      <span class="filters-label">Filter by focus:</span>
+      <div class="filters-controls" role="group" aria-label="Project categories">
+        <a
+          href="/work"
+          class:list={['pill', !urlCategory && 'active']}
+        >
+          All
+        </a>
+        {categories.map((category) => (
+          <a
+            href={`?category=${encodeURIComponent(category)}`}
+            class:list={['pill', urlCategory === category && 'active']}
+          >
+            {category}
+          </a>
+        ))}
+      </div>
+    </div>
+    <div class="container">
+      <div class="grid work-grid">
+        {filtered.map((project) => (
+          <ProjectCard project={project} />
+        ))}
+      </div>
+      {filtered.length === 0 && (
+        <p class="muted">No projects in this category yet. Check back soon.</p>
+      )}
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .page-hero {
+    padding-top: calc(var(--space-4xl) + var(--nav-height));
+    padding-bottom: var(--space-2xl);
+    position: relative;
+  }
+
+  .filters {
+    display: flex;
+    align-items: center;
+    gap: var(--space-md);
+    flex-wrap: wrap;
+    margin-bottom: var(--space-xl);
+  }
+
+  .filters-label {
+    font-size: var(--font-size-sm);
+    font-weight: var(--font-weight-medium);
+    color: var(--color-text-tertiary);
+  }
+
+  .filters-controls {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-sm);
+  }
+
+  .pill {
+    padding: var(--space-3xs) var(--space-sm);
+    border-radius: var(--radius-round);
+    border: 1px solid var(--color-border-subtle);
+    font-size: var(--font-size-xs);
+    color: var(--color-text-secondary);
+    background: var(--color-surface);
+    transition: all var(--duration-sm) var(--ease-standard);
+  }
+
+  .pill:hover,
+  .pill:focus-visible {
+    color: var(--color-text-primary);
+    border-color: var(--color-border);
+    background: var(--color-surface-alt);
+  }
+
+  .pill.active {
+    color: var(--color-accent);
+    border-color: rgba(11, 143, 98, 0.42);
+    background: rgba(11, 143, 98, 0.14);
+  }
+
+  .work-grid {
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  }
+</style>

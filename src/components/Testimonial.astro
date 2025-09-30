@@ -1,0 +1,138 @@
+---
+export interface Props {
+  quote: string;
+  author: string;
+  role: string;
+  company?: string;
+  avatar?: string;
+  className?: string;
+}
+
+const { quote, author, role, company, avatar, className = '' } = Astro.props;
+---
+
+<blockquote class={`testimonial ${className}`}>
+  <div class="quote-content">
+    <p class="quote-text">"{quote}"</p>
+  </div>
+  
+  <footer class="quote-attribution">
+    {avatar && (
+      <img 
+        src={avatar} 
+        alt={`${author}'s profile picture`}
+        class="author-avatar"
+        loading="lazy"
+        decoding="async"
+      />
+    )}
+    <div class="author-info">
+      <cite class="author-name">{author}</cite>
+      <div class="author-role">
+        {role}{company && <span class="company"> at {company}</span>}
+      </div>
+    </div>
+  </footer>
+</blockquote>
+
+<style>
+  .testimonial {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-lg);
+    padding: var(--space-xl);
+    background: var(--color-card-bg);
+    border: 1px solid var(--color-border-subtle);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-soft);
+    margin: 0;
+    position: relative;
+  }
+
+  .testimonial::before {
+    content: '"';
+    position: absolute;
+    top: var(--space-md);
+    left: var(--space-md);
+    font-size: 3rem;
+    font-weight: var(--font-weight-bold);
+    color: var(--color-accent-muted);
+    line-height: 1;
+    font-family: Georgia, serif;
+  }
+
+  .quote-content {
+    padding-left: var(--space-xl);
+  }
+
+  .quote-text {
+    font-size: var(--font-size-lg);
+    line-height: var(--line-height-relaxed);
+    color: var(--color-text-primary);
+    font-style: italic;
+    margin: 0;
+  }
+
+  .quote-attribution {
+    display: flex;
+    align-items: center;
+    gap: var(--space-md);
+    padding-left: var(--space-xl);
+  }
+
+  .author-avatar {
+    width: 48px;
+    height: 48px;
+    border-radius: var(--radius-round);
+    object-fit: cover;
+    border: 2px solid var(--color-border-subtle);
+  }
+
+  .author-info {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3xs);
+  }
+
+  .author-name {
+    font-size: var(--font-size-md);
+    font-weight: var(--font-weight-semibold);
+    color: var(--color-text-primary);
+    font-style: normal;
+  }
+
+  .author-role {
+    font-size: var(--font-size-sm);
+    color: var(--color-text-secondary);
+  }
+
+  .company {
+    color: var(--color-text-tertiary);
+  }
+
+  @media (max-width: 768px) {
+    .testimonial {
+      padding: var(--space-lg);
+    }
+
+    .testimonial::before {
+      top: var(--space-sm);
+      left: var(--space-sm);
+      font-size: 2rem;
+    }
+
+    .quote-content,
+    .quote-attribution {
+      padding-left: var(--space-lg);
+    }
+
+    .quote-text {
+      font-size: var(--font-size-md);
+    }
+
+    .author-avatar {
+      width: 40px;
+      height: 40px;
+    }
+  }
+</style>

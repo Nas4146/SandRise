@@ -1,0 +1,123 @@
+---
+import BaseLayout from '@layouts/BaseLayout.astro';
+import { getCollection, getEntry } from 'astro:content';
+
+export async function getStaticPaths() {
+  const posts = (await getCollection('blog')).filter((post) => !post.data.draft);
+  return posts.map((post) => ({
+    params: { slug: post.slug }
+  }));
+}
+
+const { slug } = Astro.params;
+
+if (!slug) {
+  throw new Error('Blog slug missing');
+}
+
+const entry = await getEntry('blog', slug);
+
+if (!entry) {
+  throw new Error(`Blog post not found: ${slug}`);
+}
+
+const { Content } = await entry.render();
+const structuredData = {
+  '@context': 'https://schema.org',
+  '@type': 'Article',
+  headline: entry.data.title,
+  description: entry.data.description,
+  datePublished: entry.data.publishedAt.toISOString(),
+  dateModified: (entry.data.updatedAt ?? entry.data.publishedAt).toISOString(),
+  author: {
+    '@type': 'Person',
+    name: 'Nick Sanders'
+  }
+};
+---
+<BaseLayout
+  title={`${entry.data.title} — SandRise Insights`}
+  description={entry.data.description}
+  structuredData={structuredData}
+  type="article"
+>
+  <article class="article">
+    <header class="article-hero">
+      <div class="container">
+        <span class="badge">{entry.data.tags?.[0] ?? 'Article'}</span>
+        <h1>{entry.data.title}</h1>
+        <div class="meta">
+          <time datetime={entry.data.publishedAt.toISOString()}>{entry.data.publishedAt.toLocaleDateString()}</time>
+          {entry.data.readingTime && <span>{entry.data.readingTime}</span>}
+        </div>
+        <p class="lead">{entry.data.description}</p>
+      </div>
+    </header>
+    <section class="article-content">
+      <div class="container content">
+        <Content />
+      </div>
+    </section>
+  </article>
+</BaseLayout>
+
+<style>
+  .article-hero {
+    padding-top: calc(var(--space-4xl) + var(--nav-height));
+    padding-bottom: var(--space-2xl);
+  }
+
+  .meta {
+    display: inline-flex;
+    gap: var(--space-sm);
+    color: var(--color-text-tertiary);
+    font-size: var(--font-size-xs);
+  }
+
+  .article-content {
+    padding-bottom: var(--space-4xl);
+  }
+
+  .content {
+    max-width: 70ch;
+  }
+
+  .content :global(h2) {
+    font-size: var(--font-size-xl);
+    margin-top: var(--space-2xl);
+  }
+
+  .content :global(p),
+  .content :global(ul),
+  .content :global(ol) {
+    margin-bottom: var(--space-lg);
+  }
+
+  .content :global(ul),
+  .content :global(ol) {
+    padding-left: var(--space-xl);
+  }
+
+  .content :global(blockquote) {
+    border-left: 4px solid rgba(12, 122, 227, 0.4);
+    padding-left: var(--space-lg);
+    margin: var(--space-xl) 0;
+    color: var(--color-text-secondary);
+    font-style: italic;
+  }
+
+  .content :global(code) {
+    font-family: 'SFMono-Regular', ui-monospace, Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace;
+    background: rgba(17, 17, 17, 0.08);
+    padding: 0.15em 0.4em;
+    border-radius: var(--radius-sm);
+  }
+
+  .content :global(pre) {
+    background: rgba(17, 17, 17, 0.92);
+    color: #f6f6f6;
+    padding: var(--space-lg);
+    border-radius: var(--radius-md);
+    overflow-x: auto;
+  }
+</style>

@@ -1,0 +1,27 @@
+<svg width="960" height="540" viewBox="0 0 960 540" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="signal-ledger-bg" x1="0" y1="0" x2="960" y2="540" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#0B8F62" />
+      <stop offset="1" stop-color="#0C3355" />
+    </linearGradient>
+    <linearGradient id="signal-ledger-grid" x1="0" y1="0" x2="0" y2="540" gradientUnits="userSpaceOnUse">
+      <stop stop-color="rgba(255,255,255,0.38)" />
+      <stop offset="1" stop-color="rgba(255,255,255,0.08)" />
+    </linearGradient>
+  </defs>
+  <rect width="960" height="540" rx="24" fill="url(#signal-ledger-bg)" />
+  <g opacity="0.4" stroke="url(#signal-ledger-grid)">
+    <path d="M80 468L880 72" stroke-width="2" />
+    <path d="M120 468L920 72" stroke-width="2" />
+    <path d="M160 468L960 84" stroke-width="2" />
+    <path d="M200 468L960 120" stroke-width="2" />
+  </g>
+  <g opacity="0.55">
+    <rect x="140" y="164" width="320" height="212" rx="18" fill="rgba(12, 51, 85, 0.45)" stroke="rgba(255,255,255,0.18)" stroke-width="2" />
+    <rect x="500" y="196" width="320" height="180" rx="18" fill="rgba(12, 143, 98, 0.45)" stroke="rgba(255,255,255,0.18)" stroke-width="2" />
+    <path d="M172 260H428" stroke="rgba(255,255,255,0.45)" stroke-width="8" stroke-linecap="round" />
+    <path d="M172 300H348" stroke="rgba(255,255,255,0.28)" stroke-width="8" stroke-linecap="round" />
+    <circle cx="620" cy="278" r="64" fill="rgba(255,255,255,0.14)" stroke="rgba(255,255,255,0.28)" stroke-width="10" />
+    <path d="M580 320L604 296L628 312L652 276L668 292L692 252" stroke="#E6FFFA" stroke-width="10" stroke-linecap="round" stroke-linejoin="round" />
+  </g>
+</svg>

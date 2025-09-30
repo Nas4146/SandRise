@@ -1,0 +1,121 @@
+---
+import BaseLayout from '@layouts/BaseLayout.astro';
+import SectionHeading from '@components/SectionHeading.astro';
+
+const description = 'SandRise skillset across product strategy, UX, delivery, and tooling—see the stack used to build and grow digital products.';
+
+const skillGroups = [
+  {
+    title: 'Product & Strategy',
+    items: ['Product vision & narrative', 'Roadmapping & prioritization', 'Experiment design', 'North star metrics']
+  },
+  {
+    title: 'Research & Insights',
+    items: ['Jobs-to-be-done', 'User interviews & synthesis', 'Surveys & quantitative analysis', 'Usability testing']
+  },
+  {
+    title: 'Design & Experience',
+    items: ['UX architecture', 'Interaction design', 'Design systems', 'Content strategy']
+  },
+  {
+    title: 'Delivery & Leadership',
+    items: ['Sprint facilitation', 'Cross-functional alignment', 'Team coaching', 'Stakeholder storytelling']
+  }
+];
+
+const tools = [
+  {
+    category: 'Product & Analytics',
+    items: ['Linear', 'Notion', 'Jira', 'Mixpanel', 'Amplitude']
+  },
+  {
+    category: 'Design & Systems',
+    items: ['Figma', 'FigJam', 'Panda CSS', 'Storybook', 'Webflow']
+  },
+  {
+    category: 'Build & Ops',
+    items: ['Astro', 'Next.js', 'TypeScript', 'Supabase', 'AWS', 'Vercel']
+  }
+];
+---
+<BaseLayout title="Skills — SandRise" description={description}>
+  <section class="page-hero pattern-grid">
+    <div class="container">
+      <span class="badge">Capabilities</span>
+      <h1>Skills, tools, and focus areas</h1>
+      <p class="lead">
+        The toolkit SandRise uses to lead strategy, design the experience, and ship product.
+      </p>
+    </div>
+  </section>
+
+  <section class="section-alt">
+    <div class="container">
+      <SectionHeading
+        eyebrow="Core strengths"
+        title="Where SandRise creates momentum"
+      />
+      <div class="grid skills-grid">
+        {skillGroups.map((group) => (
+          <article class="card">
+            <h3>{group.title}</h3>
+            <ul>
+              {group.items.map((skill) => (
+                <li>{skill}</li>
+              ))}
+            </ul>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="container tools">
+      <SectionHeading
+        eyebrow="Tools"
+        title="Tools across discovery, design, and delivery"
+        description="Always exploring, but here’s the current stack."
+      />
+      <div class="grid tool-grid">
+        {tools.map((tool) => (
+          <article class="card">
+            <h3>{tool.category}</h3>
+            <div class="tag-list">
+              {tool.items.map((item) => (
+                <span class="tag">{item}</span>
+              ))}
+            </div>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .page-hero {
+    padding-top: calc(var(--space-4xl) + var(--nav-height));
+    padding-bottom: var(--space-2xl);
+  }
+
+  .skills-grid {
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: var(--space-2xl);
+  }
+
+  .skills-grid ul {
+    margin: var(--space-md) 0 0;
+    padding-left: var(--space-lg);
+  }
+
+  .skills-grid .card,
+  .tool-grid .card {
+    border: 1px solid rgba(11, 143, 98, 0.18);
+  }
+
+  .tool-grid {
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: var(--space-2xl);
+  }
+</style>
