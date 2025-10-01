@@ -1,0 +1,115 @@
+---
+interface Props {
+  tech: string;
+  size?: 'sm' | 'md' | 'lg';
+  showLabel?: boolean;
+}
+
+const { tech, size = 'md', showLabel = false } = Astro.props;
+
+// Map technology names to logo info
+const techMap: Record<string, { icon: string; color: string; label: string }> = {
+  'React': { icon: '⚛️', color: '#61DAFB', label: 'React' },
+  'React Native': { icon: '📱', color: '#61DAFB', label: 'React Native' },
+  'TypeScript': { icon: '🔷', color: '#3178C6', label: 'TypeScript' },
+  'JavaScript': { icon: '💛', color: '#F7DF1E', label: 'JavaScript' },
+  'Node.js': { icon: '🟢', color: '#339933', label: 'Node.js' },
+  'Python': { icon: '🐍', color: '#3776AB', label: 'Python' },
+  'Astro': { icon: '🚀', color: '#FF5D01', label: 'Astro' },
+  'Next.js': { icon: '▲', color: '#000000', label: 'Next.js' },
+  'Vue': { icon: '💚', color: '#4FC08D', label: 'Vue.js' },
+  'Supabase': { icon: '🔋', color: '#3ECF8E', label: 'Supabase' },
+  'Firebase': { icon: '🔥', color: '#FFCA28', label: 'Firebase' },
+  'AWS': { icon: '☁️', color: '#FF9900', label: 'AWS' },
+  'Vercel': { icon: '▲', color: '#000000', label: 'Vercel' },
+  'Figma': { icon: '🎨', color: '#F24E1E', label: 'Figma' },
+  'Expo': { icon: '⚡', color: '#000020', label: 'Expo' },
+  'Redux': { icon: '🔄', color: '#764ABC', label: 'Redux' },
+  'Git': { icon: '📚', color: '#F05032', label: 'Git' },
+  'Docker': { icon: '🐳', color: '#2496ED', label: 'Docker' },
+  'Tailwind': { icon: '💨', color: '#06B6D4', label: 'Tailwind CSS' },
+  'CSS': { icon: '🎨', color: '#1572B6', label: 'CSS' },
+  'HTML': { icon: '📄', color: '#E34F26', label: 'HTML' },
+  'GraphQL': { icon: '💗', color: '#E10098', label: 'GraphQL' },
+  'REST': { icon: '🌐', color: '#009688', label: 'REST API' },
+  'MongoDB': { icon: '🍃', color: '#47A248', label: 'MongoDB' },
+  'PostgreSQL': { icon: '🐘', color: '#336791', label: 'PostgreSQL' },
+  'MySQL': { icon: '🗄️', color: '#4479A1', label: 'MySQL' }
+};
+
+const techInfo = techMap[tech] || { icon: '⚙️', color: '#666666', label: tech };
+---
+
+<div class={`tech-logo tech-logo--${size}`} title={techInfo.label}>
+  <span class="tech-icon" style={`color: ${techInfo.color}`}>
+    {techInfo.icon}
+  </span>
+  {showLabel && <span class="tech-label">{techInfo.label}</span>}
+</div>
+
+<style>
+  .tech-logo {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-xs);
+    padding: var(--space-xs);
+    border-radius: var(--radius-md);
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    transition: all 0.2s ease;
+  }
+
+  .tech-logo:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(17, 34, 21, 0.1);
+  }
+
+  .tech-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2em;
+  }
+
+  .tech-label {
+    font-size: var(--font-size-xs);
+    font-weight: 500;
+    color: var(--color-text-secondary);
+    white-space: nowrap;
+  }
+
+  /* Size variations */
+  .tech-logo--sm {
+    padding: var(--space-2xs) var(--space-xs);
+  }
+
+  .tech-logo--sm .tech-icon {
+    font-size: 1em;
+  }
+
+  .tech-logo--sm .tech-label {
+    font-size: 0.75rem;
+  }
+
+  .tech-logo--md {
+    padding: var(--space-xs) var(--space-sm);
+  }
+
+  .tech-logo--lg {
+    padding: var(--space-sm) var(--space-md);
+  }
+
+  .tech-logo--lg .tech-icon {
+    font-size: 1.5em;
+  }
+
+  .tech-logo--lg .tech-label {
+    font-size: var(--font-size-sm);
+  }
+
+  @media (prefers-color-scheme: dark) {
+    .tech-logo:hover {
+      box-shadow: 0 4px 12px rgba(47, 190, 132, 0.15);
+    }
+  }
+</style>

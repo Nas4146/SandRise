@@ -1,6 +1,7 @@
 ---
 import BaseLayout from '@layouts/BaseLayout.astro';
 import SectionHeading from '@components/SectionHeading.astro';
+import TechLogo from '@components/TechLogo.astro';
 
 const description = 'SandRise skillset across product strategy, UX, delivery, and tooling—see the stack used to build and grow digital products.';
 
@@ -81,9 +82,11 @@ const tools = [
         {tools.map((tool) => (
           <article class="card">
             <h3>{tool.category}</h3>
-            <div class="tag-list">
+            <div class="tool-items">
               {tool.items.map((item) => (
-                <span class="tag">{item}</span>
+                <div class="tool-item">
+                  <TechLogo tech={item} size="sm" showLabel={true} />
+                </div>
               ))}
             </div>
           </article>
@@ -117,5 +120,24 @@ const tools = [
   .tool-grid {
     grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
     gap: var(--space-2xl);
+  }
+
+  .tool-items {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-sm);
+    margin-top: var(--space-md);
+  }
+
+  .tool-item {
+    display: flex;
+  }
+
+  @media (max-width: 768px) {
+    .skills-grid,
+    .tool-grid {
+      grid-template-columns: 1fr;
+      gap: var(--space-xl);
+    }
   }
 </style>

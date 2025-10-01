@@ -29,21 +29,35 @@ const description = 'Explore SandRise projects led by Nick Sanders: discovery sp
         <a
           href="/work"
           class:list={['pill', !urlCategory && 'active']}
+          data-category="all"
         >
-          All
+          <span>All</span>
+          <span class="pill-count">{projects.length}</span>
         </a>
-        {categories.map((category) => (
-          <a
-            href={`?category=${encodeURIComponent(category)}`}
-            class:list={['pill', urlCategory === category && 'active']}
-          >
-            {category}
-          </a>
-        ))}
+        {categories.map((category) => {
+          const count = projects.filter(p => p.data.category === category).length;
+          return (
+            <a
+              href={`?category=${encodeURIComponent(category)}`}
+              class:list={['pill', urlCategory === category && 'active']}
+              data-category={category}
+            >
+              <span>{category}</span>
+              <span class="pill-count">{count}</span>
+            </a>
+          );
+        })}
       </div>
     </div>
     <div class="container">
-      <div class="grid work-grid">
+      <div class="project-results">
+        <p class="results-count">
+          <span class="accent-text">{filtered.length}</span> 
+          {filtered.length === 1 ? 'project' : 'projects'}
+          {urlCategory && ` in ${urlCategory}`}
+        </p>
+      </div>
+      <div class="grid work-grid" id="projects-grid">
         {filtered.map((project) => (
           <ProjectCard project={project} />
         ))}

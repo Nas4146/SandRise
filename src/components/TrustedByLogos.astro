@@ -1,0 +1,120 @@
+---
+interface Props {
+  className?: string;
+}
+
+const { className = '' } = Astro.props;
+
+const organizations = [
+  {
+    name: 'Broadcom',
+    logo: '🔗', // You can replace with actual SVG paths or images
+    type: 'company'
+  },
+  {
+    name: 'VMware',
+    logo: '☁️',
+    type: 'company'
+  },
+  {
+    name: 'AWS',
+    logo: '🚀',
+    type: 'company'
+  },
+  {
+    name: 'Fannie Mae',
+    logo: '🏠',
+    type: 'company'
+  },
+  {
+    name: 'UT Austin McCombs',
+    logo: '🎓',
+    type: 'education'
+  }
+];
+---
+
+<div class={`trusted-by ${className}`}>
+  <p class="trusted-by-label">Trusted by industry leaders</p>
+  <div class="trusted-logos">
+    {organizations.map((org) => (
+      <div class="trusted-logo" title={org.name}>
+        <span class="logo-icon" aria-label={org.name}>{org.logo}</span>
+      </div>
+    ))}
+  </div>
+</div>
+
+<style>
+  .trusted-by {
+    text-align: center;
+    margin-top: var(--space-xl);
+  }
+
+  .trusted-by-label {
+    font-size: var(--font-size-xs);
+    color: var(--color-text-tertiary);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    font-weight: 500;
+    margin: 0 0 var(--space-md) 0;
+  }
+
+  .trusted-logos {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: var(--space-lg);
+    flex-wrap: wrap;
+  }
+
+  .trusted-logo {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 48px;
+    height: 48px;
+    border-radius: var(--radius-md);
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    transition: all 0.3s ease;
+    position: relative;
+  }
+
+  .trusted-logo:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(17, 34, 21, 0.1);
+    border-color: var(--color-accent);
+  }
+
+  .logo-icon {
+    font-size: 1.5rem;
+    opacity: 0.7;
+    transition: opacity 0.3s ease;
+  }
+
+  .trusted-logo:hover .logo-icon {
+    opacity: 1;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    .trusted-logo:hover {
+      box-shadow: 0 8px 20px rgba(47, 190, 132, 0.15);
+    }
+  }
+
+  @media (max-width: 768px) {
+    .trusted-logos {
+      gap: var(--space-md);
+    }
+    
+    .trusted-logo {
+      width: 40px;
+      height: 40px;
+    }
+    
+    .logo-icon {
+      font-size: 1.25rem;
+    }
+  }
+</style>

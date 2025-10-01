@@ -1,6 +1,7 @@
 ---
 import BaseLayout from '@layouts/BaseLayout.astro';
 import SectionHeading from '@components/SectionHeading.astro';
+import TrustedByLogos from '@components/TrustedByLogos.astro';
 import profilePortrait from '@content/profile.jpeg';
 import type { CollectionEntry } from 'astro:content';
 import { getCollection } from 'astro:content';
@@ -52,6 +53,7 @@ const heroStructuredData = {
           <a class="intro-button" href="https://github.com/Nas4146" target="_blank" rel="noopener">GitHub</a>
           <a class="intro-button" href="https://www.linkedin.com/in/sandersnick/" target="_blank" rel="noopener">LinkedIn</a>
         </div>
+        <TrustedByLogos />
       </div>
       <aside class="intro-portrait">
         <div class="portrait-frame">

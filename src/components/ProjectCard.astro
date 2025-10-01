@@ -1,19 +1,32 @@
 ---
 import type { CollectionEntry } from 'astro:content';
+import TechLogo from './TechLogo.astro';
 
 interface Props {
   project: CollectionEntry<'projects'>;
 }
 
 const { project } = Astro.props as Props;
-const { title, summary, tags, heroAlt, heroImage, impact, href } = project.data;
+const { title, summary, tags, heroAlt, heroImage, impact, href, timeline, role } = project.data;
 const slug = project.slug;
 const iconToken = project.data.category?.slice(0, 1).toUpperCase() ?? '•';
 ---
 <article class="project-card">
   <a href={href ?? `/work/${slug}`} class="card-link">
-    <figure>
+    <figure class="card-figure">
       <img src={heroImage} alt={heroAlt} loading="lazy" width="640" height="420" />
+      <div class="hover-overlay">
+        <div class="overlay-content">
+          <span class="overlay-role">{role}</span>
+          <span class="overlay-timeline">{timeline}</span>
+        </div>
+        <div class="view-project">
+          <span>View Project</span>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M7 17L17 7M17 7H7M17 7V17"/>
+          </svg>
+        </div>
+      </div>
     </figure>
     <div class="card-body">
       <div class="card-meta">
@@ -30,6 +43,19 @@ const iconToken = project.data.category?.slice(0, 1).toUpperCase() ?? '•';
           <span class="tag">{tag}</span>
         ))}
       </div>
+      {tags && tags.length > 0 && (
+        <div class="tech-stack">
+          <span class="tech-stack-label">Built with:</span>
+          <div class="tech-logos">
+            {tags.slice(0, 4).map((tag) => (
+              <TechLogo tech={tag} size="sm" />
+            ))}
+            {tags.length > 4 && (
+              <span class="tech-more">+{tags.length - 4}</span>
+            )}
+          </div>
+        </div>
+      )}
     </div>
   </a>
 </article>
@@ -47,7 +73,7 @@ const iconToken = project.data.category?.slice(0, 1).toUpperCase() ?? '•';
 
   .project-card:hover,
   .project-card:focus-within {
-    transform: translateY(-6px);
+    transform: translateY(-8px);
     box-shadow: var(--shadow-medium);
   }
 
@@ -57,12 +83,13 @@ const iconToken = project.data.category?.slice(0, 1).toUpperCase() ?? '•';
     color: inherit;
   }
 
-  figure {
+  .card-figure {
     margin: 0;
     position: relative;
+    overflow: hidden;
   }
 
-  figure::after {
+  .card-figure::after {
     content: '';
     position: absolute;
     inset: 0;
@@ -71,14 +98,87 @@ const iconToken = project.data.category?.slice(0, 1).toUpperCase() ?? '•';
     transition: opacity var(--duration-sm) var(--ease-standard);
   }
 
-  .card-link:hover figure::after,
-  .card-link:focus-visible figure::after {
+  .card-link:hover .card-figure::after,
+  .card-link:focus-visible .card-figure::after {
     opacity: 1;
+  }
+
+  .hover-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, rgba(11, 143, 98, 0.9), rgba(47, 190, 132, 0.8));
+    color: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: var(--space-lg);
+    opacity: 0;
+    transform: translateY(20px);
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    pointer-events: none;
+  }
+
+  .card-link:hover .hover-overlay,
+  .card-link:focus-visible .hover-overlay {
+    opacity: 1;
+    transform: translateY(0);
+    pointer-events: auto;
+  }
+
+  .overlay-content {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-xs);
+  }
+
+  .overlay-role {
+    font-size: var(--font-size-sm);
+    font-weight: 600;
+    letter-spacing: 0.02em;
+    text-transform: uppercase;
+  }
+
+  .overlay-timeline {
+    font-size: var(--font-size-md);
+    opacity: 0.9;
+  }
+
+  .view-project {
+    display: flex;
+    align-items: center;
+    gap: var(--space-xs);
+    align-self: flex-end;
+    font-weight: 500;
+    padding: var(--space-sm) var(--space-md);
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: var(--radius-md);
+    backdrop-filter: blur(8px);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    transition: all 0.2s ease;
+  }
+
+  .view-project:hover {
+    background: rgba(255, 255, 255, 0.3);
+    transform: translateX(4px);
+  }
+
+  .view-project svg {
+    transition: transform 0.2s ease;
+  }
+
+  .view-project:hover svg {
+    transform: translate(2px, -2px);
   }
 
   img {
     width: 100%;
     display: block;
+    transition: transform var(--duration-md) var(--ease-standard);
+  }
+
+  .card-link:hover img,
+  .card-link:focus-visible img {
+    transform: scale(1.05);
   }
 
   .card-body {
@@ -110,15 +210,93 @@ const iconToken = project.data.category?.slice(0, 1).toUpperCase() ?? '•';
   h3 {
     margin-bottom: var(--space-xs);
     font-size: var(--font-size-xl);
+    transition: color var(--duration-sm) var(--ease-standard);
+  }
+
+  .card-link:hover h3,
+  .card-link:focus-visible h3 {
+    color: var(--color-accent);
   }
 
   p {
     margin: 0;
+    transition: opacity var(--duration-sm) var(--ease-standard);
+  }
+
+  .tag-list {
+    opacity: 1;
+    transition: opacity var(--duration-sm) var(--ease-standard);
+  }
+
+  .card-link:hover .tag-list,
+  .card-link:focus-visible .tag-list {
+    opacity: 0.8;
+  }
+
+  .tech-stack {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-xs);
+    margin-top: var(--space-sm);
+    padding-top: var(--space-sm);
+    border-top: 1px solid var(--color-border);
+  }
+
+  .tech-stack-label {
+    font-size: var(--font-size-xs);
+    color: var(--color-text-tertiary);
+    font-weight: 500;
+    letter-spacing: 0.02em;
+  }
+
+  .tech-logos {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-xs);
+    align-items: center;
+  }
+
+  .tech-more {
+    font-size: var(--font-size-xs);
+    color: var(--color-text-tertiary);
+    background: var(--color-surface-alt);
+    padding: var(--space-2xs) var(--space-xs);
+    border-radius: var(--radius-sm);
+    border: 1px solid var(--color-border);
+  }
+
+  @media (prefers-color-scheme: dark) {
+    .hover-overlay {
+      background: linear-gradient(135deg, rgba(47, 190, 132, 0.9), rgba(11, 143, 98, 0.8));
+    }
   }
 
   @media (max-width: 768px) {
     .card-body {
       padding: var(--space-lg);
+    }
+    
+    .project-card:hover,
+    .project-card:focus-within {
+      transform: translateY(-4px);
+    }
+    
+    .hover-overlay {
+      padding: var(--space-md);
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .project-card,
+    .card-figure::after,
+    .hover-overlay,
+    img,
+    h3,
+    p,
+    .tag-list,
+    .view-project,
+    .view-project svg {
+      transition: none;
     }
   }
 </style>
