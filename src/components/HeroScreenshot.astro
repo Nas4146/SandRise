@@ -80,11 +80,7 @@ const { src, alt, title, subtitle, className = '' } = Astro.props;
     left: 0;
     right: 0;
     height: 32px;
-    background: linear-gradient(
-      to bottom,
-      var(--color-surface-alt),
-      var(--color-surface)
-    );
+    background-color: var(--color-surface-alt);
     border-bottom: 1px solid var(--color-border-subtle);
     z-index: 1;
   }
@@ -100,12 +96,7 @@ const { src, alt, title, subtitle, className = '' } = Astro.props;
   .screenshot-overlay {
     position: absolute;
     inset: 0;
-    background: linear-gradient(
-      45deg,
-      transparent 0%,
-      rgba(11, 143, 98, 0.03) 50%,
-      transparent 100%
-    );
+    background-color: rgba(79, 124, 99, 0.06);
     pointer-events: none;
   }
 

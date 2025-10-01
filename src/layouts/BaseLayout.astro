@@ -52,15 +52,13 @@ const props = Astro.props as Props;
     content: '';
     position: fixed;
     inset: -120px;
-    background: radial-gradient(circle at top right, rgba(11, 143, 98, 0.14), transparent 55%),
-      radial-gradient(circle at 14% 40%, rgba(47, 190, 132, 0.12), transparent 42%);
     z-index: -1;
     pointer-events: none;
+    background-color: transparent;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120' viewBox='0 0 120 120'%3E%3Crect width='120' height='120' fill='none' stroke='%23112215' stroke-opacity='0.06' stroke-width='1'/%3E%3Cpath d='M60 0v120' stroke='%23112215' stroke-opacity='0.04' stroke-width='1'/%3E%3Cpath d='M0 60h120' stroke='%23112215' stroke-opacity='0.04' stroke-width='1'/%3E%3C/svg%3E");
+    background-repeat: repeat;
+    background-size: 120px 120px;
+    opacity: 0.35;
   }
 
-  @media (prefers-reduced-motion: reduce) {
-    body::before {
-      display: none;
-    }
-  }
 </style>

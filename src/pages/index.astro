@@ -256,9 +256,7 @@ const heroStructuredData = {
     grid-column: span 8;
     display: grid;
     gap: 0;
-    background: linear-gradient(135deg, 
-      rgba(255, 255, 255, 0.1) 0%, 
-      rgba(255, 255, 255, 0.05) 100%);
+    background-color: rgba(255, 255, 255, 0.18);
     backdrop-filter: blur(20px);
     -webkit-backdrop-filter: blur(20px);
     padding: var(--space-lg);
@@ -282,27 +280,12 @@ const heroStructuredData = {
     left: 0;
     right: 0;
     height: 1px;
-    background: linear-gradient(90deg, 
-      transparent, 
-      rgba(255, 255, 255, 0.6), 
-      transparent);
+    background-color: rgba(255, 255, 255, 0.6);
     border-radius: var(--radius-lg) var(--radius-lg) 0 0;
   }
 
   .intro-copy::after {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: linear-gradient(135deg, 
-      rgba(255, 255, 255, 0.1) 0%, 
-      transparent 50%, 
-      rgba(12, 143, 98, 0.05) 100%);
-    pointer-events: none;
-    z-index: -1;
-    border-radius: var(--radius-lg);
+    display: none;
   }
 
   .intro-name {
@@ -322,9 +305,9 @@ const heroStructuredData = {
     left: 0;
     width: 60px;
     height: 3px;
-    background: linear-gradient(90deg, var(--color-accent), rgba(47, 190, 132, 0.6));
+    background-color: var(--color-accent);
     border-radius: var(--radius-round);
-    box-shadow: 0 2px 4px rgba(12, 143, 98, 0.2);
+    box-shadow: 0 2px 4px rgba(79, 124, 99, 0.18);
   }
 
   .intro-title {
@@ -369,7 +352,7 @@ const heroStructuredData = {
     margin-bottom: var(--space-xs);
     padding-left: var(--space-sm);
     border-left: 3px solid var(--color-accent);
-    background: linear-gradient(90deg, rgba(12, 143, 98, 0.05), transparent);
+    background-color: rgba(79, 124, 99, 0.06);
     padding-top: var(--space-2xs);
     padding-bottom: var(--space-2xs);
     border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
@@ -384,7 +367,7 @@ const heroStructuredData = {
     transition: all 0.3s ease;
     margin-bottom: var(--space-2xs);
     padding: var(--space-2xs) var(--space-xs);
-    background: rgba(12, 143, 98, 0.04);
+    background: rgba(93, 138, 111, 0.02);
     border-radius: var(--radius-sm);
     width: fit-content;
     transform: translateY(0);
@@ -393,7 +376,7 @@ const heroStructuredData = {
   .intro-email:hover,
   .intro-email:focus-visible {
     color: var(--color-accent);
-    background: rgba(12, 143, 98, 0.08);
+    background: rgba(93, 138, 111, 0.05);
     transform: translateY(-2px);
     box-shadow: 0 4px 12px rgba(12, 143, 98, 0.15);
   }
@@ -404,7 +387,7 @@ const heroStructuredData = {
     line-height: 1.6;
     color: var(--color-text-primary);
     padding-left: var(--space-xs);
-    border-left: 2px solid rgba(12, 143, 98, 0.15);
+    border-left: 2px solid rgba(79, 124, 99, 0.18);
   }
 
   .intro-copy :global(.trusted-by-logos) {
@@ -431,9 +414,7 @@ const heroStructuredData = {
     text-transform: uppercase;
     text-decoration: none;
     color: var(--color-text-primary);
-    background: linear-gradient(135deg, 
-      rgba(255, 255, 255, 0.1) 0%, 
-      rgba(255, 255, 255, 0.05) 100%);
+    background-color: rgba(255, 255, 255, 0.2);
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
     border: 1px solid rgba(255, 255, 255, 0.2);
@@ -443,10 +424,8 @@ const heroStructuredData = {
   }
 
   .intro-button.primary {
-    background: linear-gradient(135deg, 
-      rgba(12, 143, 98, 0.2) 0%, 
-      rgba(12, 143, 98, 0.1) 100%);
-    border-color: rgba(12, 143, 98, 0.4);
+    background-color: rgba(79, 124, 99, 0.26);
+    border-color: rgba(79, 124, 99, 0.4);
     color: var(--color-text-primary);
   }
 
@@ -477,9 +456,7 @@ const heroStructuredData = {
     position: relative;
     padding: var(--space-xs);
     border-radius: var(--radius-lg);
-    background: linear-gradient(135deg, 
-      rgba(255, 255, 255, 0.15) 0%, 
-      rgba(255, 255, 255, 0.05) 100%);
+    background-color: rgba(255, 255, 255, 0.18);
     backdrop-filter: blur(15px);
     -webkit-backdrop-filter: blur(15px);
     border: 1px solid rgba(255, 255, 255, 0.3);
@@ -504,10 +481,7 @@ const heroStructuredData = {
     border-radius: calc(var(--radius-lg) - var(--space-xs));
     border: 1px solid rgba(255, 255, 255, 0.2);
     pointer-events: none;
-    background: linear-gradient(135deg, 
-      rgba(255, 255, 255, 0.1) 0%, 
-      transparent 50%, 
-      rgba(255, 255, 255, 0.05) 100%);
+    background-color: transparent;
   }
 
   .portrait-frame img {
@@ -540,7 +514,7 @@ const heroStructuredData = {
     left: -80px;
     width: 60px;
     height: 2px;
-    background: linear-gradient(90deg, transparent, var(--color-accent));
+    background-color: var(--color-accent);
     transform: translateY(-50%);
   }
 
@@ -551,7 +525,7 @@ const heroStructuredData = {
     right: -80px;
     width: 60px;
     height: 2px;
-    background: linear-gradient(90deg, var(--color-accent), transparent);
+    background-color: var(--color-accent);
     transform: translateY(-50%);
   }
 
@@ -586,11 +560,7 @@ const heroStructuredData = {
     content: '';
     position: absolute;
     inset: 0;
-    background: linear-gradient(135deg, 
-      rgba(17, 34, 21, 0.85) 0%, 
-      rgba(17, 34, 21, 0.7) 30%, 
-      rgba(17, 34, 21, 0.4) 70%, 
-      rgba(17, 34, 21, 0.6) 100%);
+    background-color: rgba(17, 34, 21, 0.68);
     opacity: 0.9;
     transition: opacity var(--duration-md) var(--ease-standard);
     z-index: 0;
@@ -665,10 +635,10 @@ const heroStructuredData = {
     letter-spacing: 0.14em;
     padding: var(--space-3xs) var(--space-sm);
     border-radius: var(--radius-round);
-    background: linear-gradient(135deg, var(--color-accent), rgba(47, 190, 132, 0.8));
+    background-color: var(--color-accent);
     color: white;
     font-weight: var(--font-weight-semibold);
-    box-shadow: 0 4px 8px rgba(12, 143, 98, 0.3);
+    box-shadow: 0 4px 8px rgba(79, 124, 99, 0.3);
     width: fit-content;
     align-self: flex-start;
     transition: all 0.3s ease;
@@ -677,7 +647,7 @@ const heroStructuredData = {
 
   .project-tile:hover .project-impact {
     transform: translateY(-2px);
-    box-shadow: 0 6px 12px rgba(12, 143, 98, 0.4);
+    box-shadow: 0 6px 12px rgba(79, 124, 99, 0.4);
   }
 
   .project-content p {
@@ -699,8 +669,8 @@ const heroStructuredData = {
   .project-tags span {
     padding: var(--space-2xs) var(--space-sm);
     border-radius: var(--radius-round);
-    background: rgba(12, 143, 98, 0.15);
-    border: 1px solid rgba(12, 143, 98, 0.3);
+    background: rgba(93, 138, 111, 0.10);
+    border: 1px solid rgba(79, 124, 99, 0.3);
     color: rgba(255, 255, 255, 0.9);
     font-size: 0.65rem;
     letter-spacing: 0.06em;
@@ -727,9 +697,7 @@ const heroStructuredData = {
   .interest-card {
     padding: var(--space-lg);
     border-radius: var(--radius-sm);
-    background: linear-gradient(135deg, 
-      rgba(255, 255, 255, 0.1) 0%, 
-      rgba(255, 255, 255, 0.05) 100%);
+    background-color: rgba(255, 255, 255, 0.18);
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
     border: 1px solid rgba(255, 255, 255, 0.2);
@@ -758,9 +726,7 @@ const heroStructuredData = {
 
   .sandrise-section {
     padding: var(--space-md) 0 var(--space-lg);
-    background-image: 
-      radial-gradient(circle at 25% 25%, rgba(12, 143, 98, 0.02) 0%, transparent 50%),
-      radial-gradient(circle at 75% 75%, rgba(47, 190, 132, 0.01) 0%, transparent 50%);
+    background-color: rgba(79, 124, 99, 0.04);
     position: relative;
   }
 
@@ -771,7 +737,7 @@ const heroStructuredData = {
     left: 0;
     right: 0;
     height: 1px;
-    background: linear-gradient(90deg, transparent, rgba(12, 143, 98, 0.1), transparent);
+    background-color: rgba(79, 124, 99, 0.2);
   }
 
   .sandrise-copy {

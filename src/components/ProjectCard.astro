@@ -93,7 +93,7 @@ const iconToken = project.data.category?.slice(0, 1).toUpperCase() ?? '•';
     content: '';
     position: absolute;
     inset: 0;
-    background: linear-gradient(0deg, rgba(11, 143, 98, 0.2), transparent 50%);
+    background-color: rgba(79, 124, 99, 0.18);
     opacity: 0;
     transition: opacity var(--duration-sm) var(--ease-standard);
   }
@@ -106,7 +106,7 @@ const iconToken = project.data.category?.slice(0, 1).toUpperCase() ?? '•';
   .hover-overlay {
     position: absolute;
     inset: 0;
-    background: linear-gradient(135deg, rgba(11, 143, 98, 0.9), rgba(47, 190, 132, 0.8));
+    background-color: rgba(79, 124, 99, 0.9);
     color: white;
     display: flex;
     flex-direction: column;
@@ -267,7 +267,7 @@ const iconToken = project.data.category?.slice(0, 1).toUpperCase() ?? '•';
 
   @media (prefers-color-scheme: dark) {
     .hover-overlay {
-      background: linear-gradient(135deg, rgba(47, 190, 132, 0.9), rgba(11, 143, 98, 0.8));
+      background-color: rgba(111, 157, 129, 0.85);
     }
   }
 

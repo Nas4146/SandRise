@@ -1,0 +1,1 @@
+const e=document.querySelector(".site-header");e&&(e.style.transform="translateY(-100%)",e.style.transition="transform 0.6s cubic-bezier(0.34, 1.56, 0.64, 1)",requestAnimationFrame(()=>{e.style.transform="translateY(0)"}));

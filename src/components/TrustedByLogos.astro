@@ -86,9 +86,7 @@ const organizations = [
     height: 44px;
     padding: var(--space-xs) var(--space-sm);
     border-radius: var(--radius-sm);
-    background: linear-gradient(135deg, 
-      color-mix(in srgb, var(--brand-color) 8%, transparent 92%), 
-      color-mix(in srgb, var(--brand-color) 4%, transparent 96%));
+    background-color: color-mix(in srgb, var(--brand-color) 8%, transparent 92%);
     border: 1px solid color-mix(in srgb, var(--brand-color) 20%, transparent 80%);
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     position: relative;
@@ -96,32 +94,16 @@ const organizations = [
   }
 
   .trusted-logo::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: -100%;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(90deg, 
-      transparent, 
-      color-mix(in srgb, var(--brand-color) 15%, transparent 85%), 
-      transparent);
-    transition: left 0.5s ease;
+    display: none;
   }
 
   .trusted-logo:hover {
     transform: translateY(-3px);
-    background: linear-gradient(135deg, 
-      color-mix(in srgb, var(--brand-color) 12%, transparent 88%), 
-      color-mix(in srgb, var(--brand-color) 6%, transparent 94%));
+    background-color: color-mix(in srgb, var(--brand-color) 12%, transparent 88%);
     border-color: color-mix(in srgb, var(--brand-color) 30%, transparent 70%);
     box-shadow: 
       0 8px 25px color-mix(in srgb, var(--brand-color) 15%, transparent 85%),
       0 4px 12px color-mix(in srgb, var(--brand-color) 10%, transparent 90%);
-  }
-
-  .trusted-logo:hover::before {
-    left: 100%;
   }
 
   .logo-text {
@@ -142,9 +124,7 @@ const organizations = [
 
   /* Organization-specific styling */
   .trusted-logo[data-org="education"] {
-    background: linear-gradient(135deg, 
-      color-mix(in srgb, var(--brand-color) 10%, transparent 90%), 
-      color-mix(in srgb, var(--brand-color) 5%, transparent 95%));
+    background-color: color-mix(in srgb, var(--brand-color) 10%, transparent 90%);
   }
 
   .trusted-logo[data-org="education"] .logo-text {
@@ -154,9 +134,7 @@ const organizations = [
 
   @media (prefers-color-scheme: dark) {
     .trusted-logo {
-      background: linear-gradient(135deg, 
-        color-mix(in srgb, var(--brand-color) 12%, transparent 88%), 
-        color-mix(in srgb, var(--brand-color) 6%, transparent 94%));
+      background-color: color-mix(in srgb, var(--brand-color) 12%, transparent 88%);
     }
     
     .trusted-logo:hover {

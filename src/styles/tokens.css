@@ -2,24 +2,24 @@
   color-scheme: light;
 
   /* Color palette */
-  --color-base: #f7f9f5;
+  --color-base: #f5f1e6;
   --color-surface: #ffffff;
-  --color-surface-alt: #eef4ec;
-  --color-border: #c7d4c6;
-  --color-border-subtle: #dfe7de;
-  --color-text-primary: #112215;
-  --color-text-secondary: #233427;
-  --color-text-tertiary: #4d5c51;
-  --color-accent: #0b8f62;
-  --color-accent-muted: #cbeedd;
-  --color-highlight: #2fbe84;
-  --color-success: #2fbe84;
+  --color-surface-alt: #ece6d8;
+  --color-border: #d7d0c2;
+  --color-border-subtle: #e4ddd0;
+  --color-text-primary: #1f211b;
+  --color-text-secondary: #3f4238;
+  --color-text-tertiary: #6d7067;
+  --color-accent: #4f7c63;
+  --color-accent-muted: #dce8df;
+  --color-highlight: #6f9d81;
+  --color-success: #6f9d81;
 
   /* Semantic tokens */
-  --color-hero-bg: linear-gradient(140deg, rgba(11, 143, 98, 0.16), rgba(47, 190, 132, 0));
+  --color-hero-bg: rgba(79, 124, 99, 0.1);
   --color-card-bg: rgba(255, 255, 255, 0.9);
-  --color-overlay: rgba(11, 143, 98, 0.08);
-  --color-grid-line: rgba(17, 34, 21, 0.08);
+  --color-overlay: rgba(79, 124, 99, 0.06);
+  --color-grid-line: rgba(171, 164, 148, 0.25);
 
   /* Typography */
   --font-sans: "Geist Mono", "JetBrains Mono", "SFMono-Regular", ui-monospace, "SFMono", monospace;
@@ -80,20 +80,21 @@
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --color-base: #0f1712;
-    --color-surface: #131c16;
-    --color-surface-alt: #1a261e;
-    --color-border: #243329;
-    --color-border-subtle: #1d2a20;
-    --color-text-primary: #f3f8f1;
-    --color-text-secondary: #d7e3d5;
-    --color-text-tertiary: #9fb5a6;
-    --color-accent: #2fbe84;
-    --color-accent-muted: rgba(47, 190, 132, 0.16);
-    --color-highlight: #6de7af;
-    --color-card-bg: rgba(19, 28, 22, 0.94);
-    --color-overlay: rgba(47, 190, 132, 0.14);
-    --color-grid-line: rgba(141, 196, 162, 0.12);
+    color-scheme: light;
+    --color-base: #f5f1e6;
+    --color-surface: #ffffff;
+    --color-surface-alt: #ece6d8;
+    --color-border: #d7d0c2;
+    --color-border-subtle: #e4ddd0;
+    --color-text-primary: #1f211b;
+    --color-text-secondary: #3f4238;
+    --color-text-tertiary: #6d7067;
+    --color-accent: #4f7c63;
+    --color-accent-muted: #dce8df;
+    --color-highlight: #6f9d81;
+    --color-card-bg: rgba(255, 255, 255, 0.9);
+    --color-overlay: rgba(79, 124, 99, 0.06);
+    --color-grid-line: rgba(171, 164, 148, 0.25);
   }
 }
 

@@ -19,10 +19,6 @@ body {
   font-family: var(--font-sans);
   color: var(--color-text-secondary);
   background-color: var(--color-base);
-  background-image:
-    radial-gradient(circle at top right, rgba(11, 143, 98, 0.08), transparent 45%),
-    radial-gradient(circle at 12% 18%, rgba(47, 190, 132, 0.08), transparent 40%),
-    linear-gradient(var(--color-base), var(--color-base));
   line-height: var(--line-height-relaxed);
   text-rendering: optimizeLegibility;
 }
@@ -113,10 +109,7 @@ h1 {
   font-weight: var(--font-weight-bold);
   margin-bottom: var(--space-xl);
   max-width: 18ch;
-  background: linear-gradient(135deg, var(--color-text-primary), var(--color-accent));
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
+  color: var(--color-text-primary);
 }
 
 h2 {
@@ -135,7 +128,7 @@ h2::before {
   transform: translateY(-50%);
   width: 4px;
   height: 24px;
-  background: linear-gradient(135deg, var(--color-accent), var(--color-highlight));
+  background-color: var(--color-accent);
   border-radius: var(--radius-round);
   opacity: 0.8;
 }
@@ -169,7 +162,7 @@ h4 {
   left: 0;
   width: 60%;
   height: 3px;
-  background: linear-gradient(90deg, var(--color-accent), transparent);
+  background-color: var(--color-accent);
   border-radius: var(--radius-round);
 }
 
@@ -260,20 +253,20 @@ section {
   gap: var(--space-2xs);
   padding: var(--space-3xs) var(--space-sm);
   border-radius: var(--radius-round);
-  background: linear-gradient(135deg, rgba(11, 143, 98, 0.15), rgba(47, 190, 132, 0.08));
+  background-color: rgba(79, 124, 99, 0.12);
   color: var(--color-accent);
   font-size: var(--font-size-xs);
   font-weight: var(--font-weight-semibold);
   letter-spacing: 0.08em;
   text-transform: uppercase;
-  border: 1px solid rgba(11, 143, 98, 0.2);
+  border: 1px solid rgba(79, 124, 99, 0.24);
   transition: all var(--duration-sm) var(--ease-standard);
 }
 
 .badge:hover {
-  background: linear-gradient(135deg, rgba(11, 143, 98, 0.2), rgba(47, 190, 132, 0.12));
+  background-color: rgba(79, 124, 99, 0.16);
   transform: translateY(-1px);
-  box-shadow: 0 4px 8px rgba(11, 143, 98, 0.15);
+  box-shadow: 0 4px 8px rgba(79, 124, 99, 0.18);
 }
 
 .badge-neutral {
@@ -283,7 +276,7 @@ section {
 }
 
 .badge-highlight {
-  background: linear-gradient(135deg, var(--color-highlight), var(--color-accent));
+  background-color: var(--color-accent);
   color: white;
   border: none;
   text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
@@ -365,7 +358,7 @@ section {
 }
 
 ::selection {
-  background: rgba(11, 143, 98, 0.24);
+  background: rgba(93, 138, 111, 0.18);
   color: var(--color-text-primary);
 }
 
@@ -378,21 +371,9 @@ section {
   position: absolute;
   inset: var(--space-2xl) var(--space-lg);
   border-radius: var(--radius-lg);
-  background-image: 
-    radial-gradient(circle at 1px 1px, var(--color-grid-line) 1px, transparent 0),
-    linear-gradient(
-      to right,
-      var(--color-grid-line) 1px,
-      transparent 1px
-    ),
-    linear-gradient(
-      to bottom,
-      var(--color-grid-line) 1px,
-      transparent 1px
-    );
-  background-size: 32px 32px, 32px 32px, 32px 32px;
+  border: 1px solid var(--color-border-subtle);
+  background-color: transparent;
   pointer-events: none;
-  opacity: 0.4;
   z-index: 0;
 }
 
@@ -405,8 +386,9 @@ section {
   content: '';
   position: absolute;
   inset: 0;
-  background-image: radial-gradient(circle at 2px 2px, rgba(11, 143, 98, 0.08) 1px, transparent 0);
-  background-size: 20px 20px;
+  border: 1px solid var(--color-border-subtle);
+  border-radius: var(--radius-md);
+  background-color: transparent;
   pointer-events: none;
   z-index: 0;
 }
@@ -419,13 +401,9 @@ section {
   content: '';
   position: absolute;
   inset: 0;
-  background-image: repeating-linear-gradient(
-    45deg,
-    transparent,
-    transparent 20px,
-    rgba(11, 143, 98, 0.03) 20px,
-    rgba(11, 143, 98, 0.03) 21px
-  );
+  border: 1px solid var(--color-border-subtle);
+  border-radius: var(--radius-md);
+  background-color: transparent;
   pointer-events: none;
   z-index: 0;
 }
