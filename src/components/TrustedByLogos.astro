@@ -10,31 +10,36 @@ const organizations = [
     name: 'Broadcom',
     shortName: 'BROADCOM',
     brandColor: '#CA0404', // Broadcom Red
-    type: 'company'
+    type: 'company',
+    logo: '/images/logos/Broadcom_Logo_Red-Black_no-tag.png'
   },
   {
     name: 'VMware',
     shortName: 'VMware',
     brandColor: '#0091DA', // VMware Blue
-    type: 'company'
+    type: 'company',
+    logo: '/images/logos/vmware.png'
   },
   {
     name: 'AWS',
     shortName: 'aws',
     brandColor: '#FF9900', // AWS Orange
-    type: 'company'
+    type: 'company',
+    logo: '/images/logos/aws.png'
   },
   {
     name: 'Fannie Mae',
     shortName: 'FNMA',
     brandColor: '#005DAA', // Fannie Mae Blue
-    type: 'company'
+    type: 'company',
+    logo: '/images/logos/fannie-mae.png'
   },
   {
     name: 'UT Austin McCombs',
     shortName: 'McCombs',
     brandColor: '#BF5700', // UT Burnt Orange
-    type: 'education'
+    type: 'education',
+    logo: '/images/logos/4_RGB_McCombs_School_Brand_Formal.png'
   }
 ];
 ---
@@ -48,7 +53,12 @@ const organizations = [
         style={`--brand-color: ${org.brandColor}`}
         data-org={org.type}
       >
-        <span class="logo-text" aria-label={org.name}>{org.shortName}</span>
+        <img
+          src={org.logo}
+          alt={`${org.name} logo`}
+          loading="lazy"
+          decoding="async"
+        />
       </div>
     ))}
   </div>
@@ -71,26 +81,30 @@ const organizations = [
 
   .trusted-logos {
     display: flex;
-    justify-content: center;
+    justify-content: flex-start;
     align-items: center;
-    gap: var(--space-xl);
-    flex-wrap: wrap;
+    gap: clamp(var(--space-sm), 3vw, var(--space-lg));
     margin-top: var(--space-sm);
+    margin-inline: 0;
+    width: 100%;
+    flex-wrap: nowrap;
+    padding: 0;
   }
 
   .trusted-logo {
     display: flex;
     align-items: center;
     justify-content: center;
-    min-width: 80px;
-    height: 44px;
-    padding: var(--space-xs) var(--space-sm);
+  min-width: clamp(120px, 18vw, 150px);
+  height: clamp(54px, 8vw, 64px);
+  padding: var(--space-2xs) var(--space-xs);
     border-radius: var(--radius-sm);
-    background-color: color-mix(in srgb, var(--brand-color) 8%, transparent 92%);
-    border: 1px solid color-mix(in srgb, var(--brand-color) 20%, transparent 80%);
+    background-color: transparent;
+    border: 1px solid rgba(17, 34, 21, 0.14);
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     position: relative;
     overflow: hidden;
+    box-shadow: 0 12px 32px rgba(17, 34, 21, 0.08);
   }
 
   .trusted-logo::before {
@@ -99,48 +113,42 @@ const organizations = [
 
   .trusted-logo:hover {
     transform: translateY(-3px);
-    background-color: color-mix(in srgb, var(--brand-color) 12%, transparent 88%);
-    border-color: color-mix(in srgb, var(--brand-color) 30%, transparent 70%);
+    border-color: color-mix(in srgb, var(--brand-color) 24%, transparent 76%);
     box-shadow: 
-      0 8px 25px color-mix(in srgb, var(--brand-color) 15%, transparent 85%),
-      0 4px 12px color-mix(in srgb, var(--brand-color) 10%, transparent 90%);
+      0 18px 36px rgba(17, 34, 21, 0.16),
+      0 6px 12px rgba(17, 34, 21, 0.12);
   }
 
-  .logo-text {
-    font-size: var(--font-size-xs);
-    font-weight: var(--font-weight-bold);
-    color: var(--brand-color);
-    letter-spacing: 0.02em;
-    position: relative;
-    z-index: 1;
-    text-shadow: 0 1px 2px color-mix(in srgb, var(--brand-color) 20%, transparent 80%);
-    transition: all 0.3s ease;
+  .trusted-logo img {
+  width: clamp(72px, 8vw, 108px);
+  max-height: clamp(28px, 6vw, 32px);
+  height: auto;
+    filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.12));
+    transition: transform 0.3s ease;
+    object-fit: contain;
+    mix-blend-mode: multiply;
   }
 
-  .trusted-logo:hover .logo-text {
-    color: color-mix(in srgb, var(--brand-color) 90%, #000 10%);
-    transform: scale(1.05);
+  .trusted-logo:hover img {
+    transform: scale(1.04);
   }
 
   /* Organization-specific styling */
   .trusted-logo[data-org="education"] {
-    background-color: color-mix(in srgb, var(--brand-color) 10%, transparent 90%);
-  }
-
-  .trusted-logo[data-org="education"] .logo-text {
-    font-style: italic;
-    letter-spacing: 0.01em;
+    border-style: dashed;
+    border-color: rgba(191, 87, 0, 0.24);
   }
 
   @media (prefers-color-scheme: dark) {
     .trusted-logo {
-      background-color: color-mix(in srgb, var(--brand-color) 12%, transparent 88%);
+      background-color: rgba(17, 34, 21, 0.45);
+      border-color: rgba(255, 255, 255, 0.14);
     }
     
     .trusted-logo:hover {
       box-shadow: 
-        0 8px 25px color-mix(in srgb, var(--brand-color) 20%, transparent 80%),
-        0 4px 12px color-mix(in srgb, var(--brand-color) 15%, transparent 85%);
+        0 18px 36px rgba(0, 0, 0, 0.35),
+        0 6px 16px rgba(0, 0, 0, 0.25);
     }
   }
 
@@ -151,12 +159,8 @@ const organizations = [
     
     .trusted-logo {
       min-width: 70px;
-      height: 38px;
-      padding: var(--space-2xs) var(--space-xs);
-    }
-    
-    .logo-text {
-      font-size: 0.65rem;
+      height: 44px;
+      padding: var(--space-3xs) var(--space-xs);
     }
   }
 
@@ -167,12 +171,8 @@ const organizations = [
     
     .trusted-logo {
       min-width: 60px;
-      height: 34px;
-      padding: var(--space-3xs) var(--space-2xs);
-    }
-    
-    .logo-text {
-      font-size: 0.6rem;
+      height: 40px;
+      padding: var(--space-4xs) var(--space-2xs);
     }
   }
 </style>
