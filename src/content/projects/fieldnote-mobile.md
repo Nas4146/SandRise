@@ -6,7 +6,7 @@ role: "React Native Developer"
 timeline: "6 months"
 heroImage: "/images/projects/GroopT-logo.png"
 heroAlt: "GroopT app icon for smart group coordination"
-impact: "Live on TestFlight, App Store ready"
+impact: "Beta Testing via TestFlight"
 tags:
   - React Native
   - TypeScript

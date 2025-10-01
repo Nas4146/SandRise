@@ -6,7 +6,7 @@ role: "Full-Stack Developer"
 timeline: "4 months"
 heroImage: "/images/projects/signal-ledger.svg"
 heroAlt: "Commander task management interface"
-impact: "Personal Use"
+impact: "Ideation"
 tags:
   - Productivity
   - Command Line

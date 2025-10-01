@@ -6,7 +6,7 @@ role: "iOS Developer"
 timeline: "4 months"
 heroImage: "/images/projects/izzocam-logo.png"
 heroAlt: "IzzoCam app icon with orange gradient background"
-impact: "Live on TestFlight, App Store ready"
+impact: "Beta Testing via TestFlight"
 tags:
   - Swift
   - SwiftUI

@@ -2,6 +2,7 @@
 import BaseLayout from '@layouts/BaseLayout.astro';
 import SectionHeading from '@components/SectionHeading.astro';
 import TrustedByLogos from '@components/TrustedByLogos.astro';
+import TechnologiesSection from '@components/TechnologiesSection.astro';
 import profilePortrait from '@content/profile.jpeg';
 import type { CollectionEntry } from 'astro:content';
 import { getCollection } from 'astro:content';
@@ -147,6 +148,10 @@ const heroStructuredData = {
     </div>
   </section>
 
+  <TechnologiesSection />
+
+  <!-- SandRise Section - Commented out for now -->
+  <!--
   <section id="sandrise" class="section-alt sandrise-section pattern-grid scroll-trigger">
     <div class="container sandrise-grid">
       <div class="sandrise-copy scroll-fade-left">
@@ -170,6 +175,7 @@ const heroStructuredData = {
       </div>
     </div>
   </section>
+  -->
 
 </BaseLayout>
 

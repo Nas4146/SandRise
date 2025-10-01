@@ -1,12 +1,12 @@
 ---
-title: "Morning Google News Feed Podcast"
+title: "Coffee Scroll - Morning Google News Feed Podcast"
 summary: "An AI-powered podcast that automatically generates daily news summaries from Google News feeds with natural voice narration."
 category: "AI Content"
 role: "Full-Stack Developer"
 timeline: "3 months"
 heroImage: "/images/projects/summit-go.svg"
 heroAlt: "Morning podcast automation platform"
-impact: "Daily Episodes"
+impact: "Ideation"
 tags:
   - AI
   - Podcast

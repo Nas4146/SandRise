@@ -1,12 +1,12 @@
 ---
-title: "Topdown Game — 2D Action Adventure"
+title: "Topdown — 2D RPG"
 summary: "A classic top-down 2D action adventure game featuring exploration, combat, and puzzle-solving in a pixel art world."
 category: "Game Development"
 role: "Game Developer"
 timeline: "6 months"
 heroImage: "/images/logos/techflow.svg"
 heroAlt: "Topdown game pixel art interface"
-impact: "Prototype Complete"
+impact: "In Development"
 tags:
   - Game Development
   - Unity

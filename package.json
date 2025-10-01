@@ -23,6 +23,7 @@
     "@astrojs/check": "^0.9.4",
     "@types/node": "^20.11.30",
     "prettier": "^3.3.2",
+    "simple-icons": "^15.16.0",
     "typescript": "^5.9.3"
   }
 }

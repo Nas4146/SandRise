@@ -6,7 +6,7 @@ role: "Product Developer"
 timeline: "6 months"
 heroImage: "/images/logos/healthlink.svg"
 heroAlt: "Dev Talk communication platform"
-impact: "Beta Testing"
+impact: "In Development"
 tags:
   - Communication
   - Developer Tools

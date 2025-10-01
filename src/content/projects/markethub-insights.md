@@ -1,12 +1,12 @@
 ---
-title: "Ring — Connection Platform"
+title: "Ring — Job Notifier"
 summary: "A modern connection and networking platform that helps people build meaningful professional and personal relationships through intelligent matching."
 category: "Social Network"
 role: "Full-Stack Developer"
 timeline: "8 months"
 heroImage: "/images/logos/markethub.svg"
 heroAlt: "Ring connection platform"
-impact: "In Development"
+impact: "Personal Use"
 tags:
   - Social Networking
   - React Native
