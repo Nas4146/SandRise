@@ -3,6 +3,7 @@ import BaseLayout from '@layouts/BaseLayout.astro';
 import SectionHeading from '@components/SectionHeading.astro';
 import TrustedByLogos from '@components/TrustedByLogos.astro';
 import TechnologiesSection from '@components/TechnologiesSection.astro';
+import ExploringNext from '@components/ExploringNext.astro';
 import profilePortrait from '@content/profile.jpeg';
 import type { CollectionEntry } from 'astro:content';
 import { getCollection } from 'astro:content';
@@ -149,6 +150,8 @@ const heroStructuredData = {
   </section>
 
   <TechnologiesSection />
+
+  <ExploringNext />
 
   <!-- SandRise Section - Commented out for now -->
   <!--
