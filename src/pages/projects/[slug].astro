@@ -1,0 +1,663 @@
+---
+import BaseLayout from '@layouts/BaseLayout.astro';
+import SectionHeading from '@components/SectionHeading.astro';
+import TechnologiesSection from '@components/TechnologiesSection.astro';
+import { getCollection, getEntry } from 'astro:content';
+import type { CollectionEntry } from 'astro:content';
+
+const { slug } = Astro.params;
+const project = await getEntry('projects', slug!);
+
+if (!project) {
+  return Astro.redirect('/nicksanders');
+}
+
+const {
+  title,
+  summary,
+  category,
+  role,
+  timeline,
+  heroImage,
+  heroAlt,
+  impact,
+  tags,
+  metrics,
+  problem,
+  roleDetail,
+  process,
+  outcomes,
+  reflection,
+  gallery,
+  href
+} = project.data;
+
+const relatedProjects: CollectionEntry<'projects'>[] = (await getCollection('projects'))
+  .filter((entry) => entry.slug !== project.slug && !entry.data.draft)
+  .slice(0, 3);
+
+const structuredData = {
+  '@context': 'https://schema.org',
+  '@type': 'CreativeWork',
+  name: title,
+  description: summary,
+  author: {
+    '@type': 'Person',
+    name: 'Nick Sanders'
+  },
+  headline: title,
+  inLanguage: 'en-US'
+};
+
+const rasterRegex = /\.(png|jpe?g)$/i;
+const isHeroRaster = heroImage ? rasterRegex.test(heroImage) : false;
+const heroWebp = isHeroRaster && heroImage ? heroImage.replace(rasterRegex, '.webp') : null;
+---
+<BaseLayout
+  title={`${title} — SandRise Project`}
+  description={summary}
+  structuredData={structuredData}
+>
+  <section class="project-hero scroll-trigger">
+    <div class="container project-hero-grid">
+      <div class="project-hero-card scroll-fade-up">
+        <a class="back-link" href="/work">← Back to work</a>
+        <span class="project-category">{category}</span>
+        <h1>{title}</h1>
+        <p class="project-summary">{summary}</p>
+        <div class="project-meta">
+          {role && (
+            <div>
+              <span class="meta-label">Role</span>
+              <span>{role}</span>
+            </div>
+          )}
+          {timeline && (
+            <div>
+              <span class="meta-label">Timeline</span>
+              <span>{timeline}</span>
+            </div>
+          )}
+          {impact && (
+            <div>
+              <span class="meta-label">Status</span>
+              <span>{impact}</span>
+            </div>
+          )}
+        </div>
+        {tags && tags.length > 0 && (
+          <div class="project-tags">
+            {tags.slice(0, 8).map((tag) => (
+              <span>{tag}</span>
+            ))}
+          </div>
+        )}
+        {href && (
+          <div class="cta-row">
+            <a class="cta" href={href} target="_blank" rel="noopener">
+              View live project
+            </a>
+          </div>
+        )}
+      </div>
+      {heroImage && (
+        <aside class="project-hero-media scroll-fade-right">
+          <div class="hero-media-frame">
+            {isHeroRaster && heroWebp ? (
+              <picture>
+                <source srcset={heroWebp} type="image/webp" />
+                <img src={heroImage} alt={heroAlt ?? title} loading="lazy" decoding="async" />
+              </picture>
+            ) : (
+              <img src={heroImage} alt={heroAlt ?? title} loading="lazy" decoding="async" />
+            )}
+          </div>
+        </aside>
+      )}
+    </div>
+  </section>
+
+  <section class="project-content section-alt scroll-trigger">
+    <div class="container project-content-grid">
+      <article class="project-body scroll-fade-up">
+        {problem && (
+          <div class="project-section">
+            <SectionHeading eyebrow="Problem" title="The challenge" description={problem} />
+          </div>
+        )}
+
+        {roleDetail && (
+          <div class="project-section">
+            <SectionHeading eyebrow="Role" title="Where I focused" description={roleDetail} />
+          </div>
+        )}
+
+        {process && process.length > 0 && (
+          <div class="project-section">
+            <SectionHeading eyebrow="Process" title="How we approached it" />
+            <div class="process-grid">
+              {process.map((step) => (
+                <article class="process-card">
+                  <h3>{step.title}</h3>
+                  <p>{step.description}</p>
+                  {step.media && step.media.length > 0 && (
+                    <div class="process-media">
+                      {step.media.map((mediaItem) => {
+                        const isMediaRaster = rasterRegex.test(mediaItem.src);
+                        const mediaWebp = isMediaRaster ? mediaItem.src.replace(rasterRegex, '.webp') : null;
+                        return (
+                          <figure>
+                            {isMediaRaster && mediaWebp ? (
+                              <picture>
+                                <source srcset={mediaWebp} type="image/webp" />
+                                <img src={mediaItem.src} alt={mediaItem.alt} loading="lazy" decoding="async" />
+                              </picture>
+                            ) : (
+                              <img src={mediaItem.src} alt={mediaItem.alt} loading="lazy" decoding="async" />
+                            )}
+                          </figure>
+                        );
+                      })}
+                    </div>
+                  )}
+                </article>
+              ))}
+            </div>
+          </div>
+        )}
+
+        {outcomes && outcomes.length > 0 && (
+          <div class="project-section">
+            <SectionHeading eyebrow="Outcomes" title="What shipped" />
+            <ul class="outcomes-list">
+              {outcomes.map((outcome) => (
+                <li>{outcome}</li>
+              ))}
+            </ul>
+          </div>
+        )}
+
+        {reflection && (
+          <div class="project-section reflection">
+            <SectionHeading eyebrow="Reflection" title="What I learned" />
+            <blockquote>{reflection}</blockquote>
+          </div>
+        )}
+
+        {gallery && gallery.length > 0 && (
+          <div class="project-section">
+            <SectionHeading eyebrow="Gallery" title="Project visuals" />
+            <div class="gallery-grid">
+              {gallery.map((item) => {
+                const isGalleryRaster = rasterRegex.test(item.src);
+                const galleryWebp = isGalleryRaster ? item.src.replace(rasterRegex, '.webp') : null;
+                return (
+                  <figure>
+                    {isGalleryRaster && galleryWebp ? (
+                      <picture>
+                        <source srcset={galleryWebp} type="image/webp" />
+                        <img src={item.src} alt={item.alt} loading="lazy" decoding="async" />
+                      </picture>
+                    ) : (
+                      <img src={item.src} alt={item.alt} loading="lazy" decoding="async" />
+                    )}
+                  </figure>
+                );
+              })}
+            </div>
+          </div>
+        )}
+      </article>
+
+      <aside class="project-sidebar scroll-fade-right">
+        <div class="sidebar-card">
+          <h2>Project Snapshot</h2>
+          <ul>
+            {category && (
+              <li>
+                <span class="label">Category</span>
+                <span>{category}</span>
+              </li>
+            )}
+            {role && (
+              <li>
+                <span class="label">Role</span>
+                <span>{role}</span>
+              </li>
+            )}
+            {timeline && (
+              <li>
+                <span class="label">Timeline</span>
+                <span>{timeline}</span>
+              </li>
+            )}
+            {impact && (
+              <li>
+                <span class="label">Impact</span>
+                <span>{impact}</span>
+              </li>
+            )}
+          </ul>
+        </div>
+
+        {metrics && metrics.length > 0 && (
+          <div class="sidebar-card metrics">
+            <h2>Key Metrics</h2>
+            <div class="metrics-grid">
+              {metrics.map((metric) => (
+                <div class="metric">
+                  <span class="metric-label">{metric.label}</span>
+                  <span class="metric-value">{metric.value}</span>
+                  {metric.hint && <span class="metric-hint">{metric.hint}</span>}
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
+
+        {relatedProjects.length > 0 && (
+          <div class="sidebar-card related">
+            <h2>More projects</h2>
+            <ul>
+              {relatedProjects.map((related) => (
+                <li>
+                  <a href={`/projects/${related.slug}`}>{related.data.title}</a>
+                  <p>{related.data.summary}</p>
+                </li>
+              ))}
+            </ul>
+          </div>
+        )}
+      </aside>
+    </div>
+  </section>
+
+  <TechnologiesSection />
+</BaseLayout>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (prefersReducedMotion) return;
+
+    const observerOptions = {
+      threshold: 0.1,
+      rootMargin: '0px 0px -50px 0px'
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('animate');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, observerOptions);
+
+    const elements = document.querySelectorAll('.scroll-trigger');
+    elements.forEach((el) => observer.observe(el));
+  });
+</script>
+
+<style>
+  .project-hero {
+    padding: var(--space-xl) 0 var(--space-lg);
+  }
+
+  .project-hero-grid {
+    display: grid;
+    grid-template-columns: repeat(12, minmax(0, 1fr));
+    gap: var(--space-lg);
+    align-items: center;
+  }
+
+  .project-hero-card {
+    grid-column: span 7;
+    background: rgba(255, 255, 255, 0.18);
+    backdrop-filter: blur(20px);
+    padding: var(--space-lg);
+    border-radius: var(--radius-lg);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    box-shadow: 0 16px 40px rgba(15, 32, 24, 0.16);
+    display: grid;
+    gap: var(--space-sm);
+  }
+
+  .back-link {
+    font-size: var(--font-size-xs);
+    color: var(--color-text-secondary);
+    text-decoration: none;
+    transition: color 0.2s ease;
+  }
+
+  .back-link:hover,
+  .back-link:focus-visible {
+    color: var(--color-text-primary);
+  }
+
+  .project-category {
+    font-size: var(--font-size-xs);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--color-accent);
+    font-weight: var(--font-weight-medium);
+    margin-bottom: var(--space-2xs);
+  }
+
+  .project-hero-card h1 {
+    margin: 0;
+    font-size: clamp(2.5rem, 4vw, 3.5rem);
+    letter-spacing: -0.02em;
+  }
+
+  .project-summary {
+    font-size: var(--font-size-md);
+    color: var(--color-text-secondary);
+    margin: 0;
+  }
+
+  .project-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-sm);
+  }
+
+  .project-meta > div {
+    display: grid;
+    gap: var(--space-3xs);
+    padding: var(--space-xs) var(--space-sm);
+    background: rgba(255, 255, 255, 0.12);
+    border-radius: var(--radius-md);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+  }
+
+  .meta-label {
+    font-size: var(--font-size-2xs);
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--color-accent);
+  }
+
+  .project-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-2xs);
+  }
+
+  .project-tags span {
+    padding: var(--space-3xs) var(--space-xs);
+    border-radius: var(--radius-round);
+    background: rgba(79, 124, 99, 0.12);
+    color: var(--color-accent);
+    font-size: var(--font-size-2xs);
+  }
+
+  .cta-row {
+    margin-top: var(--space-sm);
+  }
+
+  .cta {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-2xs);
+    padding: var(--space-xs) var(--space-md);
+    border-radius: var(--radius-round);
+    background: var(--color-text-primary);
+    color: var(--color-background);
+    font-weight: var(--font-weight-medium);
+    text-decoration: none;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    box-shadow: 0 12px 30px rgba(15, 32, 24, 0.18);
+  }
+
+  .cta:hover,
+  .cta:focus-visible {
+    transform: translateY(-2px);
+  }
+
+  .project-hero-media {
+    grid-column: span 5;
+  }
+
+  .hero-media-frame {
+    background: rgba(255, 255, 255, 0.18);
+    border-radius: var(--radius-lg);
+    padding: var(--space-sm);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+  }
+
+  .hero-media-frame picture {
+    display: block;
+  }
+
+  .hero-media-frame img {
+    width: 100%;
+    border-radius: var(--radius-md);
+    display: block;
+  }
+
+  .project-content {
+    padding: var(--space-xl) 0;
+  }
+
+  .project-content-grid {
+    display: grid;
+    grid-template-columns: repeat(12, minmax(0, 1fr));
+    gap: var(--space-lg);
+    align-items: start;
+  }
+
+  .project-body {
+    grid-column: span 8;
+    display: grid;
+    gap: var(--space-xl);
+  }
+
+  .project-section {
+    display: grid;
+    gap: var(--space-md);
+  }
+
+  .project-section :global(p) {
+    margin: 0;
+    color: var(--color-text-secondary);
+  }
+
+  .process-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: var(--space-md);
+  }
+
+  .process-card {
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: var(--radius-lg);
+    padding: var(--space-lg);
+    border: 1px solid rgba(255, 255, 255, 0.16);
+    display: grid;
+    gap: var(--space-sm);
+    box-shadow: 0 10px 28px rgba(15, 32, 24, 0.12);
+  }
+
+  .process-card h3 {
+    margin: 0;
+  }
+
+  .process-media {
+    display: grid;
+    gap: var(--space-sm);
+  }
+
+  .process-media figure {
+    margin: 0;
+    border-radius: var(--radius-md);
+    overflow: hidden;
+  }
+
+  .process-media picture {
+    display: block;
+  }
+
+  .process-media img {
+    width: 100%;
+    display: block;
+  }
+
+  .outcomes-list {
+    margin: 0;
+    padding-left: var(--space-lg);
+    display: grid;
+    gap: var(--space-2xs);
+  }
+
+  .reflection blockquote {
+    margin: 0;
+    padding: var(--space-lg);
+    border-radius: var(--radius-lg);
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.14);
+    font-size: var(--font-size-md);
+    line-height: 1.6;
+  }
+
+  .gallery-grid {
+    display: grid;
+    gap: var(--space-md);
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  }
+
+  .gallery-grid figure {
+    margin: 0;
+    overflow: hidden;
+    border-radius: var(--radius-lg);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+  }
+
+  .gallery-grid picture {
+    display: block;
+  }
+
+  .gallery-grid img {
+    width: 100%;
+    display: block;
+  }
+
+  .project-sidebar {
+    grid-column: span 4;
+    display: grid;
+    gap: var(--space-lg);
+  }
+
+  .sidebar-card {
+    background: rgba(255, 255, 255, 0.12);
+    backdrop-filter: blur(18px);
+    padding: var(--space-lg);
+    border-radius: var(--radius-lg);
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    box-shadow: 0 12px 28px rgba(15, 32, 24, 0.14);
+  }
+
+  .sidebar-card h2 {
+    margin-top: 0;
+    margin-bottom: var(--space-md);
+  }
+
+  .sidebar-card ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: grid;
+    gap: var(--space-sm);
+  }
+
+  .sidebar-card li {
+    display: grid;
+    gap: var(--space-3xs);
+  }
+
+  .sidebar-card .label {
+    font-size: var(--font-size-2xs);
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--color-accent);
+  }
+
+  .sidebar-card.related ul {
+    gap: var(--space-md);
+  }
+
+  .sidebar-card.related p {
+    margin: 0;
+    color: var(--color-text-secondary);
+    font-size: var(--font-size-sm);
+  }
+
+  .sidebar-card.related a {
+    color: var(--color-text-primary);
+    font-weight: var(--font-weight-semibold);
+  }
+
+  .sidebar-card.metrics {
+    display: grid;
+    gap: var(--space-md);
+  }
+
+  .metrics-grid {
+    display: grid;
+    gap: var(--space-sm);
+  }
+
+  .metric {
+    display: grid;
+    gap: var(--space-3xs);
+    padding: var(--space-sm);
+    border-radius: var(--radius-md);
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+  }
+
+  .metric-label {
+    font-size: var(--font-size-xs);
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    color: var(--color-accent);
+  }
+
+  .metric-value {
+    font-size: var(--font-size-lg);
+    font-weight: var(--font-weight-semibold);
+  }
+
+  .metric-hint {
+    font-size: var(--font-size-2xs);
+    color: var(--color-text-secondary);
+  }
+
+  @media (max-width: 1024px) {
+    .project-hero-grid,
+    .project-content-grid {
+      grid-template-columns: repeat(1, minmax(0, 1fr));
+    }
+
+    .project-hero-card,
+    .project-body,
+    .project-sidebar {
+      grid-column: span 1;
+    }
+  }
+
+  @media (max-width: 768px) {
+    .project-hero {
+      padding-top: var(--space-lg);
+    }
+
+    .project-hero-card {
+      padding: var(--space-md);
+    }
+
+    .project-content {
+      padding-top: var(--space-lg);
+    }
+  }
+</style>

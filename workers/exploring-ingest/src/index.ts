@@ -14,6 +14,10 @@ interface Env {
 
 type Channel = 'twilio' | 'slack';
 
+type ExecutionContext = {
+  waitUntil(promise: Promise<unknown>): void;
+};
+
 type ExploringType = 'tool' | 'article' | 'research' | 'api';
 
 type ExploringRecord = {

@@ -4,12 +4,13 @@
 import fs from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
+import { optimize } from 'svgo';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-const sourceDir = 'node_modules/simple-icons/icons';
-const targetDir = 'public/images/tech';
+const sourceDir = path.resolve(__dirname, 'node_modules/simple-icons/icons');
+const targetDir = path.resolve(__dirname, 'public/images/tech');
 
 // Mapping of component names to simple-icons filenames
 const logoMapping = {
@@ -83,6 +84,7 @@ if (!fs.existsSync(targetDir)) {
 
 let copied = 0;
 let missing = [];
+let bytesSaved = 0;
 
 console.log('🚀 Copying technology logos...\n');
 
@@ -91,8 +93,31 @@ Object.entries(logoMapping).forEach(([targetName, sourceName]) => {
   const targetPath = path.join(targetDir, targetName);
   
   if (fs.existsSync(sourcePath)) {
-    fs.copyFileSync(sourcePath, targetPath);
-    console.log(`✅ Copied: ${targetName}`);
+    const svgContent = fs.readFileSync(sourcePath, 'utf-8');
+    const initialSize = Buffer.byteLength(svgContent, 'utf-8');
+    const { data: optimizedSvg } = optimize(svgContent, {
+      path: sourcePath,
+      multipass: true,
+      plugins: [
+        'preset-default',
+        {
+          name: 'removeViewBox',
+          active: false
+        },
+        {
+          name: 'cleanupNumericValues',
+          params: { floatPrecision: 3 }
+        }
+      ]
+    });
+
+    fs.writeFileSync(targetPath, optimizedSvg, 'utf-8');
+
+    const optimizedSize = Buffer.byteLength(optimizedSvg, 'utf-8');
+    bytesSaved += Math.max(0, initialSize - optimizedSize);
+    console.log(
+      `✅ Copied: ${targetName} (${(optimizedSize / 1024).toFixed(1)} KB, saved ${(Math.max(0, initialSize - optimizedSize) / 1024).toFixed(2)} KB)`
+    );
     copied++;
   } else {
     console.log(`❌ Missing: ${sourceName} (for ${targetName})`);
@@ -103,6 +128,7 @@ Object.entries(logoMapping).forEach(([targetName, sourceName]) => {
 console.log(`\n📊 Summary:`);
 console.log(`   Copied: ${copied} logos`);
 console.log(`   Missing: ${missing.length} logos`);
+console.log(`   Bytes saved: ${(bytesSaved / 1024).toFixed(2)} KB`);
 
 if (missing.length > 0) {
   console.log(`\n⚠️  Missing logos:`);

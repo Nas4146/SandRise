@@ -1,7 +1,1 @@
-<svg width="1024" height="640" viewBox="0 0 1024 640" fill="none" xmlns="http://www.w3.org/2000/svg">
-  <rect width="1024" height="640" rx="28" fill="#F2F7FF" />
-  <path d="M120 160C200 140 256 168 320 200C384 232 448 264 528 244C608 224 672 172 744 164C816 156 888 192 904 256C920 320 872 400 792 432C712 464 600 448 520 404C440 360 392 288 320 256C248 224 152 232 120 264" stroke="#0C7AE3" stroke-width="18" stroke-linecap="round"/>
-  <circle cx="320" cy="248" r="28" fill="#0C7AE3" opacity="0.18" />
-  <circle cx="736" cy="232" r="48" fill="#5A7BFF" opacity="0.12" />
-  <rect x="152" y="448" width="240" height="96" rx="18" fill="#0C7AE3" fill-opacity="0.15" />
-</svg>
+<svg xmlns="http://www.w3.org/2000/svg" width="1024" height="640" fill="none"><rect width="1024" height="640" fill="#F2F7FF" rx="28"/><path stroke="#0C7AE3" stroke-linecap="round" stroke-width="18" d="M120 160c80-20 136 8 200 40s128 64 208 44 144-72 216-80 144 28 160 92-32 144-112 176-192 16-272-28-128-116-200-148-168-24-200 8"/><circle cx="320" cy="248" r="28" fill="#0C7AE3" opacity=".18"/><circle cx="736" cy="232" r="48" fill="#5A7BFF" opacity=".12"/><rect width="240" height="96" x="152" y="448" fill="#0C7AE3" fill-opacity=".15" rx="18"/></svg>

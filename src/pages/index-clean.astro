@@ -11,6 +11,8 @@ const projects: CollectionEntry<'projects'>[] = allProjects.sort((a, b) =>
   a.data.title.localeCompare(b.data.title)
 );
 
+const rasterRegex = /\.(png|jpe?g)$/i;
+
 const interests = [
   'AI & applied automation',
   'Product systems & ops',
@@ -75,14 +77,24 @@ const heroStructuredData = {
       <h2 class="projects-heading scroll-fade-up">Current Projects</h2>
       <ul class="project-list">
         {projects.map((project, index) => {
-          const href = project.data.href ?? `/work/${project.slug}`;
+          const href = project.data.href ?? `/projects/${project.slug}`;
+          const heroSrc = project.data.heroImage;
+          const isRasterHero = rasterRegex.test(heroSrc);
+          const fallbackMime = heroSrc.toLowerCase().endsWith('.png')
+            ? 'image/png'
+            : heroSrc.toLowerCase().match(/\.jpe?g$/)
+              ? 'image/jpeg'
+              : '';
+          const backgroundValue = isRasterHero
+            ? `image-set(url(${heroSrc.replace(rasterRegex, '.webp')}) type("image/webp"), url(${heroSrc})${fallbackMime ? ` type("${fallbackMime}")` : ''})`
+            : `url(${heroSrc})`;
           return (
             <li>
               <a
                 class="project-tile scroll-scale-in"
                 href={href}
                 aria-label={`Explore ${project.data.title}`}
-                style={`--project-image: url(${project.data.heroImage}); --animation-delay: ${index * 0.1}s`}
+                style={`--project-image: ${backgroundValue}; --project-image-fallback: url(${heroSrc}); --animation-delay: ${index * 0.1}s`}
               >
                 <div class="project-overlay">
                   <span class="project-index">{String(index + 1).padStart(2, '0')}</span>
@@ -534,7 +546,7 @@ const heroStructuredData = {
     height: 320px;
     border: 1px solid rgba(17, 34, 21, 0.08);
     box-shadow: 0 12px 28px rgba(17, 34, 21, 0.1);
-    background-image: var(--project-image);
+    background-image: var(--project-image, var(--project-image-fallback));
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center;

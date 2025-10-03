@@ -5,8 +5,12 @@
  * Usage: node supabase/apply-policies.js <project-ref> <service-role-key>
  */
 
-const fs = require('fs');
-const path = require('path');
+import fs from 'fs';
+import path from 'path';
+import { fileURLToPath } from 'url';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 const [projectRef, serviceRoleKey] = process.argv.slice(2);
 
@@ -73,8 +77,8 @@ async function applyPolicies() {
           console.log('   ✅ Success via alternative endpoint');
         }
       } else {
-        const result = await response.json();
-        console.log(`   ✅ Success`);
+  await response.json().catch(() => null);
+  console.log(`   ✅ Success`);
       }
     } catch (error) {
       console.error(`   ❌ Error: ${error.message}`);

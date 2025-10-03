@@ -8,13 +8,25 @@ interface Props {
 
 const { project } = Astro.props as Props;
 const { title, summary, tags, heroAlt, heroImage, impact, href, timeline, role } = project.data;
+const rasterRegex = /\.(png|jpe?g)$/i;
+const isRasterImage = rasterRegex.test(heroImage);
+const webpSource = isRasterImage ? heroImage.replace(rasterRegex, '.webp') : null;
 const slug = project.slug;
 const iconToken = project.data.category?.slice(0, 1).toUpperCase() ?? '•';
 ---
 <article class="project-card">
-  <a href={href ?? `/work/${slug}`} class="card-link">
+  <a href={href ?? `/projects/${slug}`} class="card-link">
     <figure class="card-figure">
-      <img src={heroImage} alt={heroAlt} loading="lazy" width="640" height="420" />
+      <div class="card-figure-media">
+        {isRasterImage && webpSource ? (
+          <picture>
+            <source srcset={webpSource} type="image/webp" />
+            <img src={heroImage} alt={heroAlt} loading="lazy" decoding="async" />
+          </picture>
+        ) : (
+          <img src={heroImage} alt={heroAlt} loading="lazy" decoding="async" />
+        )}
+      </div>
       <div class="hover-overlay">
         <div class="overlay-content">
           <span class="overlay-role">{role}</span>
@@ -87,6 +99,13 @@ const iconToken = project.data.category?.slice(0, 1).toUpperCase() ?? '•';
     margin: 0;
     position: relative;
     overflow: hidden;
+    background: var(--color-surface-alt);
+    border-bottom: 1px solid var(--color-border-subtle);
+    aspect-ratio: 5 / 3;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: var(--space-lg);
   }
 
   .card-figure::after {
@@ -101,6 +120,38 @@ const iconToken = project.data.category?.slice(0, 1).toUpperCase() ?? '•';
   .card-link:hover .card-figure::after,
   .card-link:focus-visible .card-figure::after {
     opacity: 1;
+  }
+
+  .card-figure-media {
+    width: min(70%, 320px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform var(--duration-md) var(--ease-standard),
+      filter var(--duration-md) var(--ease-standard);
+  }
+
+  .card-figure-media picture {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .card-figure-media img {
+    width: 100%;
+    height: auto;
+    max-height: 220px;
+    object-fit: contain;
+    image-rendering: -webkit-optimize-contrast;
+    image-rendering: crisp-edges;
+    filter: drop-shadow(0 4px 12px rgba(17, 34, 21, 0.12));
+  }
+
+  @supports not (image-rendering: crisp-edges) {
+    .card-figure-media img {
+      image-rendering: auto;
+    }
   }
 
   .hover-overlay {
@@ -170,15 +221,9 @@ const iconToken = project.data.category?.slice(0, 1).toUpperCase() ?? '•';
     transform: translate(2px, -2px);
   }
 
-  img {
-    width: 100%;
-    display: block;
-    transition: transform var(--duration-md) var(--ease-standard);
-  }
-
-  .card-link:hover img,
-  .card-link:focus-visible img {
-    transform: scale(1.05);
+  .card-link:hover .card-figure-media,
+  .card-link:focus-visible .card-figure-media {
+    transform: translateY(-6px);
   }
 
   .card-body {
@@ -281,6 +326,14 @@ const iconToken = project.data.category?.slice(0, 1).toUpperCase() ?? '•';
       transform: translateY(-4px);
     }
     
+    .card-figure {
+      padding: var(--space-md);
+    }
+
+    .card-figure-media {
+      width: min(80%, 280px);
+    }
+
     .hover-overlay {
       padding: var(--space-md);
     }
