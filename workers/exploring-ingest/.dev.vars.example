@@ -1,0 +1,8 @@
+# Development secrets for local worker testing
+# Copy to .dev.vars and fill in your actual values
+# DO NOT commit .dev.vars to git
+
+SUPABASE_SERVICE_ROLE_KEY=your_service_role_key_here
+TWILIO_AUTH_TOKEN=your_twilio_auth_token_here
+SLACK_SIGNING_SECRET=your_slack_signing_secret_here
+BUILD_WEBHOOK_URL=

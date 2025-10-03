@@ -1,0 +1,24 @@
+name = "exploring-ingest"
+main = "src/index.ts"
+compatibility_date = "2024-07-18"
+
+[observability]
+enabled = true
+
+# Environment variables (non-sensitive)
+[vars]
+SUPABASE_URL = "https://sthbxxuzklalnaiaeagd.supabase.co"
+SUPABASE_EXPLORING_TABLE = "exploring_next"
+ENABLE_TWILIO = "true"
+ENABLE_SLACK = "true"
+FEED_LIMIT = "10"
+TWILIO_SUCCESS_MESSAGE = "Thanks! Added to Exploring Next."
+SLACK_SUCCESS_MESSAGE = "Added to Exploring Next ✅"
+
+# Secrets (set via: wrangler secret put SECRET_NAME)
+# Required:
+# - SUPABASE_SERVICE_ROLE_KEY
+# - TWILIO_AUTH_TOKEN (if ENABLE_TWILIO=true)
+# - SLACK_SIGNING_SECRET (if ENABLE_SLACK=true)
+# Optional:
+# - BUILD_WEBHOOK_URL (trigger Astro rebuild after insert)

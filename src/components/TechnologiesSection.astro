@@ -170,8 +170,13 @@ const techCategories = [
     gap: var(--space-xs);
     padding: var(--space-xs) var(--space-xs) var(--space-sm);
     border-radius: var(--radius-md);
-    background: var(--color-background);
-    border: 1px solid var(--color-border);
+    background: rgba(255, 255, 255, 0.4);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    box-shadow: 
+      0 4px 6px rgba(0, 0, 0, 0.05),
+      inset 0 1px 0 rgba(255, 255, 255, 0.2);
     transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
     cursor: default;
   }
@@ -179,9 +184,11 @@ const techCategories = [
   .tech-item:hover {
     transform: translateY(-2px);
     border-color: color-mix(in srgb, var(--tech-color) 40%, transparent 60%);
+    background: rgba(255, 255, 255, 0.5);
     box-shadow: 
       0 8px 16px rgba(17, 34, 21, 0.1),
-      0 2px 4px rgba(17, 34, 21, 0.06);
+      0 2px 4px rgba(17, 34, 21, 0.06),
+      inset 0 1px 0 rgba(255, 255, 255, 0.3);
   }
 
   .tech-logo-wrapper {
@@ -214,14 +221,18 @@ const techCategories = [
 
   @media (prefers-color-scheme: dark) {
     .tech-item {
-      background: rgba(17, 34, 21, 0.3);
+      background: rgba(17, 34, 21, 0.4);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
       border-color: rgba(255, 255, 255, 0.1);
     }
 
     .tech-item:hover {
+      background: rgba(17, 34, 21, 0.5);
       box-shadow: 
         0 8px 16px rgba(0, 0, 0, 0.3),
-        0 2px 4px rgba(0, 0, 0, 0.2);
+        0 2px 4px rgba(0, 0, 0, 0.2),
+        inset 0 1px 0 rgba(255, 255, 255, 0.1);
     }
   }
 

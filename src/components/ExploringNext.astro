@@ -14,7 +14,7 @@ interface ExploringItem {
   description?: string;
 }
 
-const exploringItems: ExploringItem[] = [
+const fallbackItems: ExploringItem[] = [
   {
     title: 'continue.dev',
     type: 'tool',
@@ -42,6 +42,53 @@ const exploringItems: ExploringItem[] = [
     description: 'Exploring alternatives for voice-based content generation'
   }
 ];
+
+const feedUrl = import.meta.env.PUBLIC_EXPLORING_FEED_URL;
+
+const exploringItems: ExploringItem[] = await (async () => {
+  if (!feedUrl) return fallbackItems;
+
+  try {
+    const response = await fetch(feedUrl, {
+      headers: { 'Accept': 'application/json' }
+    });
+
+    if (!response.ok) {
+      console.warn(`ExploringNext feed request failed (${response.status}). Falling back to static list.`);
+      return fallbackItems;
+    }
+
+    const payload = await response.json();
+    if (!payload || !Array.isArray(payload.items)) {
+      console.warn('ExploringNext feed payload malformed. Falling back to static list.');
+      return fallbackItems;
+    }
+
+    const allowedTypes = new Set(['tool', 'article', 'research', 'api']);
+
+    const normalized = payload.items
+      .filter((item: Record<string, unknown>) => typeof item?.title === 'string' && typeof item?.url === 'string')
+      .map((item: Record<string, unknown>) => {
+        const type = typeof item.type === 'string' && allowedTypes.has(item.type) ? item.type : 'article';
+        return {
+          title: String(item.title),
+          type: type as ExploringItem['type'],
+          url: typeof item.url === 'string' ? item.url : undefined,
+          description: typeof item.description === 'string' ? item.description : undefined
+        } satisfies ExploringItem;
+      });
+
+    if (normalized.length === 0) {
+      console.warn('ExploringNext feed returned no valid items. Falling back to static list.');
+      return fallbackItems;
+    }
+
+    return normalized;
+  } catch (error) {
+    console.warn('ExploringNext feed request errored. Falling back to static list.', error);
+    return fallbackItems;
+  }
+})();
 
 const typeLabels = {
   tool: 'Tool',
@@ -123,10 +170,15 @@ const typeColors = {
   }
 
   .exploring-item {
-    background: var(--color-bg-primary);
-    border: 1px solid var(--color-border);
+    background: rgba(255, 255, 255, 0.4);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.3);
     border-radius: var(--radius-sm);
     padding: var(--space-xs) var(--space-sm);
+    box-shadow: 
+      0 4px 6px rgba(0, 0, 0, 0.05),
+      inset 0 1px 0 rgba(255, 255, 255, 0.2);
     transition: all var(--transition-base);
     opacity: 0;
     transform: translateY(20px);
@@ -134,7 +186,10 @@ const typeColors = {
 
   .exploring-item:hover {
     border-color: var(--type-color);
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+    background: rgba(255, 255, 255, 0.5);
+    box-shadow: 
+      0 2px 8px rgba(0, 0, 0, 0.08),
+      inset 0 1px 0 rgba(255, 255, 255, 0.3);
     transform: translateY(-1px);
   }
 
@@ -249,6 +304,23 @@ const typeColors = {
 
     .item-description {
       font-size: 0.8125rem;
+    }
+  }
+
+  /* Dark mode support */
+  @media (prefers-color-scheme: dark) {
+    .exploring-item {
+      background: rgba(17, 34, 21, 0.4);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-color: rgba(255, 255, 255, 0.15);
+    }
+
+    .exploring-item:hover {
+      background: rgba(17, 34, 21, 0.5);
+      box-shadow: 
+        0 2px 8px rgba(0, 0, 0, 0.3),
+        inset 0 1px 0 rgba(255, 255, 255, 0.1);
     }
   }
 

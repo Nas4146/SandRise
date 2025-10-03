@@ -15,9 +15,15 @@ const { eyebrow, title, description, align = 'left' } = Astro.props as Props;
 </div>
 
 <style>
+  /* Override for centered alignment if needed */
   .section-heading.centered {
     align-items: center;
     text-align: center;
+  }
+
+  .section-heading.centered h2::after {
+    left: 50%;
+    transform: translateX(-50%);
   }
 
   .section-heading.centered p {

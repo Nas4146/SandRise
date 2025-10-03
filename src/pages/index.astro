@@ -9,17 +9,36 @@ import type { CollectionEntry } from 'astro:content';
 import { getCollection } from 'astro:content';
 
 const allProjects = (await getCollection('projects')).filter((project) => !project.data.draft);
-const projects: CollectionEntry<'projects'>[] = allProjects.sort((a, b) =>
-  a.data.title.localeCompare(b.data.title)
-);
+
+// Define status priority order
+const statusPriority: Record<string, number> = {
+  'Available in App Store': 1,
+  'Beta Testing via TestFlight': 2,
+  'In Development': 3,
+  'Personal Use': 3, // Same priority as In Development
+  'Ideation': 4
+};
+
+// Sort projects by status priority, then alphabetically within same status
+const projects: CollectionEntry<'projects'>[] = allProjects.sort((a, b) => {
+  const priorityA = statusPriority[a.data.impact || ''] || 99;
+  const priorityB = statusPriority[b.data.impact || ''] || 99;
+  
+  if (priorityA !== priorityB) {
+    return priorityA - priorityB;
+  }
+  
+  // If same priority, sort alphabetically
+  return a.data.title.localeCompare(b.data.title);
+});
 
 const interests = [
-  'AI & applied automation',
-  'Product systems & ops',
-  'Strength training',
-  'Coffee brewing & roasting',
-  'Horror films & storytelling',
-  'Trail running & outdoors'
+  'Building with AI agents',
+  'Strength training & fitness',
+  'Coffee brewing (and roasting)',
+  'Horror films & dark storytelling',
+  'Trail running in the hills',
+  'Product systems & operations'
 ];
 
 const heroStructuredData = {
@@ -93,7 +112,13 @@ const heroStructuredData = {
 
   <section id="projects" class="projects-section scroll-trigger">
     <div class="container">
-      <h2 class="projects-heading scroll-fade-up">Current Projects</h2>
+      <div class="scroll-fade-up">
+        <SectionHeading
+          eyebrow="Portfolio"
+          title="Current Projects"
+          description="A selection of recent work spanning product strategy, design systems, and full-stack development."
+        />
+      </div>
       <ul class="project-list">
         {projects.map((project, index) => {
           const href = project.data.href ?? `/work/${project.slug}`;
@@ -130,13 +155,17 @@ const heroStructuredData = {
     </div>
   </section>
 
+  <TechnologiesSection />
+
+  <ExploringNext />
+
   <section id="interests" class="section-compact interests-section scroll-trigger">
     <div class="container">
       <div class="scroll-fade-up">
         <SectionHeading
-          eyebrow="Interests"
-          title="What keeps me curious right now"
-          description="The themes I'm reading, building, and experimenting with outside of client work."
+          eyebrow="Beyond Work"
+          title="What I'm into outside of building products"
+          description="The things that keep me energized, curious, and occasionally caffeinated."
         />
       </div>
       <ul class="interests-grid">
@@ -148,10 +177,6 @@ const heroStructuredData = {
       </ul>
     </div>
   </section>
-
-  <TechnologiesSection />
-
-  <ExploringNext />
 
   <!-- SandRise Section - Commented out for now -->
   <!--
@@ -503,39 +528,7 @@ const heroStructuredData = {
   }
 
   .projects-section {
-    padding: var(--space-3xl) 0 var(--space-3xl);
-  }
-
-  .projects-heading {
-    margin: 0 0 var(--space-3xl) 0;
-    font-size: var(--font-size-2xl);
-    font-weight: var(--font-weight-bold);
-    color: var(--color-text-primary);
-    position: relative;
-    text-align: center;
-    letter-spacing: -0.01em;
-  }
-
-  .projects-heading::before {
-    content: '';
-    position: absolute;
-    top: 50%;
-    left: -80px;
-    width: 60px;
-    height: 2px;
-    background-color: var(--color-accent);
-    transform: translateY(-50%);
-  }
-
-  .projects-heading::after {
-    content: '';
-    position: absolute;
-    top: 50%;
-    right: -80px;
-    width: 60px;
-    height: 2px;
-    background-color: var(--color-accent);
-    transform: translateY(-50%);
+    padding: var(--space-2xl) 0 var(--space-3xl);
   }
 
   .project-list {

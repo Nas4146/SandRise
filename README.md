@@ -101,6 +101,63 @@ Blog posts live in `src/content/blog/*.md`. Draft posts (`draft: true`) are hidd
 2. `npm run build`
 3. Deploy `dist/` to Netlify, Vercel, or preferred static host (Astro SSR adapters optional).
 
+## Exploring Next Ingestion Service
+
+The Cloudflare Worker powering SMS/Slack ingestion lives in `workers/exploring-ingest/`.
+
+### 1. Configure Environment Variables
+
+Set the following on the Worker via `wrangler.toml` vars or `wrangler secret put`:
+
+| Name | Type | Purpose |
+| --- | --- | --- |
+| `ENABLE_TWILIO` | plain | Gate the Twilio channel (`true`/`false`) |
+| `ENABLE_SLACK` | plain | Gate the Slack channel (`true`/`false`) |
+| `SUPABASE_URL` | plain | Supabase project URL |
+| `SUPABASE_SERVICE_ROLE_KEY` | secret | Service-role key for writes/reads |
+| `SUPABASE_EXPLORING_TABLE` | plain (optional) | Override table name (`exploring_next` default) |
+| `TWILIO_AUTH_TOKEN` | secret | Validate Twilio webhook signatures |
+| `SLACK_SIGNING_SECRET` | secret | Validate Slack slash command signatures |
+| `BUILD_WEBHOOK_URL` | secret (optional) | Trigger Astro rebuild after new entry |
+| `TWILIO_SUCCESS_MESSAGE` | plain (optional) | Custom SMS confirmation |
+| `SLACK_SUCCESS_MESSAGE` | plain (optional) | Custom Slack response |
+| `FEED_LIMIT` | plain (optional) | Default number of items served by `/feed` |
+
+On the Astro site, expose the Worker feed via `.env`:
+
+```
+PUBLIC_EXPLORING_FEED_URL="https://<worker-domain>/feed"
+```
+
+### 2. Deploy the Worker
+
+```
+npm install --prefix workers/exploring-ingest
+npm run deploy --prefix workers/exploring-ingest
+```
+
+Point Twilio SMS and the Slack Slash Command to:
+
+- `POST https://<worker-domain>/ingest/twilio`
+- `POST https://<worker-domain>/ingest/slack`
+
+### 3. Supabase Table Schema
+
+```
+create table public.exploring_next (
+  id uuid primary key default gen_random_uuid(),
+  title text not null,
+  url text not null unique,
+  type text check (type in ('tool','article','research','api')) default 'article',
+  description text,
+  source_channel text,
+  source_context jsonb,
+  discovered_at timestamptz default now()
+);
+```
+
+The Worker also exposes `GET /feed` returning `{ items: [...] }`; `ExploringNext.astro` will call this endpoint when `PUBLIC_EXPLORING_FEED_URL` is set, falling back to the static list when absent or on error.
+
 ---
 
 Crafted with care for SandRise — let me know when you’re ready to plug in real case studies or iterate further.
