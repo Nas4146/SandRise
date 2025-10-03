@@ -1,0 +1,2 @@
+# Redirect pages.dev domain to custom domain
+https://sandrise.pages.dev/* https://sandrise.io/:splat 301!
