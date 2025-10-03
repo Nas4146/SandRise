@@ -3,72 +3,161 @@ interface Props {
   tech: string;
   size?: 'sm' | 'md' | 'lg';
   showLabel?: boolean;
+  variant?: 'chip' | 'overlay';
 }
 
-const { tech, size = 'md', showLabel = false } = Astro.props;
+const { tech, size = 'md', showLabel = false, variant = 'chip' } = Astro.props;
 
-// Map technology names to logo info
-const techMap: Record<string, { icon: string; color: string; label: string }> = {
-  'React': { icon: '⚛️', color: '#61DAFB', label: 'React' },
-  'React Native': { icon: '📱', color: '#61DAFB', label: 'React Native' },
-  'TypeScript': { icon: '🔷', color: '#3178C6', label: 'TypeScript' },
-  'JavaScript': { icon: '💛', color: '#F7DF1E', label: 'JavaScript' },
-  'Node.js': { icon: '🟢', color: '#339933', label: 'Node.js' },
-  'Python': { icon: '🐍', color: '#3776AB', label: 'Python' },
-  'Astro': { icon: '🚀', color: '#FF5D01', label: 'Astro' },
-  'Next.js': { icon: '▲', color: '#000000', label: 'Next.js' },
-  'Vue': { icon: '💚', color: '#4FC08D', label: 'Vue.js' },
-  'Supabase': { icon: '🔋', color: '#3ECF8E', label: 'Supabase' },
-  'Firebase': { icon: '🔥', color: '#FFCA28', label: 'Firebase' },
-  'AWS': { icon: '☁️', color: '#FF9900', label: 'AWS' },
-  'Vercel': { icon: '▲', color: '#000000', label: 'Vercel' },
-  'Figma': { icon: '🎨', color: '#F24E1E', label: 'Figma' },
-  'Expo': { icon: '⚡', color: '#000020', label: 'Expo' },
-  'Redux': { icon: '🔄', color: '#764ABC', label: 'Redux' },
-  'Git': { icon: '📚', color: '#F05032', label: 'Git' },
-  'Docker': { icon: '🐳', color: '#2496ED', label: 'Docker' },
-  'Tailwind': { icon: '💨', color: '#06B6D4', label: 'Tailwind CSS' },
-  'CSS': { icon: '🎨', color: '#1572B6', label: 'CSS' },
-  'HTML': { icon: '📄', color: '#E34F26', label: 'HTML' },
-  'GraphQL': { icon: '💗', color: '#E10098', label: 'GraphQL' },
-  'REST': { icon: '🌐', color: '#009688', label: 'REST API' },
-  'MongoDB': { icon: '🍃', color: '#47A248', label: 'MongoDB' },
-  'PostgreSQL': { icon: '🐘', color: '#336791', label: 'PostgreSQL' },
-  'MySQL': { icon: '🗄️', color: '#4479A1', label: 'MySQL' }
+const normalizedTech = tech.trim();
+
+const techCatalog: Record<string, { src: string; label: string }> = {
+  'React': { src: '/images/tech/react.svg', label: 'React' },
+  'React Native': { src: '/images/tech/react-native.svg', label: 'React Native' },
+  'TypeScript': { src: '/images/tech/typescript.svg', label: 'TypeScript' },
+  'JavaScript': { src: '/images/tech/javascript.svg', label: 'JavaScript' },
+  'Node.js': { src: '/images/tech/nodejs.svg', label: 'Node.js' },
+  'Python': { src: '/images/tech/python.svg', label: 'Python' },
+  'Astro': { src: '/images/tech/astro.svg', label: 'Astro' },
+  'Next.js': { src: '/images/tech/nextjs.svg', label: 'Next.js' },
+  'Vue': { src: '/images/tech/vue.svg', label: 'Vue.js' },
+  'Supabase': { src: '/images/tech/supabase.svg', label: 'Supabase' },
+  'Firebase': { src: '/images/tech/firebase.svg', label: 'Firebase' },
+  'Firestore': { src: '/images/tech/firebase.svg', label: 'Firestore' },
+  'Expo': { src: '/images/tech/expo.svg', label: 'Expo' },
+  'Redux': { src: '/images/tech/javascript.svg', label: 'Redux' },
+  'Git': { src: '/images/tech/git.svg', label: 'Git' },
+  'GitHub': { src: '/images/tech/github.svg', label: 'GitHub' },
+  'Docker': { src: '/images/tech/docker.svg', label: 'Docker' },
+  'Tailwind': { src: '/images/tech/tailwindcss.svg', label: 'Tailwind CSS' },
+  'Tailwind CSS': { src: '/images/tech/tailwindcss.svg', label: 'Tailwind CSS' },
+  'GraphQL': { src: '/images/tech/graphql.svg', label: 'GraphQL' },
+  'MongoDB': { src: '/images/tech/mongodb.svg', label: 'MongoDB' },
+  'PostgreSQL': { src: '/images/tech/postgresql.svg', label: 'PostgreSQL' },
+  'Swift': { src: '/images/tech/swift.svg', label: 'Swift' },
+  'SwiftUI': { src: '/images/tech/swiftui.svg', label: 'SwiftUI' },
+  'Xcode': { src: '/images/tech/xcode.svg', label: 'Xcode' },
+  'Google Cloud': { src: '/images/tech/gcp.svg', label: 'Google Cloud Platform' },
+  'Firebase Functions': { src: '/images/tech/firebase.svg', label: 'Firebase Functions' },
+  'Slack': { src: '/images/tech/slack.svg', label: 'Slack' },
+  'Apple': { src: '/images/tech/apple.svg', label: 'Apple' },
+  'FastAPI': { src: '/images/tech/fastapi.svg', label: 'FastAPI' },
+  'Flask': { src: '/images/tech/flask.svg', label: 'Flask' },
+  'OpenAI': { src: '/images/tech/openai.svg', label: 'OpenAI' },
+  'LiveKit': { src: '/images/tech/livekit.svg', label: 'LiveKit' },
+  'Supabase Postgres': { src: '/images/tech/supabase.svg', label: 'Supabase Postgres' },
+  'SQLite': { src: '/images/tech/sqlite.svg', label: 'SQLite' }
 };
 
-const techInfo = techMap[tech] || { icon: '⚙️', color: '#666666', label: tech };
+const techInfo = techCatalog[normalizedTech];
+const label = techInfo?.label ?? normalizedTech;
 ---
 
-<div class={`tech-logo tech-logo--${size}`} title={techInfo.label}>
-  <span class="tech-icon" style={`color: ${techInfo.color}`}>
-    {techInfo.icon}
-  </span>
-  {showLabel && <span class="tech-label">{techInfo.label}</span>}
+<div class={`tech-logo tech-logo--${size} tech-logo--${variant}`} title={label}>
+  {techInfo ? (
+    <img src={techInfo.src} alt={label} loading="lazy" decoding="async" />
+  ) : (
+    <span class="tech-text">{label}</span>
+  )}
+  {showLabel && <span class="tech-label">{label}</span>}
 </div>
 
 <style>
   .tech-logo {
     display: inline-flex;
     align-items: center;
+    justify-content: center;
     gap: var(--space-xs);
-    padding: var(--space-xs);
     border-radius: var(--radius-md);
-    background: var(--color-surface);
-    border: 1px solid var(--color-border);
-    transition: all 0.2s ease;
+    transition:
+      transform var(--duration-sm) var(--ease-standard),
+      box-shadow var(--duration-sm) var(--ease-standard),
+      background var(--duration-sm) var(--ease-standard),
+      border var(--duration-sm) var(--ease-standard);
   }
 
   .tech-logo:hover {
     transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(17, 34, 21, 0.1);
   }
 
-  .tech-icon {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 1.2em;
+  .tech-logo--chip {
+    padding: var(--space-2xs) var(--space-xs);
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    box-shadow: 0 2px 4px rgba(17, 34, 21, 0.08);
+  }
+
+  .tech-logo--chip:has(.tech-text) {
+    background-color: rgba(100, 116, 139, 0.9);
+    border: 1px solid rgba(100, 116, 139, 0.3);
+  }
+
+  .tech-logo--chip .tech-text {
+    color: white;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    font-size: 0.7rem;
+  }
+
+  .tech-logo--chip:hover {
+    box-shadow: var(--shadow-soft-lg, 0 4px 12px rgba(17, 34, 21, 0.12));
+  }
+
+  .tech-logo--overlay {
+    padding: var(--space-3xs);
+    border-radius: var(--radius-round);
+    background: rgba(255, 255, 255, 0.92);
+    border: 1px solid rgba(255, 255, 255, 0.4);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    backdrop-filter: blur(8px);
+  }
+
+  .tech-logo--overlay:has(.tech-text) {
+    background-color: rgba(100, 116, 139, 0.9);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    padding: var(--space-2xs) var(--space-sm);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  }
+
+  .tech-logo--overlay:hover {
+    transform: translateY(-3px) scale(1.02);
+    box-shadow: 0 10px 22px rgba(11, 25, 16, 0.35);
+  }
+
+  .tech-logo img {
+    width: 28px;
+    height: 28px;
+    object-fit: contain;
+  }
+
+  .tech-logo--sm {
+    gap: var(--space-3xs);
+  }
+
+  .tech-logo--sm.tech-logo--chip {
+    padding: var(--space-3xs) var(--space-2xs);
+  }
+
+  .tech-logo--sm.tech-logo--overlay {
+    padding: calc(var(--space-3xs) * 0.75);
+  }
+
+  .tech-logo--sm img {
+    width: 22px;
+    height: 22px;
+  }
+
+  .tech-logo--lg {
+    padding: var(--space-xs) var(--space-sm);
+  }
+
+  .tech-logo--lg img {
+    width: 36px;
+    height: 36px;
+  }
+
+  .tech-logo--overlay img {
+    filter: drop-shadow(0 2px 6px rgba(0, 0, 0, 0.3));
   }
 
   .tech-label {
@@ -78,38 +167,62 @@ const techInfo = techMap[tech] || { icon: '⚙️', color: '#666666', label: tec
     white-space: nowrap;
   }
 
-  /* Size variations */
-  .tech-logo--sm {
-    padding: var(--space-2xs) var(--space-xs);
+  .tech-logo--overlay .tech-label {
+    color: rgba(255, 255, 255, 0.9);
   }
 
-  .tech-logo--sm .tech-icon {
-    font-size: 1em;
+  .tech-text {
+    font-size: var(--font-size-xs);
+    font-weight: 600;
+    color: var(--color-text-primary);
+    white-space: nowrap;
+    letter-spacing: 0.02em;
   }
 
-  .tech-logo--sm .tech-label {
-    font-size: 0.75rem;
+  .tech-logo--overlay .tech-text {
+    color: rgba(255, 255, 255, 0.95);
+    font-weight: 600;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    font-size: 0.65rem;
   }
 
-  .tech-logo--md {
-    padding: var(--space-xs) var(--space-sm);
+  .tech-logo--sm .tech-text {
+    font-size: 0.7rem;
   }
 
-  .tech-logo--lg {
-    padding: var(--space-sm) var(--space-md);
-  }
-
-  .tech-logo--lg .tech-icon {
-    font-size: 1.5em;
-  }
-
-  .tech-logo--lg .tech-label {
+  .tech-logo--lg .tech-text {
     font-size: var(--font-size-sm);
   }
 
-  @media (prefers-color-scheme: dark) {
-    .tech-logo:hover {
-      box-shadow: 0 4px 12px rgba(47, 190, 132, 0.15);
-    }
+  .tech-fallback {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    background: var(--color-surface-alt);
+    color: var(--color-text-secondary);
+    font-weight: 600;
+    font-size: 0.85rem;
+  }
+
+  .tech-logo--overlay .tech-fallback {
+    background: rgba(255, 255, 255, 0.18);
+    color: rgba(255, 255, 255, 0.9);
+  }
+
+  .tech-logo--sm .tech-fallback {
+    width: 22px;
+    height: 22px;
+    font-size: 0.75rem;
+  }
+
+  .tech-logo--lg .tech-fallback {
+    width: 36px;
+    height: 36px;
+    font-size: 1rem;
   }
 </style>

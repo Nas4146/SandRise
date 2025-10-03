@@ -157,6 +157,27 @@ declare module 'astro:content' {
   collection: "projects";
   data: InferEntrySchema<"projects">
 } & { render(): Render[".md"] };
+"coffee-scroll.md": {
+	id: "coffee-scroll.md";
+  slug: "coffee-scroll";
+  body: string;
+  collection: "projects";
+  data: InferEntrySchema<"projects">
+} & { render(): Render[".md"] };
+"commander.md": {
+	id: "commander.md";
+  slug: "commander";
+  body: string;
+  collection: "projects";
+  data: InferEntrySchema<"projects">
+} & { render(): Render[".md"] };
+"devtalk.md": {
+	id: "devtalk.md";
+  slug: "devtalk";
+  body: string;
+  collection: "projects";
+  data: InferEntrySchema<"projects">
+} & { render(): Render[".md"] };
 "fieldnote-mobile.md": {
 	id: "fieldnote-mobile.md";
   slug: "fieldnote-mobile";
@@ -178,6 +199,13 @@ declare module 'astro:content' {
   collection: "projects";
   data: InferEntrySchema<"projects">
 } & { render(): Render[".md"] };
+"grooptroop.md": {
+	id: "grooptroop.md";
+  slug: "grooptroop";
+  body: string;
+  collection: "projects";
+  data: InferEntrySchema<"projects">
+} & { render(): Render[".md"] };
 "healthlink-care.md": {
 	id: "healthlink-care.md";
   slug: "healthlink-care";
@@ -185,9 +213,23 @@ declare module 'astro:content' {
   collection: "projects";
   data: InferEntrySchema<"projects">
 } & { render(): Render[".md"] };
+"izzocam.md": {
+	id: "izzocam.md";
+  slug: "izzocam";
+  body: string;
+  collection: "projects";
+  data: InferEntrySchema<"projects">
+} & { render(): Render[".md"] };
 "markethub-insights.md": {
 	id: "markethub-insights.md";
   slug: "markethub-insights";
+  body: string;
+  collection: "projects";
+  data: InferEntrySchema<"projects">
+} & { render(): Render[".md"] };
+"ring.md": {
+	id: "ring.md";
+  slug: "ring";
   body: string;
   collection: "projects";
   data: InferEntrySchema<"projects">
@@ -209,6 +251,13 @@ declare module 'astro:content' {
 "techflow-monitoring.md": {
 	id: "techflow-monitoring.md";
   slug: "techflow-monitoring";
+  body: string;
+  collection: "projects";
+  data: InferEntrySchema<"projects">
+} & { render(): Render[".md"] };
+"windy.md": {
+	id: "windy.md";
+  slug: "windy";
   body: string;
   collection: "projects";
   data: InferEntrySchema<"projects">

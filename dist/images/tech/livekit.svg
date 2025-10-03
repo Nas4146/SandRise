@@ -1,0 +1,12 @@
+<svg width="64" height="64" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg" aria-labelledby="title" role="img">
+  <title>LiveKit logo</title>
+  <defs>
+    <radialGradient id="livekitGradient" cx="0.3" cy="0.3" r="0.9">
+      <stop offset="0%" stop-color="#FF6E7F"/>
+      <stop offset="50%" stop-color="#B547F5"/>
+      <stop offset="100%" stop-color="#4328FF"/>
+    </radialGradient>
+  </defs>
+  <circle cx="32" cy="32" r="28" fill="url(#livekitGradient)"/>
+  <path d="M24 22h6l6 10 4-6h8l-12 18-12-22z" fill="#FFFFFF" opacity="0.9"/>
+</svg>

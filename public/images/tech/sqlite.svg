@@ -1,0 +1,7 @@
+<svg width="64" height="64" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg" aria-labelledby="title" role="img">
+  <title>SQLite logo</title>
+  <rect x="8" y="8" width="48" height="48" rx="6" fill="#0B72B5"/>
+  <path d="M25 20h10c3.9 0 7 3.1 7 7v17H18V27c0-3.9 3.1-7 7-7z" fill="#FFFFFF" opacity="0.9"/>
+  <path d="M18 34h24" stroke="#0B72B5" stroke-width="3" stroke-linecap="round"/>
+  <path d="M34 20v24" stroke="#0B72B5" stroke-width="3" stroke-linecap="round"/>
+</svg>

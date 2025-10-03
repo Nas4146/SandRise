@@ -4,9 +4,10 @@ summary: "An AI-powered podcast that automatically generates daily news summarie
 category: "AI Content"
 role: "Full-Stack Developer"
 timeline: "3 months"
-heroImage: "/images/projects/summit-go.svg"
-heroAlt: "Morning podcast automation platform"
+heroImage: "/images/projects/coffee-scroll.svg"
+heroAlt: "Coffee Scroll automated morning podcast"
 impact: "Ideation"
+draft: true
 tags:
   - AI
   - Podcast

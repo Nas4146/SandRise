@@ -1,41 +1,40 @@
 ---
-title: "Ring — Job Notifier"
-summary: "A modern connection and networking platform that helps people build meaningful professional and personal relationships through intelligent matching."
-category: "Social Network"
-role: "Full-Stack Developer"
-timeline: "8 months"
-heroImage: "/images/logos/markethub.svg"
-heroAlt: "Ring connection platform"
-impact: "Personal Use"
+title: "Ring — Job alert automation"
+summary: "Modular scouting agent that hunts PM openings across CSE + ATS feeds and delivers ready-to-apply leads before they trend."
+category: "Automation"
+role: "Product Manager & Product Builder"
+timeline: "Ongoing"
+heroImage: "/images/projects/ring.svg"
+heroAlt: "Ring job alert automation system"
+impact: "Private beta · Nightly + on-demand runs"
+draft: true
 tags:
-  - Social Networking
-  - React Native
-  - Node.js
-  - GraphQL
-  - Real-time
-  - Matching Algorithm
+  - Python
+  - Google Cloud
+  - Slack
+  - Apple
 metrics:
-  - label: "Platform"
-    value: "Mobile"
-    hint: "iOS & Android"
-  - label: "Focus"
-    value: "Connections"
-    hint: "Meaningful relationships"
-  - label: "Technology"
-    value: "React Native"
-    hint: "Cross-platform app"
-problem: "Existing networking platforms focus on quantity over quality, making it difficult to form genuine connections and maintain meaningful professional relationships."
-roleDetail: "Leading full-stack development of a mobile-first platform that uses intelligent algorithms to suggest relevant connections and facilitate meaningful conversations."
+  - label: "Cadence"
+    value: "Every few minutes"
+    hint: "Nightly + on-demand runs"
+  - label: "Sources"
+    value: "Google CSE + ATS"
+    hint: "Greenhouse, Lever, Ashby, Workday"
+  - label: "Delivery"
+    value: "Slack & iMessage"
+    hint: "Actionable, deduped alerts"
+problem: "New PM roles move fast. Manually polling company boards wastes hours and loses the first-mover advantage. Ring automates discovery, filtering, and notifications so I can apply before listings go viral."
+roleDetail: "Designed and built the agent architecture spanning Google CSE, direct ATS integrations, smart filters, and multi-channel delivery with guardrails, quotas, and health monitoring."
 process:
-  - title: "Matching Algorithm"
-    description: "Developing sophisticated matching algorithms that consider interests, professional goals, and compatibility factors for better connections."
-  - title: "Real-time Features"
-    description: "Building real-time messaging and interaction features that encourage genuine conversations and relationship building."
-  - title: "Mobile Experience"
-    description: "Creating an intuitive React Native application optimized for mobile interactions and cross-platform compatibility."
+  - title: "Source aggregation"
+    description: "Federated Google Custom Search with direct Greenhouse, Lever, Ashby, Workday, and SmartRecruiters scrapers to capture fresh postings."
+  - title: "Signal filtering"
+    description: "Applied opinionated rules for title, geography, hybrid preferences, and deduped canonical job keys to surface only relevant roles."
+  - title: "Notification pipeline"
+    description: "Delivered ready-to-apply leads through Slack and iMessage with batching, sanity-check dry runs, and quota-aware retries."
 outcomes:
-  - "Developing intelligent matching algorithms for quality connections."
-  - "Building real-time communication features for meaningful interactions."
-  - "Creating a seamless mobile experience across iOS and Android platforms."
-reflection: "True networking success comes from quality relationships, not quantity of connections. Ring focuses on facilitating genuine interactions that lead to lasting professional and personal relationships."
+  - "Identified qualified PM roles minutes after posting with automated hand-off."
+  - "Built rotating logs, heartbeat state files, and retry backoff for resilient runs."
+  - "Laid groundwork for future metrics dashboard and outreach automations."
+reflection: "Career leverage comes from speed to signal. Ring keeps the scouting loop running so I can focus on thoughtful outreach instead of refreshing job boards."
 ---

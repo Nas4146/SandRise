@@ -4,9 +4,10 @@ summary: "A powerful command-line inspired task management and productivity plat
 category: "Productivity"
 role: "Full-Stack Developer"
 timeline: "4 months"
-heroImage: "/images/projects/signal-ledger.svg"
-heroAlt: "Commander task management interface"
+heroImage: "/images/projects/commander.svg"
+heroAlt: "Commander task management system interface"
 impact: "Ideation"
+draft: true
 tags:
   - Productivity
   - Command Line

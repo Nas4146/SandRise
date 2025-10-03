@@ -1,41 +1,40 @@
 ---
-title: "Windy — AI Development Agents"
-summary: "An intelligent development assistant platform that streamlines coding workflows with AI-powered automation and collaborative tools."
+title: "AI Dev Agents — Windy platform"
+summary: "AI-native developer workstation orchestrating autonomous coding agents, multi-tier storage, and progress-aware execution."
 category: "Developer Tools"
-role: "Full-Stack Developer"
+role: "Product Manager & Product Builder"
 timeline: "Ongoing"
-heroImage: "/images/logos/financeos.svg"
-heroAlt: "Windy AI development platform"
-impact: "In Development"
+heroImage: "/images/projects/windy.svg"
+heroAlt: "AI Dev Agents orchestration platform"
+impact: "Internal beta · Orchestrator MVP shipped"
+draft: true
 tags:
-  - AI
-  - Developer Tools
-  - Automation
-  - React
-  - Node.js
-  - TypeScript
+  - Python
+  - Flask
+  - Firebase
+  - Docker
 metrics:
   - label: "Status"
-    value: "Active"
-    hint: "Currently in development"
-  - label: "Focus"
-    value: "AI Agents"
-    hint: "Development automation"
-  - label: "Platform"
-    value: "Web"
-    hint: "Full-stack application"
-problem: "Development workflows often involve repetitive tasks and context switching that slow down productivity. Windy aims to create intelligent agents that can assist developers with coding, testing, and deployment tasks."
-roleDetail: "Leading full-stack development of an AI-powered platform that integrates with existing development workflows to provide intelligent assistance and automation capabilities."
+    value: "Internal beta"
+    hint: "Orchestrator MVP shippable"
+  - label: "Storage"
+    value: "JSON + Firestore"
+    hint: "Multi-tier federation"
+  - label: "Delivery"
+    value: "CLI & API parity"
+    hint: "Progress-aware execution"
+problem: "Teams experimenting with AI coding agents lack orchestration, traceability, and shared storage. Windy unifies execution, reporting, and storage so humans always understand what agents did and why."
+roleDetail: "Defined product requirements, architecture layers, and developer experience—from orchestrator design and storage federation to progress reporting and hybrid auth."
 process:
-  - title: "AI Integration"
-    description: "Building intelligent agents that can understand development contexts and provide meaningful assistance with coding tasks."
-  - title: "Workflow Automation"
-    description: "Creating seamless integrations with popular development tools and platforms to automate repetitive tasks."
-  - title: "Collaborative Features"
-    description: "Developing features that enable teams to share AI agents and development insights effectively."
+  - title: "Agent orchestrator"
+    description: "Built unified run manager that coordinates CLI, API, and background services while persisting execution state."
+  - title: "Multi-tier storage"
+    description: "Federated local JSON caches with Firestore adapters to keep agent history synced and queryable."
+  - title: "Progress reporting"
+    description: "Shipped structured status updates, SSE streams, and collaboration hooks for human-in-the-loop reviews."
 outcomes:
-  - "Developing advanced AI agent capabilities for development assistance."
-  - "Creating intuitive interfaces for developer-AI collaboration."
-  - "Building robust integrations with popular development tools."
-reflection: "AI-powered development tools represent the future of software engineering. Windy explores how intelligent agents can augment human creativity while maintaining developer control and understanding."
+  - "Regression suite validating execution record unification across storage tiers."
+  - "Containerized execution path adopted by early design partners."
+  - "GitHub Actions integration roadmap in place for smoke automation."
+reflection: "Building agent platforms is about trust and transparency. Windy proves autonomous support works when orchestration, storage, and reporting stay in lockstep."
 ---

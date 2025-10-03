@@ -1,5 +1,33 @@
 <svg width="64" height="64" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
-  <rect width="64" height="64" rx="16" fill="#0C7AE3"/>
-  <path d="M16 40C22 28 30 20 40 16" stroke="white" stroke-width="4" stroke-linecap="round"/>
-  <path d="M24 48C30 36 38 28 48 24" stroke="white" stroke-width="4" stroke-linecap="round"/>
+  <!-- Dark gradient background -->
+  <rect width="64" height="64" rx="16" fill="url(#favicon-bg)"/>
+  <defs>
+    <linearGradient id="favicon-bg" x1="0" y1="0" x2="0" y2="64" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#2D4A3E"/>
+      <stop offset="100%" stop-color="#1A2E26"/>
+    </linearGradient>
+    <linearGradient id="tri-gradient-1" x1="0" y1="50" x2="0" y2="20" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#D49A5A"/>
+      <stop offset="100%" stop-color="#E8B687"/>
+    </linearGradient>
+    <linearGradient id="tri-gradient-2" x1="0" y1="35" x2="0" y2="10" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#E8B687"/>
+      <stop offset="100%" stop-color="#FFD9A3"/>
+    </linearGradient>
+  </defs>
+  
+  <!-- Rising triangles -->
+  <!-- Bottom triangle - largest -->
+  <path d="M 20 48 L 32 28 L 44 48 Z" fill="url(#tri-gradient-1)"/>
+  
+  <!-- Top triangle - smaller, lighter -->
+  <path d="M 26 28 L 32 16 L 38 28 Z" fill="url(#tri-gradient-2)"/>
+  
+  <!-- Accent line -->
+  <path d="M 32 50 L 32 14" 
+        stroke="#6FA885" 
+        stroke-width="2" 
+        stroke-dasharray="4,3"
+        stroke-linecap="round"
+        opacity="0.5"/>
 </svg>

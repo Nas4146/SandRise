@@ -1,41 +1,41 @@
 ---
-title: "Dev Talk — Developer Communication Platform"
-summary: "A streamlined communication platform designed specifically for development teams to collaborate effectively and share technical knowledge."
-category: "Communication"
-role: "Product Developer"
+title: "DevTalk — Autonomous incident response workbench"
+summary: "AI-augmented console that turns natural-language work requests into diagnostics, code fixes, and runbooks without leaving chat."
+category: "AI Ops"
+role: "Product Manager & Product Builder"
 timeline: "6 months"
-heroImage: "/images/logos/healthlink.svg"
-heroAlt: "Dev Talk communication platform"
-impact: "In Development"
+heroImage: "/images/projects/devtalk.svg"
+heroAlt: "DevTalk incident response workbench"
+impact: "Internal beta · Slack-first"
+draft: true
 tags:
-  - Communication
-  - Developer Tools
-  - Collaboration
-  - React
-  - WebRTC
-  - Real-time
+  - Python
+  - FastAPI
+  - Slack
+  - Docker
+  - OpenAI
 metrics:
-  - label: "Platform"
-    value: "Web"
-    hint: "Browser-based application"
-  - label: "Focus"
-    value: "Dev Teams"
-    hint: "Developer-centric features"
-  - label: "Status"
-    value: "Beta"
-    hint: "Currently in testing"
-problem: "Development teams struggle with communication tools that aren't designed for technical discussions, code sharing, and collaborative problem-solving."
-roleDetail: "Leading product development of a communication platform that understands developer workflows and integrates seamlessly with coding environments."
+  - label: "Lifecycle"
+    value: "Internal beta"
+    hint: "Hands-on with core team"
+  - label: "Delivery"
+    value: "Slack assistant + CLI"
+    hint: "Unified conversational surface"
+  - label: "Audit"
+    value: "SQLite trail"
+    hint: "Structured safety & approvals"
+problem: "Incident response demands juggling logs, terminals, approvals, and code changes. DevTalk compresses that chaos into conversational workflows so teams can diagnose and remediate in minutes."
+roleDetail: "Own product strategy, orchestrator design, and AI change broker—from OpenAI-backed patch intelligence to Slack thread progress reporting and structured audit trails."
 process:
-  - title: "Developer Research"
-    description: "Conducted extensive research with development teams to understand communication pain points and workflow requirements."
-  - title: "Technical Architecture"
-    description: "Built a real-time communication platform with code syntax highlighting, screen sharing, and integrated development tools."
-  - title: "User Testing"
-    description: "Iterative testing with beta users to refine features and ensure the platform meets real developer needs."
+  - title: "Investigative agent"
+    description: "Built natural-language commands that trigger diagnostics, health checks, and remediation scripts with safe allowlisted execution."
+  - title: "Patch intelligence"
+    description: "Shipped FastAPI change broker that normalizes AI-generated diffs into deterministic edit operations with human approval."
+  - title: "Slack-first workflow"
+    description: "Crafted conversational approvals, run history, and status updates so operators stay inside chat without losing traceability."
 outcomes:
-  - "Developed real-time communication features tailored for developers."
-  - "Integrated code sharing and syntax highlighting capabilities."
-  - "Created seamless workflow integrations with popular development tools."
-reflection: "Effective developer communication requires understanding the unique context and challenges of technical work. Dev Talk focuses on making these conversations more productive and meaningful."
+  - "Reduced patch application failures via context-anchored edit operations."
+  - "Delivered dark-themed web console for reviewing investigations and applied changes."
+  - "Enabled natural-language install flows with safe command execution summaries."
+reflection: "Reliability work thrives on clarity. DevTalk shows how AI can accelerate triage while keeping humans in control through transparent, auditable flows."
 ---

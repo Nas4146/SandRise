@@ -1,40 +1,37 @@
 ---
-title: "flex ex"
-summary: "AI-powered fitness app with live workout editing and smart customization for personalized training experiences."
+title: "FlexEx — AI workout companion"
+summary: "Gen Z-focused fitness app pairing instant AI workouts with live editing so every session adapts in seconds."
 category: "Mobile App"
-role: "Founder & Full-Stack Developer"
+role: "Founder & Product Builder"
 timeline: "12 months"
 heroImage: "/images/projects/flexex-icon.png"
-heroAlt: "Flex ex app icon featuring modern fitness branding"
-impact: "Available in App Store"
+heroAlt: "FlexEx app icon featuring modern fitness branding"
+impact: "Pre-launch · App Store queued"
 tags:
-  - iOS
   - React Native
-  - AI/ML
-  - Firebase
   - Expo
-  - Redux
   - TypeScript
+  - Firebase
+href: "https://flexex.app"
 metrics:
-  - label: "App Store Status"
-    value: "Live"
-    hint: "Available for download"
-  - label: "Workout Generation"
-    value: "AI-Powered"
-    hint: "Personalized routines"
-  - label: "Live Editing"
-    value: "Real-time"
-    hint: "Drag & drop customization"
-problem: "Most fitness apps provide static workouts that don't adapt to user preferences, equipment availability, or real-time needs during training sessions."
-roleDetail: "Led end-to-end development from concept to App Store launch, including AI integration, mobile architecture, backend services, user authentication, and App Store submission process."
+  - label: "Stage"
+    value: "Pre-launch"
+    hint: "App Store submission queued"
+  - label: "Platforms"
+    value: "iOS & Android"
+    hint: "Single Expo codebase"
+  - label: "AI Loop"
+    value: "Generate + Edit"
+    hint: "Instant workouts with live controls"
+problem: "Static workout apps can't keep pace with changing goals, equipment access, or in-session adjustments. FlexEx pairs AI generation with live editing so every routine stays personal."
+roleDetail: "Drive product strategy, design system, and end-to-end development—from AI workout engine and Expo architecture to Firebase services, release management, and accessibility compliance."
 process:
   - title: "AI Workout Engine"
     description: "Developed intelligent workout generation system that creates personalized routines based on fitness level, available equipment, and user goals."
   - title: "Live Editing Interface"
     description: "Built intuitive drag & drop functionality allowing users to reorder exercises, swap alternatives, and modify workouts in real-time during training."
   - title: "Cross-Platform Architecture"
-    description: "Implemented scalable React Native architecture with Redux state management, Firebase backend, and seamless authentication flows."
-href: "https://flexex.app"
+    description: "Implemented scalable React Native + Expo architecture with TypeScript-first models, shared UI tokens, and remote-config driven feature flags."
 outcomes:
   - "Successfully launched AI-powered fitness app on iOS App Store with 4+ rating"
   - "Implemented real-time workout editing with drag & drop functionality"

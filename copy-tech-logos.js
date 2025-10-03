@@ -5,6 +5,7 @@ import fs from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
 import { optimize } from 'svgo';
+import * as simpleIcons from 'simple-icons';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -93,7 +94,16 @@ Object.entries(logoMapping).forEach(([targetName, sourceName]) => {
   const targetPath = path.join(targetDir, targetName);
   
   if (fs.existsSync(sourcePath)) {
-    const svgContent = fs.readFileSync(sourcePath, 'utf-8');
+    let svgContent = fs.readFileSync(sourcePath, 'utf-8');
+    
+    // Get the icon's brand color from simple-icons
+    const iconSlug = sourceName.replace('.svg', '');
+    const iconData = simpleIcons[`si${iconSlug.charAt(0).toUpperCase()}${iconSlug.slice(1).replace(/dot/g, '')}`];
+    const brandColor = iconData?.hex ? `#${iconData.hex}` : 'currentColor';
+    
+    // Add fill color to the SVG
+    svgContent = svgContent.replace('<svg', `<svg fill="${brandColor}"`);
+    
     const initialSize = Buffer.byteLength(svgContent, 'utf-8');
     const { data: optimizedSvg } = optimize(svgContent, {
       path: sourcePath,
@@ -116,7 +126,7 @@ Object.entries(logoMapping).forEach(([targetName, sourceName]) => {
     const optimizedSize = Buffer.byteLength(optimizedSvg, 'utf-8');
     bytesSaved += Math.max(0, initialSize - optimizedSize);
     console.log(
-      `✅ Copied: ${targetName} (${(optimizedSize / 1024).toFixed(1)} KB, saved ${(Math.max(0, initialSize - optimizedSize) / 1024).toFixed(2)} KB)`
+      `✅ Copied: ${targetName} (${(optimizedSize / 1024).toFixed(1)} KB, saved ${(Math.max(0, initialSize - optimizedSize) / 1024).toFixed(2)} KB) [${brandColor}]`
     );
     copied++;
   } else {

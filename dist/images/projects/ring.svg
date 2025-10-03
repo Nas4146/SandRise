@@ -1,0 +1,20 @@
+<svg width="360" height="240" viewBox="0 0 360 240" xmlns="http://www.w3.org/2000/svg" aria-labelledby="title" role="img">
+  <title>Ring job alert automation logo</title>
+  <defs>
+    <linearGradient id="ringGradient" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#13C0A3"/>
+      <stop offset="100%" stop-color="#0B755D"/>
+    </linearGradient>
+    <radialGradient id="ringPulse" cx="0.5" cy="0.5" r="0.6">
+      <stop offset="0%" stop-color="#E8FFF9" stop-opacity="0.9"/>
+      <stop offset="100%" stop-color="#E8FFF9" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <rect width="360" height="240" rx="32" fill="#061813"/>
+  <circle cx="180" cy="120" r="96" fill="url(#ringPulse)"/>
+  <circle cx="180" cy="120" r="70" stroke="url(#ringGradient)" stroke-width="18" fill="none" stroke-linecap="round"/>
+  <path d="M260 120c0 44.2-35.8 80-80 80" stroke="url(#ringGradient)" stroke-width="14" stroke-linecap="round" fill="none"/>
+  <circle cx="248" cy="120" r="10" fill="#13C0A3"/>
+  <circle cx="132" cy="120" r="6" fill="#13C0A3"/>
+  <text x="180" y="200" text-anchor="middle" font-family="'Inter', sans-serif" font-size="22" fill="#B7F0E2" letter-spacing="0.25em">RING</text>
+</svg>

@@ -1,0 +1,5 @@
+<svg width="64" height="64" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg" aria-labelledby="title" role="img">
+  <title>Vue.js logo</title>
+  <path d="M32 53L9 11h12l11 19 11-19h12L32 53z" fill="#42B883"/>
+  <path d="M32 38L21 18h8l3 5 3-5h8L32 38z" fill="#35495E"/>
+</svg>

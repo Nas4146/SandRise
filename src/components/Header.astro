@@ -1,7 +1,7 @@
 <header class="site-header">
   <div class="container header-content">
     <a class="brand" href="/" aria-label="SandRise home">
-      <span class="brand-mark" aria-hidden="true">SR</span>
+      <img src="/sandrise-logo.svg" alt="SandRise logo" class="brand-logo" />
       <span class="brand-label">
         <strong>SandRise</strong>
       </span>
@@ -60,37 +60,14 @@
     transition: all var(--duration-sm) var(--ease-standard);
   }
 
-  .brand:hover .brand-mark {
-    transform: translateY(-1px);
-    box-shadow: 
-      0 1px 0 rgba(255, 255, 255, 0.7) inset,
-      0 6px 20px rgba(17, 34, 21, 0.15),
-      0 3px 12px rgba(93, 138, 111, 0.08);
+  .brand:hover .brand-logo {
+    transform: translateY(-2px);
   }
 
-  .brand-mark {
-    width: 38px;
-    height: 38px;
-    display: grid;
-    place-items: center;
-    border-radius: 14px;
-    background-color: rgba(255, 255, 255, 0.3);
-    backdrop-filter: blur(15px);
-    -webkit-backdrop-filter: blur(15px);
-    border: 1px solid rgba(255, 255, 255, 0.3);
-    color: var(--color-text-primary);
-    font-size: 0.85rem;
-    font-weight: 700;
-    box-shadow: 
-      0 1px 0 rgba(255, 255, 255, 0.5) inset,
-      0 4px 16px rgba(17, 34, 21, 0.1),
-      0 2px 8px rgba(93, 138, 111, 0.04);
-    transition: all var(--duration-sm) var(--ease-standard);
-    position: relative;
-  }
-
-  .brand-mark::after {
-    display: none;
+  .brand-logo {
+    width: 32px;
+    height: 32px;
+    transition: transform var(--duration-sm) var(--ease-standard);
   }
 
   .brand-label {

@@ -1,0 +1,9 @@
+<svg width="64" height="64" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg" aria-labelledby="title" role="img">
+  <title>Slack logo</title>
+  <g fill="none" stroke-linecap="round" stroke-width="10">
+    <path d="M18 36c0 5 4 9 9 9s9-4 9-9V18c0-5-4-9-9-9s-9 4-9 9" stroke="#36C5F0"/>
+    <path d="M28 18c0-5 4-9 9-9s9 4 9 9v18c0 5-4 9-9 9s-9-4-9-9" stroke="#2EB67D"/>
+    <path d="M46 28c5 0 9-4 9-9s-4-9-9-9H28c-5 0-9 4-9 9s4 9 9 9" stroke="#ECB22E"/>
+    <path d="M36 18c-5 0-9 4-9 9s4 9 9 9h18c5 0 9-4 9-9s-4-9-9-9" stroke="#E01E5A"/>
+  </g>
+</svg>

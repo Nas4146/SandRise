@@ -50,11 +50,6 @@ const iconToken = project.data.category?.slice(0, 1).toUpperCase() ?? '•';
       </div>
       <h3>{title}</h3>
       <p>{summary}</p>
-      <div class="tag-list">
-        {tags?.map((tag) => (
-          <span class="tag">{tag}</span>
-        ))}
-      </div>
       {tags && tags.length > 0 && (
         <div class="tech-stack">
           <span class="tech-stack-label">Built with:</span>
@@ -266,16 +261,6 @@ const iconToken = project.data.category?.slice(0, 1).toUpperCase() ?? '•';
   p {
     margin: 0;
     transition: opacity var(--duration-sm) var(--ease-standard);
-  }
-
-  .tag-list {
-    opacity: 1;
-    transition: opacity var(--duration-sm) var(--ease-standard);
-  }
-
-  .card-link:hover .tag-list,
-  .card-link:focus-visible .tag-list {
-    opacity: 0.8;
   }
 
   .tech-stack {

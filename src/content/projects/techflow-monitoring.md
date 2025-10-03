@@ -4,8 +4,8 @@ summary: "A classic top-down 2D action adventure game featuring exploration, com
 category: "Game Development"
 role: "Game Developer"
 timeline: "6 months"
-heroImage: "/images/logos/techflow.svg"
-heroAlt: "Topdown game pixel art interface"
+heroImage: "/images/projects/topdown.svg"
+heroAlt: "Topdown 2D RPG pixel art interface"
 impact: "In Development"
 tags:
   - Game Development

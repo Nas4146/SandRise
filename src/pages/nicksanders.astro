@@ -4,31 +4,41 @@ import SectionHeading from '@components/SectionHeading.astro';
 import TrustedByLogos from '@components/TrustedByLogos.astro';
 import TechnologiesSection from '@components/TechnologiesSection.astro';
 import ExploringNext from '@components/ExploringNext.astro';
+import TechLogo from '@components/TechLogo.astro';
 import profilePortrait from '@content/profile.jpeg';
 import type { CollectionEntry } from 'astro:content';
 import { getCollection } from 'astro:content';
 
 const allProjects = (await getCollection('projects')).filter((project) => !project.data.draft);
 
-// Define status priority order
-const statusPriority: Record<string, number> = {
-  'Available in App Store': 1,
-  'Beta Testing via TestFlight': 2,
-  'In Development': 3,
-  'Personal Use': 3, // Same priority as In Development
-  'Ideation': 4
-};
+// Define custom project order
+const projectOrder: string[] = [
+  'flexex',
+  'izzocam',
+  'grooptroop',
+  'windy',
+  'devtalk',
+  'ring',
+  'commander',
+  'coffee-scroll',
+  'techflow-monitoring' // topdown game
+];
 
-// Sort projects by status priority, then alphabetically within same status
+// Sort projects by custom order
 const projects: CollectionEntry<'projects'>[] = allProjects.sort((a, b) => {
-  const priorityA = statusPriority[a.data.impact || ''] || 99;
-  const priorityB = statusPriority[b.data.impact || ''] || 99;
+  const indexA = projectOrder.indexOf(a.slug);
+  const indexB = projectOrder.indexOf(b.slug);
   
-  if (priorityA !== priorityB) {
-    return priorityA - priorityB;
+  // If both are in the custom order, sort by that order
+  if (indexA !== -1 && indexB !== -1) {
+    return indexA - indexB;
   }
   
-  // If same priority, sort alphabetically
+  // If only one is in the custom order, prioritize it
+  if (indexA !== -1) return -1;
+  if (indexB !== -1) return 1;
+  
+  // If neither is in the custom order, sort alphabetically
   return a.data.title.localeCompare(b.data.title);
 });
 
@@ -48,7 +58,7 @@ const heroStructuredData = {
   '@type': 'Person',
   name: 'Nick Sanders',
   jobTitle: 'Product Builder',
-  url: 'https://sandrise.studio',
+  url: 'https://sandrise.io',
   worksFor: {
     '@type': 'Organization',
     name: 'SandRise'
@@ -63,17 +73,37 @@ const heroStructuredData = {
   <section id="intro" class="intro-section">
     <div class="container intro-grid">
       <div class="intro-copy">
-        <h1 class="intro-name">Nick Sanders</h1>
-        <p class="intro-title">Product Builder</p>
-        <p class="intro-location">San Francisco Bay Area</p>
-        <p class="intro-skills">Product Management | Cloud Platform & Services | Developer Tools | AI Agents | Ops Design</p>
-        <a class="intro-email" href="mailto:Nick.sanders.a@gmail.com">Nick.sanders.a@gmail.com</a>
+        <div class="intro-header">
+          <h1 class="intro-name">Nick Sanders</h1>
+          <div class="intro-meta">
+            <p class="intro-title">Product Builder</p>
+            <span class="intro-separator">•</span>
+            <p class="intro-location">San Francisco Bay Area</p>
+            <span class="intro-separator">•</span>
+            <a class="intro-email" href="mailto:Nick.sanders.a@gmail.com">Nick.sanders.a@gmail.com</a>
+          </div>
+        </div>
+        <p class="intro-skills">Product Management | Cloud Platform & Services | Developer Tools | AI Agents | Product Strategy</p>
         <p class="intro-bio">
-          DC roots, Austin for business school, now building from the SF Bay Area. Number of years in product management and developer tools. Currently obsessed with AI and agent-powered experiences, and shaping a slate of AI enabled products.
+          DC roots, Austin for grad school, now building from the SF Bay Area. Number of years in product management and developer tools. Currently obsessed with AI and agent-powered experiences, shaping a slate of AI enabled products.
         </p>
         <TrustedByLogos />
-        <div class="intro-actions">
-          <a class="intro-button primary" href="/resume.pdf" download target="_blank" rel="noopener">
+        <div class="intro-actions-wrapper">
+          <div class="intro-actions-label">
+            <span class="label-text">Connect</span>
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="12" cy="12" r="4"></circle>
+              <path d="M16 8v5a3 3 0 0 0 6 0v-1a10 10 0 1 0-3.92 7.94"></path>
+            </svg>
+          </div>
+          <div class="intro-actions">
+          <a class="intro-button" href="https://www.linkedin.com/in/sandersnick/" target="_blank" rel="noopener">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="#0A66C2">
+              <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+            </svg>
+            LinkedIn
+          </a>
+          <a class="intro-button" href="/resume.pdf" download target="_blank" rel="noopener">
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
               <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
               <polyline points="14,2 14,8 20,8"/>
@@ -84,17 +114,12 @@ const heroStructuredData = {
             Download resume
           </a>
           <a class="intro-button" href="https://github.com/Nas4146" target="_blank" rel="noopener">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="#181717">
               <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
             </svg>
             GitHub
           </a>
-          <a class="intro-button" href="https://www.linkedin.com/in/sandersnick/" target="_blank" rel="noopener">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
-              <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
-            </svg>
-            LinkedIn
-          </a>
+          </div>
         </div>
       </div>
       <aside class="intro-portrait">
@@ -143,21 +168,23 @@ const heroStructuredData = {
                 style={`--project-image: ${backgroundValue}; --project-image-fallback: url(${heroSrc}); --animation-delay: ${index * 0.1}s`}
               >
                 <div class="project-overlay">
-                  <span class="project-index">{String(index + 1).padStart(2, '0')}</span>
-                  <div class="project-content">
-                    <div class="project-heading">
-                      <h3>{project.data.title}</h3>
-                      {project.data.impact && <span class="project-impact">{project.data.impact}</span>}
-                    </div>
-                    <p>{project.data.summary}</p>
-                    {project.data.tags && project.data.tags.length > 0 && (
-                      <div class="project-tags">
-                        {project.data.tags.slice(0, 4).map((tag) => (
-                          <span>{tag}</span>
-                        ))}
+                  <div class="project-top">
+                    <span class="project-index">{String(index + 1).padStart(2, '0')}</span>
+                    <div class="project-content">
+                      <div class="project-heading">
+                        <h3>{project.data.title}</h3>
+                        {project.data.impact && <span class="project-impact">{project.data.impact}</span>}
                       </div>
-                    )}
+                      <p>{project.data.summary}</p>
+                    </div>
                   </div>
+                  {project.data.tags && project.data.tags.length > 0 && (
+                    <div class="project-tags">
+                      {project.data.tags.slice(0, 4).map((tag) => (
+                        <TechLogo tech={tag} size="sm" variant="overlay" />
+                      ))}
+                    </div>
+                  )}
                 </div>
               </a>
             </li>
@@ -334,117 +361,171 @@ const heroStructuredData = {
     display: none;
   }
 
+  .intro-header {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-xs);
+    margin-bottom: var(--space-md);
+  }
+
+  .intro-meta {
+    display: flex;
+    align-items: center;
+    gap: var(--space-xs);
+    flex-wrap: wrap;
+  }
+
+  .intro-separator {
+    color: var(--color-accent);
+    opacity: 0.4;
+    font-size: var(--font-size-xs);
+  }
+
   .intro-name {
     margin: 0;
-    font-size: clamp(1.5rem, 2.5vw, 2.25rem);
+    font-size: clamp(1.75rem, 3vw, 2.5rem);
     letter-spacing: -0.02em;
     color: var(--color-text-primary);
     font-weight: var(--font-weight-bold);
-    position: relative;
+    line-height: 1.1;
     text-shadow: 0 1px 2px rgba(12, 143, 98, 0.1);
   }
 
   .intro-name::after {
-    content: '';
-    position: absolute;
-    bottom: -4px;
-    left: 0;
-    width: 60px;
-    height: 3px;
-    background-color: var(--color-accent);
-    border-radius: var(--radius-round);
-    box-shadow: 0 2px 4px rgba(79, 124, 99, 0.18);
+    display: none;
   }
 
   .intro-title {
     margin: 0;
-    font-size: var(--font-size-lg);
+    font-size: var(--font-size-base);
     font-weight: var(--font-weight-semibold);
     color: var(--color-accent);
-    margin-bottom: var(--space-xs);
-    position: relative;
     text-transform: uppercase;
-    letter-spacing: 0.05em;
-    margin-top: var(--space-sm);
+    letter-spacing: 0.08em;
   }
 
   .intro-title::before {
-    content: '◆';
-    position: absolute;
-    left: -20px;
-    top: 50%;
-    transform: translateY(-50%);
-    color: var(--color-accent);
-    font-size: 0.6em;
-    opacity: 0.7;
+    display: none;
   }
 
   .intro-location {
     margin: 0;
-    font-size: var(--font-size-xs);
+    font-size: var(--font-size-sm);
+    font-weight: var(--font-weight-medium);
+    color: var(--color-text-secondary);
+    opacity: 0.85;
+  }
+
+  .intro-email {
+    margin: 0;
+    font-size: var(--font-size-sm);
     font-weight: var(--font-weight-medium);
     color: var(--color-accent);
-    margin-bottom: var(--space-2xs);
-    opacity: 0.8;
+    text-decoration: none;
+    opacity: 0.9;
+    transition: opacity 0.2s ease, color 0.2s ease;
+  }
+
+  .intro-email:hover,
+  .intro-email:focus-visible {
+    opacity: 1;
+    color: var(--color-accent);
+    text-decoration: underline;
   }
 
   .intro-skills {
     margin: 0;
-    font-size: var(--font-size-xs);
-    letter-spacing: 0.06em;
+    margin-bottom: var(--space-sm);
+    font-size: clamp(0.65rem, 1.5vw, 0.75rem);
+    letter-spacing: 0.04em;
     text-transform: uppercase;
     color: var(--color-text-secondary);
     font-weight: var(--font-weight-medium);
-    margin-bottom: var(--space-xs);
     padding-left: var(--space-sm);
     border-left: 3px solid var(--color-accent);
     background-color: rgba(79, 124, 99, 0.06);
     padding-top: var(--space-2xs);
     padding-bottom: var(--space-2xs);
     border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
-  }
-
-  .intro-email {
-    font-size: var(--font-size-xs);
-    font-weight: var(--font-weight-medium);
-    color: var(--color-text-secondary);
-    text-decoration: none;
-    position: relative;
-    transition: all 0.3s ease;
-    margin-bottom: var(--space-2xs);
-    padding: var(--space-2xs) var(--space-xs);
-    background: rgba(93, 138, 111, 0.02);
-    border-radius: var(--radius-sm);
-    width: fit-content;
-    transform: translateY(0);
-  }
-
-  .intro-email:hover,
-  .intro-email:focus-visible {
-    color: var(--color-accent);
-    background: rgba(93, 138, 111, 0.05);
-    transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(12, 143, 98, 0.15);
+    white-space: nowrap;
   }
 
   .intro-bio {
     margin: 0;
+    margin-bottom: var(--space-sm);
     font-size: var(--font-size-sm);
-    line-height: 1.6;
+    line-height: 1.7;
     color: var(--color-text-primary);
-    padding-left: var(--space-xs);
-    border-left: 2px solid rgba(79, 124, 99, 0.18);
+    padding: var(--space-sm) var(--space-md);
+    background: linear-gradient(
+      135deg,
+      rgba(79, 124, 99, 0.04) 0%,
+      rgba(79, 124, 99, 0.08) 100%
+    );
+    border-left: 3px solid var(--color-accent);
+    border-radius: 0 var(--radius-md) var(--radius-md) 0;
+    position: relative;
+    box-shadow: 
+      0 2px 8px rgba(79, 124, 99, 0.06),
+      inset 0 1px 0 rgba(255, 255, 255, 0.2);
+  }
+
+  .intro-bio::before {
+    content: '"';
+    position: absolute;
+    top: var(--space-xs);
+    left: var(--space-xs);
+    font-size: 2.5rem;
+    line-height: 1;
+    color: var(--color-accent);
+    opacity: 0.15;
+    font-family: Georgia, serif;
+    font-weight: bold;
+  }
+
+  .intro-copy :global(.trusted-by) {
+    margin-top: var(--space-xs);
+    margin-bottom: var(--space-sm);
   }
 
   .intro-copy :global(.trusted-by-logos) {
     margin: 0;
   }
 
+  .intro-actions-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2xs);
+  }
+
+  .intro-actions-label {
+    display: flex;
+    align-items: center;
+    gap: 0.35em;
+    font-size: var(--font-size-xs);
+    color: var(--color-text-secondary);
+    padding-left: 2px;
+  }
+
+  .label-text {
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    font-weight: 600;
+    opacity: 0.7;
+  }
+
+  .intro-actions-label svg {
+    width: 14px;
+    height: 14px;
+    color: var(--color-accent);
+    opacity: 0.85;
+    flex-shrink: 0;
+  }
+
   .intro-actions {
     display: flex;
     flex-wrap: wrap;
-    gap: var(--space-2xs);
-    margin-top: var(--space-md);
+    gap: var(--space-xs);
     justify-content: flex-start;
   }
 
@@ -454,34 +535,52 @@ const heroStructuredData = {
     gap: var(--space-2xs);
     padding: var(--space-xs) var(--space-md);
     border-radius: var(--radius-round);
-    font-size: var(--font-size-xs);
+    font-size: 0.7rem;
     font-weight: var(--font-weight-semibold);
-    letter-spacing: 0.08em;
+    letter-spacing: 0.05em;
     text-transform: uppercase;
     text-decoration: none;
     color: var(--color-text-primary);
-    background-color: rgba(255, 255, 255, 0.2);
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    transition: transform var(--duration-sm) var(--ease-standard),
-      box-shadow var(--duration-sm) var(--ease-standard),
-      border-color var(--duration-sm) var(--ease-standard);
+    background: rgba(255, 255, 255, 0.35);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    box-shadow: 
+      0 4px 12px rgba(17, 34, 21, 0.08),
+      inset 0 1px 0 rgba(255, 255, 255, 0.25);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    overflow: hidden;
   }
 
-  .intro-button.primary {
-    background-color: rgba(79, 124, 99, 0.26);
-    border-color: rgba(79, 124, 99, 0.4);
-    color: var(--color-text-primary);
+  .intro-button::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+      90deg,
+      transparent,
+      rgba(255, 255, 255, 0.2),
+      transparent
+    );
+    transition: left 0.5s ease;
+  }
+
+  .intro-button:hover::before {
+    left: 100%;
   }
 
   .intro-button:hover,
   .intro-button:focus-visible {
-    transform: translateY(-2px);
-    border-color: rgba(255, 255, 255, 0.4);
+    transform: translateY(-3px);
+    border-color: rgba(255, 255, 255, 0.5);
+    background: rgba(255, 255, 255, 0.5);
     box-shadow: 
-      0 8px 25px rgba(0, 0, 0, 0.15),
-      inset 0 1px 0 rgba(255, 255, 255, 0.3);
+      0 12px 28px rgba(17, 34, 21, 0.15),
+      inset 0 1px 0 rgba(255, 255, 255, 0.4);
   }
 
   .intro-button svg {
@@ -559,25 +658,54 @@ const heroStructuredData = {
     border-radius: var(--radius-md);
     overflow: hidden;
     background-color: var(--color-surface);
-    height: 320px;
-    border: 1px solid rgba(17, 34, 21, 0.08);
-    box-shadow: 0 12px 28px rgba(17, 34, 21, 0.1);
+    height: 380px;
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    box-shadow: 
+      0 12px 28px rgba(17, 34, 21, 0.1),
+      inset 0 1px 0 rgba(255, 255, 255, 0.1);
     background-image: var(--project-image, var(--project-image-fallback));
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center;
     transition: all var(--duration-md) var(--ease-standard);
     transform: translateY(0) scale(1);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
   }
 
   .project-tile::before {
     content: '';
     position: absolute;
     inset: 0;
-    background-color: rgba(17, 34, 21, 0.68);
+    background: linear-gradient(
+      135deg,
+      rgba(17, 34, 21, 0.75) 0%,
+      rgba(17, 34, 21, 0.65) 100%
+    );
     opacity: 0.9;
     transition: opacity var(--duration-md) var(--ease-standard);
     z-index: 0;
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+  }
+
+  .project-tile::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: var(--radius-md);
+    padding: 1px;
+    background: linear-gradient(
+      135deg,
+      rgba(255, 255, 255, 0.2) 0%,
+      rgba(255, 255, 255, 0.05) 50%,
+      rgba(255, 255, 255, 0.1) 100%
+    );
+    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    pointer-events: none;
+    z-index: 2;
   }
 
   .project-tile:hover,
@@ -607,16 +735,20 @@ const heroStructuredData = {
     flex-direction: column;
     justify-content: space-between;
     height: 100%;
-    padding: var(--space-xl) var(--space-lg) var(--space-2xl) var(--space-lg);
+    padding: var(--space-xl) var(--space-lg);
     color: var(--color-surface);
+  }
+
+  .project-top {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-md);
   }
 
   .project-content {
     display: flex;
     flex-direction: column;
     gap: var(--space-md);
-    flex-grow: 1;
-    justify-content: flex-end;
     transition: transform 0.3s ease;
   }
 
@@ -678,25 +810,7 @@ const heroStructuredData = {
     flex-wrap: wrap;
     gap: var(--space-xs);
     margin-top: var(--space-xs);
-  }
-
-  .project-tags span {
-    padding: var(--space-2xs) var(--space-sm);
-    border-radius: var(--radius-round);
-    background: rgba(93, 138, 111, 0.10);
-    border: 1px solid rgba(79, 124, 99, 0.3);
-    color: rgba(255, 255, 255, 0.9);
-    font-size: 0.65rem;
-    letter-spacing: 0.06em;
-    font-weight: var(--font-weight-medium);
-    backdrop-filter: blur(8px);
-    transition: all 0.2s ease;
-  }
-
-  .project-tile:hover .project-tags span {
-    background: rgba(255, 255, 255, 0.2);
-    border-color: rgba(255, 255, 255, 0.35);
-    transform: translateY(-1px);
+    padding-bottom: var(--space-sm);
   }
 
   .interests-grid {
@@ -711,24 +825,45 @@ const heroStructuredData = {
   .interest-card {
     padding: var(--space-lg);
     border-radius: var(--radius-sm);
-    background-color: rgba(255, 255, 255, 0.18);
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
-    border: 1px solid rgba(255, 255, 255, 0.2);
+    background-color: rgba(255, 255, 255, 0.6);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.4);
     box-shadow: 
-      0 8px 32px rgba(0, 0, 0, 0.1),
-      inset 0 1px 0 rgba(255, 255, 255, 0.2);
+      0 8px 16px rgba(17, 34, 21, 0.08),
+      0 2px 4px rgba(17, 34, 21, 0.04),
+      inset 0 1px 0 rgba(255, 255, 255, 0.3);
     font-size: var(--font-size-sm);
     color: var(--color-text-primary);
     transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .interest-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: linear-gradient(
+      90deg,
+      transparent 0%,
+      rgba(255, 255, 255, 0.6) 50%,
+      transparent 100%
+    );
+    opacity: 0.5;
   }
 
   .interest-card:hover {
-    transform: translateY(-2px);
+    transform: translateY(-4px);
+    background-color: rgba(255, 255, 255, 0.75);
     box-shadow: 
-      0 12px 40px rgba(0, 0, 0, 0.15),
-      inset 0 1px 0 rgba(255, 255, 255, 0.3);
-    border-color: rgba(255, 255, 255, 0.3);
+      0 12px 24px rgba(17, 34, 21, 0.12),
+      0 4px 8px rgba(17, 34, 21, 0.08),
+      inset 0 1px 0 rgba(255, 255, 255, 0.4);
+    border-color: rgba(255, 255, 255, 0.5);
   }
 
   .sandrise-grid {
