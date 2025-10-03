@@ -11,6 +11,7 @@ interface Props {
   structuredData?: Record<string, unknown>;
   noindex?: boolean;
   type?: 'website' | 'article';
+  hideFooter?: boolean;
 }
 
 const props = Astro.props as Props;
@@ -26,7 +27,7 @@ const props = Astro.props as Props;
     <main id="main">
       <slot />
     </main>
-    <Footer />
+    {!props.hideFooter && <Footer />}
   </body>
 </html>
 
