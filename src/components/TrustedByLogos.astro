@@ -88,11 +88,12 @@ const organizations = [
     </svg>
   </p>
   <div class="trusted-logos">
-    {organizations.map((org) => (
+    {organizations.map((org, index) => (
       <div 
         class="trusted-logo" 
         style={`--brand-color: ${org.brandColor}`}
         data-org={org.type}
+        data-last={index === organizations.length - 1 ? 'true' : 'false'}
       >
         <img
           src={org.logo}
@@ -242,6 +243,17 @@ const organizations = [
     border-left: 8px solid transparent;
     border-right: 8px solid transparent;
     border-top: 8px solid rgba(17, 34, 21, 0.98);
+  }
+
+  /* Right-align tooltip for last logo to prevent cutoff */
+  .trusted-logo[data-last="true"] .logo-tooltip {
+    left: auto;
+    right: 0;
+  }
+
+  .trusted-logo[data-last="true"] .logo-tooltip::after {
+    left: auto;
+    right: var(--space-md);
   }
 
   .tooltip-org {
